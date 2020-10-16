@@ -1,0 +1,17 @@
+C:\Users\luisz\source\repos\IntraPDV\IntraPDV\bin\Debug\IntraPDV.exe.config
+C:\Users\luisz\source\repos\IntraPDV\IntraPDV\bin\Debug\IntraPDV.exe
+C:\Users\luisz\source\repos\IntraPDV\IntraPDV\bin\Debug\IntraPDV.pdb
+C:\Users\luisz\source\repos\IntraPDV\IntraPDV\obj\Debug\IntraPDV.csprojAssemblyReference.cache
+C:\Users\luisz\source\repos\IntraPDV\IntraPDV\obj\Debug\IntraPDV.Form1.resources
+C:\Users\luisz\source\repos\IntraPDV\IntraPDV\obj\Debug\IntraPDV.Properties.Resources.resources
+C:\Users\luisz\source\repos\IntraPDV\IntraPDV\obj\Debug\IntraPDV.csproj.GenerateResource.cache
+C:\Users\luisz\source\repos\IntraPDV\IntraPDV\obj\Debug\IntraPDV.csproj.CoreCompileInputs.cache
+C:\Users\luisz\source\repos\IntraPDV\IntraPDV\obj\Debug\IntraPDV.exe
+C:\Users\luisz\source\repos\IntraPDV\IntraPDV\obj\Debug\IntraPDV.pdb
+C:\Users\luisz\source\repos\IntraPDV\IntraPDV\obj\Debug\IntraPDV.Interfaz_1.resources
+C:\Users\luisz\source\repos\IntraPDV\IntraPDV\obj\Debug\IntraPDV.Registrar_producto.resources
+C:\Users\luisz\source\repos\IntraPDV\IntraPDV\obj\Debug\IntraPDV.Inventario.resources
+C:\Users\luisz\source\repos\IntraPDV\IntraPDV\obj\Debug\IntraPDV.RegistroEmpleado.resources
+C:\Users\luisz\source\repos\IntraPDV\IntraPDV\obj\Debug\IntraPDV.act_DatEmpleado.resources
+C:\Users\luisz\source\repos\IntraPDV\IntraPDV\obj\Debug\IntraPDV.buscar_empleado.resources
+C:\Users\luisz\source\repos\IntraPDV\IntraPDV\obj\Debug\IntraPDV.ConfiguracionServidor.resources
