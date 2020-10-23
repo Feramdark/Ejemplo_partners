@@ -62,6 +62,12 @@
       <DependentUpon>buscar_empleado.cs</DependentUpon>
     </Compile>
     <Compile Include="CacheUsuario.cs" />
+    <Compile Include="Cobro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cobro.Designer.cs">
+      <DependentUpon>Cobro.cs</DependentUpon>
+    </Compile>
     <Compile Include="ConfiguracionServidor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,6 +111,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="buscar_empleado.resx">
       <DependentUpon>buscar_empleado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cobro.resx">
+      <DependentUpon>Cobro.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ConfiguracionServidor.resx">
       <DependentUpon>ConfiguracionServidor.cs</DependentUpon>

@@ -43,6 +43,10 @@
             this.apellidoP = new System.Windows.Forms.TextBox();
             this.nombre = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.nmero = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.tel = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.calle = new System.Windows.Forms.TextBox();
             this.lugar = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -54,30 +58,29 @@
             this.verifpass = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label12 = new System.Windows.Forms.Label();
-            this.tel = new System.Windows.Forms.TextBox();
-            this.nmero = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.BackMenu = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minimizar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.apagar)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BackMenu)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.LightCoral;
+            this.panel1.Controls.Add(this.BackMenu);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.minimizar);
             this.panel1.Controls.Add(this.apagar);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(891, 41);
+            this.panel1.Size = new System.Drawing.Size(835, 41);
             this.panel1.TabIndex = 0;
             // 
             // label1
@@ -223,6 +226,38 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Datos del domicilio";
             // 
+            // nmero
+            // 
+            this.nmero.Location = new System.Drawing.Point(17, 207);
+            this.nmero.Name = "nmero";
+            this.nmero.Size = new System.Drawing.Size(93, 31);
+            this.nmero.TabIndex = 12;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(13, 181);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(88, 23);
+            this.label11.TabIndex = 11;
+            this.label11.Text = "Numero ";
+            // 
+            // tel
+            // 
+            this.tel.Location = new System.Drawing.Point(135, 236);
+            this.tel.Name = "tel";
+            this.tel.Size = new System.Drawing.Size(111, 31);
+            this.tel.TabIndex = 10;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(6, 244);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(123, 23);
+            this.label12.TabIndex = 9;
+            this.label12.Text = "Telefono Fijo";
+            // 
             // calle
             // 
             this.calle.Location = new System.Drawing.Point(17, 136);
@@ -316,42 +351,10 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.Aquamarine;
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 505);
+            this.panel2.Location = new System.Drawing.Point(0, 518);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(891, 10);
+            this.panel2.Size = new System.Drawing.Size(835, 10);
             this.panel2.TabIndex = 9;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(6, 244);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(123, 23);
-            this.label12.TabIndex = 9;
-            this.label12.Text = "Telefono Fijo";
-            // 
-            // tel
-            // 
-            this.tel.Location = new System.Drawing.Point(135, 236);
-            this.tel.Name = "tel";
-            this.tel.Size = new System.Drawing.Size(111, 31);
-            this.tel.TabIndex = 10;
-            // 
-            // nmero
-            // 
-            this.nmero.Location = new System.Drawing.Point(17, 207);
-            this.nmero.Name = "nmero";
-            this.nmero.Size = new System.Drawing.Size(93, 31);
-            this.nmero.TabIndex = 12;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(13, 181);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(88, 23);
-            this.label11.TabIndex = 11;
-            this.label11.Text = "Numero ";
             // 
             // button1
             // 
@@ -383,12 +386,23 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // BackMenu
+            // 
+            this.BackMenu.Image = ((System.Drawing.Image)(resources.GetObject("BackMenu.Image")));
+            this.BackMenu.Location = new System.Drawing.Point(0, -1);
+            this.BackMenu.Name = "BackMenu";
+            this.BackMenu.Size = new System.Drawing.Size(57, 42);
+            this.BackMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.BackMenu.TabIndex = 13;
+            this.BackMenu.TabStop = false;
+            this.BackMenu.Click += new System.EventHandler(this.BackMenu_Click);
+            // 
             // RegistroEmpleado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(891, 515);
+            this.ClientSize = new System.Drawing.Size(835, 528);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -415,6 +429,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BackMenu)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -454,5 +469,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.PictureBox BackMenu;
     }
 }

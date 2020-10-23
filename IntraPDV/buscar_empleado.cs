@@ -27,5 +27,12 @@ namespace IntraPDV
             
 
         }
+
+        private void BackMenu_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Interfaz_1 MainMenu = new Interfaz_1();
+            MainMenu.Show();
+        }
     }
 }

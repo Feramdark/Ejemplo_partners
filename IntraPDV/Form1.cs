@@ -32,13 +32,18 @@ namespace IntraPDV
             this.FormBorderStyle = FormBorderStyle.None;
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0,0,Width, Height, 20, 20));
         }
+
         //BOTON PARA INICIAR SESION, ERROR DE PROGRAMACION (LISTO, ya puedo comparar si es usuario administrador o usuario normal)
         //PENDIENTE REDIRECCIONAR A LAS INTERFACEZ CORRESPONDIENTES
         private void button1_Click(object sender, EventArgs e)
         {
-            string cadena = ConfigurationManager.ConnectionStrings["pc_cn"].ConnectionString;
-            InicioDeSesion(Usser_Name.Text, PassWord.Text, cadena);
+            //string cadena = ConfigurationManager.ConnectionStrings["pc_cn"].ConnectionString;
+            //InicioDeSesion(Usser_Name.Text, PassWord.Text);
+            Interfaz_1 MenuPrincipal = new Interfaz_1();            
+            this.Hide();
+            MenuPrincipal.Show();
         }
+
         //Boton para mostrar la contraseña en caso de olvidar(LISTO)
         private void ShowPass_Click(object sender, EventArgs e)
         { 
@@ -53,6 +58,7 @@ namespace IntraPDV
                 ShowPass.BackColor = Color.Transparent;
             }
         }
+
         /*Boton de cerrar y comprobacion de cerrar LISTO*/
         private void apagar_Click(object sender, EventArgs e)
         {
@@ -62,6 +68,7 @@ namespace IntraPDV
                 Application.Exit();
             }
         }
+
         /*Configuracion_de_Servidor, ya funciona el resultado de servidor, usted puede cambiar de computadora 
          * e instalar el S.I. en cualquier ordenador EXPLICACION EN LA CLASE ('AppSetting.cs')*/ 
         private void pictureBox6_Click(object sender, EventArgs e)
@@ -72,7 +79,7 @@ namespace IntraPDV
 
         /*Funcion de inicio de sesion, ya admite si eres usuario administrador o usuario normal, falta verificar la interfaz que le
          * corresponde a cada usuario*/
-        public void InicioDeSesion(string Nombre_Usuario,string contraseña_usuario,string CadenaConection)
+        public void InicioDeSesion(string Nombre_Usuario,string contraseña_usuario)
         {
             if (Nombre_Usuario == "")
             {
@@ -86,19 +93,18 @@ namespace IntraPDV
             }
             try
             {
-                SqlConnection sql = new SqlConnection(CadenaConection);
+                SqlConnection sql = BDConnect.connection();
 
                 SqlCommand ConsultaUsuarios = new SqlCommand ("ConsultaUsuarios", sql);
                 ConsultaUsuarios.CommandType = CommandType.StoredProcedure;
 
                 ConsultaUsuarios.Parameters.AddWithValue("@UserName", Nombre_Usuario);
                 ConsultaUsuarios.Parameters.AddWithValue("@UserPass", contraseña_usuario);
-                sql.Open();
+                //sql.Open();
 
                 SqlDataReader lector_bd = ConsultaUsuarios.ExecuteReader();
                 /*Aqui se quedo pendiente, necesito consultar las "Memorias de cache" para manejar esos datos en las diferentes
                  * interfaces, es importante mencionar que necesitamos esas cache para conocer que usuario esta en el sistema*/
-                if (lector_bd.HasRows) { 
                 if (lector_bd.Read() == true)
                 {
                     Interfaz_1 MenuPrincipal = new Interfaz_1();
@@ -119,11 +125,11 @@ namespace IntraPDV
                  {
                      sql.Dispose();
                  }
-                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error con la conexion del servidor llame a su operador","ERROR",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                MessageBox.Show(ex.Message);
+                //MessageBox.Show("Error con la conexion del servidor llame a su operador","ERROR",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 
             }
         }

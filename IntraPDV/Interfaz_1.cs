@@ -71,8 +71,12 @@ namespace IntraPDV
 
         private void button1_Click(object sender, EventArgs e)
         {
+
             suma();
-           //RegistrarVenta();
+            String total = TotalPagar.Text;
+            //RegistrarVenta();
+            Cobro cajacobro = new Cobro(total);
+            cajacobro.Show();
         }
         private void CodigoBarras_KeyPress(object sender, KeyPressEventArgs e)
         {

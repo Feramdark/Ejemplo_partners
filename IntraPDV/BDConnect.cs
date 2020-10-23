@@ -20,6 +20,7 @@ namespace IntraPDV
             string StringConect = ConfigurationManager.ConnectionStrings["pc_cn"].ConnectionString;
             SqlConnection sqlQuery = new SqlConnection(StringConect); 
             sqlQuery.Open();
+            //MessageBox.Show("Conexion lista");
             return sqlQuery;
         }
     }

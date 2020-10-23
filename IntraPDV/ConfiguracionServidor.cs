@@ -37,7 +37,7 @@ namespace IntraPDV
         }
         private void button2_Click(object sender, EventArgs e)
         {
-           AppSetting.GuardarCadenaConexion("r7Conn", dtBase.Text);
+           AppSetting.GuardarCadenaConexion("pc_cn", dtBase.Text);
             MessageBox.Show("Guardado Exitosamente");
         }
         //FUNCIONES DE IMPLEMENTACION PARA ALTERAR LA CADENA DE CONEXION  

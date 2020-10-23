@@ -54,24 +54,27 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.BackMenu = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minimizar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.apagar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BackMenu)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.LightCoral;
+            this.panel1.Controls.Add(this.BackMenu);
             this.panel1.Controls.Add(this.minimizar);
             this.panel1.Controls.Add(this.apagar);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(981, 31);
+            this.panel1.Size = new System.Drawing.Size(986, 38);
             this.panel1.TabIndex = 0;
             // 
             // minimizar
@@ -80,9 +83,9 @@
             this.minimizar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.minimizar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.minimizar.Image = ((System.Drawing.Image)(resources.GetObject("minimizar.Image")));
-            this.minimizar.Location = new System.Drawing.Point(916, 0);
+            this.minimizar.Location = new System.Drawing.Point(899, 0);
             this.minimizar.Name = "minimizar";
-            this.minimizar.Size = new System.Drawing.Size(29, 31);
+            this.minimizar.Size = new System.Drawing.Size(38, 40);
             this.minimizar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.minimizar.TabIndex = 5;
             this.minimizar.TabStop = false;
@@ -94,9 +97,9 @@
             this.apagar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.apagar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.apagar.Image = ((System.Drawing.Image)(resources.GetObject("apagar.Image")));
-            this.apagar.Location = new System.Drawing.Point(951, 0);
+            this.apagar.Location = new System.Drawing.Point(943, 0);
             this.apagar.Name = "apagar";
-            this.apagar.Size = new System.Drawing.Size(30, 31);
+            this.apagar.Size = new System.Drawing.Size(40, 40);
             this.apagar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.apagar.TabIndex = 12;
             this.apagar.TabStop = false;
@@ -105,7 +108,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(-44, -3);
+            this.pictureBox1.Location = new System.Drawing.Point(78, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(224, 43);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -132,9 +135,9 @@
             this.groupBox1.Controls.Add(this.Bar_Code);
             this.groupBox1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.Color.Black;
-            this.groupBox1.Location = new System.Drawing.Point(12, 49);
+            this.groupBox1.Location = new System.Drawing.Point(12, 71);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(957, 103);
+            this.groupBox1.Size = new System.Drawing.Size(962, 153);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Registro";
@@ -288,9 +291,9 @@
             this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(177, 176);
+            this.groupBox2.Location = new System.Drawing.Point(171, 381);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(636, 113);
+            this.groupBox2.Size = new System.Drawing.Size(655, 120);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Acciones";
@@ -330,12 +333,23 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // BackMenu
+            // 
+            this.BackMenu.Image = ((System.Drawing.Image)(resources.GetObject("BackMenu.Image")));
+            this.BackMenu.Location = new System.Drawing.Point(0, 0);
+            this.BackMenu.Name = "BackMenu";
+            this.BackMenu.Size = new System.Drawing.Size(47, 38);
+            this.BackMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.BackMenu.TabIndex = 3;
+            this.BackMenu.TabStop = false;
+            this.BackMenu.Click += new System.EventHandler(this.BackMenu_Click);
+            // 
             // Registrar_producto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(981, 315);
+            this.ClientSize = new System.Drawing.Size(986, 527);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel1);
@@ -343,6 +357,7 @@
             this.Name = "Registrar_producto";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registrar_producto";
+            this.Load += new System.EventHandler(this.Registrar_producto_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.minimizar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.apagar)).EndInit();
@@ -350,6 +365,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.BackMenu)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -381,5 +397,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.PictureBox BackMenu;
     }
 }

@@ -99,7 +99,7 @@ namespace IntraPDV
         private void pictureBox4_Click(object sender, EventArgs e)
         {
             buscar_empleado buscar = new buscar_empleado();
-            buscar.Show();
+            buscar.ShowDialog();
         }
     }
 }

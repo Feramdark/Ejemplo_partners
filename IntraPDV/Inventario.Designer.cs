@@ -31,9 +31,11 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Inventario));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.apagar = new System.Windows.Forms.PictureBox();
             this.minimizar = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -53,6 +55,7 @@
             this.productosBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.productosBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.apagar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minimizar)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -64,13 +67,25 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.LightCoral;
+            this.panel1.Controls.Add(this.pictureBox2);
             this.panel1.Controls.Add(this.apagar);
             this.panel1.Controls.Add(this.minimizar);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(926, 35);
+            this.panel1.Size = new System.Drawing.Size(930, 35);
             this.panel1.TabIndex = 4;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(52, 35);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 8;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // apagar
             // 
@@ -102,6 +117,7 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.White;
+            this.groupBox1.Controls.Add(this.comboBox1);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
@@ -113,16 +129,31 @@
             this.groupBox1.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 41);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(228, 376);
+            this.groupBox1.Size = new System.Drawing.Size(224, 454);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Acciones";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Bebe",
+            "Boneteria",
+            "Caballero",
+            "Dama",
+            "Niña",
+            "Niño"});
+            this.comboBox1.Location = new System.Drawing.Point(6, 206);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(189, 31);
+            this.comboBox1.TabIndex = 14;
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.White;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(8, 257);
+            this.button1.Location = new System.Drawing.Point(6, 287);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(202, 38);
             this.button1.TabIndex = 13;
@@ -133,7 +164,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(2, 164);
+            this.label3.Location = new System.Drawing.Point(4, 166);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(145, 23);
             this.label3.TabIndex = 12;
@@ -159,28 +190,29 @@
             // 
             // name_search
             // 
-            this.name_search.Location = new System.Drawing.Point(6, 120);
+            this.name_search.Location = new System.Drawing.Point(6, 122);
             this.name_search.Name = "name_search";
-            this.name_search.Size = new System.Drawing.Size(159, 31);
+            this.name_search.Size = new System.Drawing.Size(189, 31);
             this.name_search.TabIndex = 9;
             // 
             // id_search
             // 
-            this.id_search.Location = new System.Drawing.Point(6, 53);
+            this.id_search.Location = new System.Drawing.Point(6, 55);
             this.id_search.Name = "id_search";
-            this.id_search.Size = new System.Drawing.Size(159, 31);
+            this.id_search.Size = new System.Drawing.Size(189, 31);
             this.id_search.TabIndex = 8;
             // 
             // search_produc
             // 
             this.search_produc.BackColor = System.Drawing.Color.White;
             this.search_produc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.search_produc.Location = new System.Drawing.Point(6, 315);
+            this.search_produc.Location = new System.Drawing.Point(6, 355);
             this.search_produc.Name = "search_produc";
             this.search_produc.Size = new System.Drawing.Size(204, 37);
             this.search_produc.TabIndex = 6;
             this.search_produc.Text = "BUSCAR PRODUCTO";
             this.search_produc.UseVisualStyleBackColor = false;
+            this.search_produc.Click += new System.EventHandler(this.search_produc_Click);
             // 
             // dataGridView1
             // 
@@ -255,7 +287,7 @@
             this.dateTimePicker1.CalendarFont = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePicker1.Cursor = System.Windows.Forms.Cursors.Default;
             this.dateTimePicker1.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(547, 41);
+            this.dateTimePicker1.Location = new System.Drawing.Point(579, 57);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(363, 31);
             this.dateTimePicker1.TabIndex = 7;
@@ -273,7 +305,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(926, 450);
+            this.ClientSize = new System.Drawing.Size(930, 522);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox1);
@@ -282,6 +314,7 @@
             this.Name = "Inventario";
             this.Text = "Inventario";
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.apagar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minimizar)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -317,5 +350,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidadDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource productosBindingSource1;
         private System.Windows.Forms.BindingSource productosBindingSource;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

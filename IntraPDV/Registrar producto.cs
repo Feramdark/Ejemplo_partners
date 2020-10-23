@@ -87,7 +87,19 @@ namespace IntraPDV
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //Dpto_gen.Items.Add("HOLA");
+        }
 
+        private void Registrar_producto_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BackMenu_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Interfaz_1 MainMenu = new Interfaz_1();
+            MainMenu.Show();
         }
     }
 }

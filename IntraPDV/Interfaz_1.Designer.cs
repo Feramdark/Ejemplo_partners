@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Interfaz_1));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.apagar = new System.Windows.Forms.PictureBox();
             this.minimizar = new System.Windows.Forms.PictureBox();
@@ -66,7 +66,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(972, 35);
+            this.panel1.Size = new System.Drawing.Size(979, 35);
             this.panel1.TabIndex = 3;
             // 
             // apagar
@@ -176,39 +176,39 @@
             // 
             this.RealizarCobro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.RealizarCobro.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RealizarCobro.Location = new System.Drawing.Point(31, 492);
+            this.RealizarCobro.Location = new System.Drawing.Point(266, 479);
             this.RealizarCobro.Name = "RealizarCobro";
-            this.RealizarCobro.Size = new System.Drawing.Size(163, 47);
+            this.RealizarCobro.Size = new System.Drawing.Size(163, 54);
             this.RealizarCobro.TabIndex = 2;
             this.RealizarCobro.Tag = "cobrar";
-            this.RealizarCobro.Text = "Cobrar";
+            this.RealizarCobro.Text = "Realizar Venta";
             this.RealizarCobro.UseVisualStyleBackColor = true;
             this.RealizarCobro.Click += new System.EventHandler(this.button1_Click);
             // 
             // dataGridView1
             // 
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.MistyRose;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.MistyRose;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(31, 86);
+            this.dataGridView1.Location = new System.Drawing.Point(266, 97);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(886, 400);
+            this.dataGridView1.Size = new System.Drawing.Size(681, 358);
             this.dataGridView1.TabIndex = 5;
             // 
             // CodigoBarras
             // 
             this.CodigoBarras.BackColor = System.Drawing.Color.White;
             this.CodigoBarras.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.CodigoBarras.Location = new System.Drawing.Point(31, 60);
+            this.CodigoBarras.Location = new System.Drawing.Point(266, 65);
             this.CodigoBarras.Name = "CodigoBarras";
-            this.CodigoBarras.Size = new System.Drawing.Size(137, 20);
+            this.CodigoBarras.Size = new System.Drawing.Size(203, 20);
             this.CodigoBarras.TabIndex = 1;
             this.CodigoBarras.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CodigoBarras_KeyPress);
             // 
@@ -216,7 +216,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(27, 38);
+            this.label1.Location = new System.Drawing.Point(262, 43);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(140, 19);
             this.label1.TabIndex = 6;
@@ -235,7 +235,7 @@
             // IdUsuario
             // 
             this.IdUsuario.AutoSize = true;
-            this.IdUsuario.Location = new System.Drawing.Point(215, 56);
+            this.IdUsuario.Location = new System.Drawing.Point(540, 72);
             this.IdUsuario.Name = "IdUsuario";
             this.IdUsuario.Size = new System.Drawing.Size(80, 13);
             this.IdUsuario.TabIndex = 8;
@@ -245,7 +245,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(473, 500);
+            this.label2.Location = new System.Drawing.Point(692, 479);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(92, 32);
             this.label2.TabIndex = 9;
@@ -255,18 +255,17 @@
             // 
             this.TotalPagar.AutoSize = true;
             this.TotalPagar.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TotalPagar.Location = new System.Drawing.Point(620, 500);
+            this.TotalPagar.Location = new System.Drawing.Point(928, 479);
             this.TotalPagar.Name = "TotalPagar";
-            this.TotalPagar.Size = new System.Drawing.Size(23, 32);
+            this.TotalPagar.Size = new System.Drawing.Size(0, 32);
             this.TotalPagar.TabIndex = 10;
-            this.TotalPagar.Text = "f";
             // 
             // Interfaz_1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(972, 551);
+            this.ClientSize = new System.Drawing.Size(979, 560);
             this.Controls.Add(this.TotalPagar);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.IdUsuario);
