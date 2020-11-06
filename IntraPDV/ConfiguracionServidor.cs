@@ -35,11 +35,6 @@ namespace IntraPDV
             cboServer.SelectedIndex = 3;
 
         }
-        private void button2_Click(object sender, EventArgs e)
-        {
-           AppSetting.GuardarCadenaConexion("pc_cn", dtBase.Text);
-            MessageBox.Show("Guardado Exitosamente");
-        }
         //FUNCIONES DE IMPLEMENTACION PARA ALTERAR LA CADENA DE CONEXION  
         private void conectar()
         {

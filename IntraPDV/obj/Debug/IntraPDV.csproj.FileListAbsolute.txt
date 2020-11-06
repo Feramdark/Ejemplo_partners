@@ -15,4 +15,5 @@ C:\Users\luisz\source\repos\IntraPDV\IntraPDV\obj\Debug\IntraPDV.RegistroEmplead
 C:\Users\luisz\source\repos\IntraPDV\IntraPDV\obj\Debug\IntraPDV.act_DatEmpleado.resources
 C:\Users\luisz\source\repos\IntraPDV\IntraPDV\obj\Debug\IntraPDV.buscar_empleado.resources
 C:\Users\luisz\source\repos\IntraPDV\IntraPDV\obj\Debug\IntraPDV.ConfiguracionServidor.resources
-C:\Users\luisz\source\repos\IntraPDV\IntraPDV\obj\Debug\IntraPDV.Cobro.resources
+C:\Users\luisz\source\repos\IntraPDV\IntraPDV\obj\Debug\IntraPDV.venta_diaria.resources
+C:\Users\luisz\source\repos\IntraPDV\IntraPDV\obj\Debug\IntraPDV.TicketForm.resources

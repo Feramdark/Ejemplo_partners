@@ -33,7 +33,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dtBase = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.SaveButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cboServer
@@ -41,14 +40,14 @@
             this.cboServer.FormattingEnabled = true;
             this.cboServer.Location = new System.Drawing.Point(103, 38);
             this.cboServer.Name = "cboServer";
-            this.cboServer.Size = new System.Drawing.Size(280, 21);
+            this.cboServer.Size = new System.Drawing.Size(227, 21);
             this.cboServer.TabIndex = 0;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(186, 140);
+            this.button1.Location = new System.Drawing.Point(150, 132);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(103, 29);
+            this.button1.Size = new System.Drawing.Size(110, 32);
             this.button1.TabIndex = 1;
             this.button1.Text = "&Conectar";
             this.button1.UseVisualStyleBackColor = true;
@@ -67,7 +66,7 @@
             // 
             this.dtBase.Location = new System.Drawing.Point(103, 89);
             this.dtBase.Name = "dtBase";
-            this.dtBase.Size = new System.Drawing.Size(280, 20);
+            this.dtBase.Size = new System.Drawing.Size(227, 20);
             this.dtBase.TabIndex = 3;
             // 
             // label2
@@ -79,22 +78,11 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Base de datos";
             // 
-            // SaveButton
-            // 
-            this.SaveButton.Location = new System.Drawing.Point(295, 140);
-            this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(103, 29);
-            this.SaveButton.TabIndex = 5;
-            this.SaveButton.Text = "&Save";
-            this.SaveButton.UseVisualStyleBackColor = true;
-            this.SaveButton.Click += new System.EventHandler(this.button2_Click);
-            // 
             // ConfiguracionServidor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(410, 182);
-            this.Controls.Add(this.SaveButton);
+            this.ClientSize = new System.Drawing.Size(394, 191);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dtBase);
             this.Controls.Add(this.label1);
@@ -116,6 +104,5 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox dtBase;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button SaveButton;
     }
 }

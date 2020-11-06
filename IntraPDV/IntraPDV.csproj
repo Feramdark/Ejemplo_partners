@@ -62,18 +62,13 @@
       <DependentUpon>buscar_empleado.cs</DependentUpon>
     </Compile>
     <Compile Include="CacheUsuario.cs" />
-    <Compile Include="Cobro.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Cobro.Designer.cs">
-      <DependentUpon>Cobro.cs</DependentUpon>
-    </Compile>
     <Compile Include="ConfiguracionServidor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ConfiguracionServidor.Designer.cs">
       <DependentUpon>ConfiguracionServidor.cs</DependentUpon>
     </Compile>
+    <Compile Include="CrearImpresion.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,14 +101,23 @@
     <Compile Include="RegistroEmpleado.Designer.cs">
       <DependentUpon>RegistroEmpleado.cs</DependentUpon>
     </Compile>
+    <Compile Include="TicketForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TicketForm.Designer.cs">
+      <DependentUpon>TicketForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="venta_diaria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="venta_diaria.Designer.cs">
+      <DependentUpon>venta_diaria.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="act_DatEmpleado.resx">
       <DependentUpon>act_DatEmpleado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="buscar_empleado.resx">
       <DependentUpon>buscar_empleado.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Cobro.resx">
-      <DependentUpon>Cobro.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ConfiguracionServidor.resx">
       <DependentUpon>ConfiguracionServidor.cs</DependentUpon>
@@ -142,6 +146,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RegistroEmpleado.resx">
       <DependentUpon>RegistroEmpleado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TicketForm.resx">
+      <DependentUpon>TicketForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="venta_diaria.resx">
+      <DependentUpon>venta_diaria.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

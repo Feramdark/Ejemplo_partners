@@ -17,7 +17,9 @@ namespace IntraPDV
         {
             InitializeComponent();
         }
+        SqlConnection conexion_BD = BDConnect.connection();
 
+        DataTable TablaInventario = new DataTable();
 
         private void apagar_Click(object sender, EventArgs e)
         {
@@ -32,10 +34,10 @@ namespace IntraPDV
         {
             this.WindowState = FormWindowState.Minimized;
         }
-
+        //Boton de actualizar
         private void button1_Click(object sender, EventArgs e)
         {
-            
+            InsertarProductos();
         }
 
         private void search_produc_Click(object sender, EventArgs e)
@@ -48,6 +50,62 @@ namespace IntraPDV
             this.Close();
             Interfaz_1 MainMenu = new Interfaz_1();
             MainMenu.Show(); 
+        }
+        public void InsertarProductos()
+        {
+            try
+            {
+                SqlCommand InsertarInventario = new SqlCommand("RegistrarProducto", conexion_BD);
+                InsertarInventario.CommandType = CommandType.StoredProcedure;
+
+                foreach (DataGridViewRow fila in dataGridView1.Rows)
+                {
+
+                    InsertarInventario.Parameters.AddWithValue("@id_pro", fila.Cells["Codigo"].Value);
+                    InsertarInventario.Parameters.AddWithValue("@name_pro", fila.Cells["nombre_producto"].Value);
+                    InsertarInventario.Parameters.AddWithValue("@cantidad", fila.Cells["cantidad_producto"].Value);
+                    InsertarInventario.Parameters.AddWithValue("@precio", fila.Cells["precio_producto"].Value);
+                    InsertarInventario.Parameters.AddWithValue("@modelo", fila.Cells["model_producto"].Value);
+                    InsertarInventario.Parameters.AddWithValue("@tipo", fila.Cells["tipo_producto"].Value);
+                    InsertarInventario.Parameters.AddWithValue("@talla", fila.Cells["talla_producto"].Value);
+                    InsertarInventario.Parameters.AddWithValue("@departamento", fila.Cells["depto_producto"].Value);
+                    InsertarInventario.Parameters.AddWithValue("@descuento", fila.Cells["descuento_produc"].Value);
+                    InsertarInventario.Parameters.AddWithValue("@fecha_ingr", Convert.ToDateTime(dateTimePicker1.Text));
+
+
+                    InsertarInventario.ExecuteNonQuery();
+
+                    InsertarInventario.Parameters.Clear(); 
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                DialogResult respuesta = MessageBox.Show("Desea continuar o Cancelar la operacion","Productos insertados",MessageBoxButtons.OKCancel,MessageBoxIcon.Information);
+                if (respuesta==DialogResult.OK)
+                {
+                    MessageBox.Show("Productos Guardados Exitosamente");
+                    dataGridView1.Rows.Clear();
+                }
+
+            }
+
+
+
+        }
+
+        private void CodigoBarras_Keypress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                dataGridView1.Rows.Add(id_search.Text);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            dataGridView1.Rows.Clear();
         }
     }
 }

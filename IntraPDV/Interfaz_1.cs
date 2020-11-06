@@ -14,7 +14,7 @@ namespace IntraPDV
 {
     public partial class Interfaz_1 : Form
     {
-        static string cadena = ConfigurationManager.ConnectionStrings["pc_cn"].ConnectionString;
+        CrearImpresion Ticket = new CrearImpresion();
         public Interfaz_1()
         {
             InitializeComponent();
@@ -25,7 +25,7 @@ namespace IntraPDV
         //CONEXION CON BASE DE DATOS
         SqlConnection conexion_BD = BDConnect.connection();
         //TABLA DE DATOS GRIDVIEW
-        DataTable TablaDatos = new DataTable();
+        DataTable tabDatos = new DataTable();
         //TABLA DE DATOS GRIDVIEW
 
         private void apagar_Click(object sender, EventArgs e)
@@ -64,20 +64,34 @@ namespace IntraPDV
 
         private void cambioDeConexiónToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ConfiguracionServidor configuracion = new ConfiguracionServidor();
-            configuracion.Show();
+            venta_diaria venta = new venta_diaria();
             this.Hide();
+            venta.ShowDialog();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("Deseas Realizar la Siguiente Venta", "Ropa y Calzado Rocha", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                ActualizarInventario();
+                RegistrarVenta();
+                horaRecibida.Text = label6.Text;
+                TicketForm ticket = new TicketForm();
+                ticket.horaText.Text = horaRecibida.Text;
+                ticket.totalText.Text = TotalPagar.Text;
+                ticket.importeText.Text = Importe.Text;
+                ticket.cambioText.Text = TextCambio.Text;
+                this.Hide();
+                this.Dispose();
+                ticket.Show();
+                ticket.MyTicket();
 
-            suma();
-            String total = TotalPagar.Text;
-            //RegistrarVenta();
-            Cobro cajacobro = new Cobro(total);
-            cajacobro.Show();
+
+            }
+            
+
         }
+
         private void CodigoBarras_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
@@ -85,63 +99,48 @@ namespace IntraPDV
                 BuscarProducto();
                 //Despues de ejecutar el codigo de reg limpia el cuadro de busqueda
                 CodigoBarras.Text = "";
+                suma();
             }
         }
 
         public void BuscarProducto()
         {
-            bool identificador = false;
-
-            DataGridViewRow FilaTabla = new DataGridViewRow();
-
+            DataGridViewRow row = new DataGridViewRow();
+            bool flag = false;
             SqlCommand datos = new SqlCommand("consulta", conexion_BD);
             datos.CommandType = CommandType.StoredProcedure;
-
             datos.Parameters.AddWithValue("@codigo", CodigoBarras.Text);
             datos.Parameters.AddWithValue("@cantidad", 1);
-            /*CELDAS
-           * 0-> Codigo barras.
-           * 1-> Nombre Del Producto.
-           * 2-> Modelo del producto.
-           * 3-> Precio del producto.
-           * 4-> Descuento, aparece en 0 en caso de no existir
-           * 5-> Cantidad de productos adquiridos, incrementa en caso de ser el mismo producto
-           * 6-> Muestra el total del producto, con o sin descuento*/
-           foreach(DataGridViewRow FilaCreada in dataGridView1.Rows)
+
+            foreach (DataGridViewRow fila in dataGridView1.Rows)
             {
-                if (FilaCreada.Cells[0].Value != null)
+                if (fila.Cells[0].Value != null)
                 {
-                    if (FilaCreada.Cells[0].Value.ToString() == CodigoBarras.Text)
+                    if (fila.Cells[0].Value.ToString() == CodigoBarras.Text)
                     {
-                     //Variables de valores
-                        int CeldaCantidad = Convert.ToInt32(FilaCreada.Cells[5].Value);
-
-                        float CeldaPrecio = Convert.ToSingle(FilaCreada.Cells[3].Value);
-                        float CeldaDescuento = Convert.ToSingle(FilaCreada.Cells[4].Value);
-                        float CeldaTotal = Convert.ToSingle(FilaCreada.Cells[6].Value);
-                     //Cierre de variables de valores
-                        //OPERACIONES//
-                        CeldaCantidad = CeldaCantidad + 1;
-                        CeldaTotal= (CeldaPrecio - ((CeldaPrecio * CeldaDescuento) / 100)) * CeldaCantidad;
-
-                        //Impresion de resultados
-                        FilaCreada.Cells[5].Value = CeldaCantidad;
-                        FilaCreada.Cells[6].Value = CeldaTotal;
-
-                        identificador = true;
+                        int cant = Convert.ToInt32(fila.Cells[4].Value);
+                        float precio = Convert.ToSingle(fila.Cells[2].Value);
+                        float descuento = Convert.ToSingle(fila.Cells[3].Value);
+                        float total = Convert.ToSingle(fila.Cells[5].Value);
+                        ///////////////////////////////////////////////////////////////////////
+                        cant = cant + 1;
+                        total = (precio - ((precio * descuento) / 100)) * cant;
+                        fila.Cells[4].Value = cant;
+                        fila.Cells[5].Value = total;
+                        flag = true;
                     }
                 }
             }
-            //Termina el foreach
-            if (identificador == false) //llena la tabla con los datos de arriba
+            if (flag == false)
             {
-                SqlDataAdapter AdaptadorDatos = new SqlDataAdapter();
-                AdaptadorDatos.SelectCommand = datos;
-                TablaDatos.Rows.Count.ToString();
-                AdaptadorDatos.Fill(TablaDatos);
-                dataGridView1.DataSource = TablaDatos;
+                SqlDataAdapter sda = new SqlDataAdapter();
+                sda.SelectCommand = datos;
+                tabDatos.Rows.Count.ToString();
+                sda.Fill(tabDatos);
+                dataGridView1.DataSource = tabDatos;
             }
         }
+
         //Termina funcion para buscar producto
         public void RegistrarVenta()
         {
@@ -152,12 +151,90 @@ namespace IntraPDV
 
                 foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
+                    RealizarVen.Parameters.Clear();
+
                     RealizarVen.Parameters.AddWithValue("@fecha", Convert.ToDateTime(dateTimePicker1.Text));
-                    RealizarVen.Parameters.AddWithValue("@cantidad", row.Cells[5].Value);
-                    RealizarVen.Parameters.AddWithValue("@total", row.Cells[6].Value);
-                    RealizarVen.Parameters.AddWithValue("@id_producto", row.Cells[0].Value);
+                    RealizarVen.Parameters.AddWithValue("@cantidad", Convert.ToInt32(row.Cells[4].Value));
+                    RealizarVen.Parameters.AddWithValue("@total", Convert.ToDouble(row.Cells[5].Value));
+                    RealizarVen.Parameters.AddWithValue("@id_producto",Convert.ToString(row.Cells[0].Value));
                     RealizarVen.Parameters.AddWithValue("@id_empleado", IdUsuario.Text);
+                    RealizarVen.Parameters.AddWithValue("@hora", Convert.ToDateTime(label6.Text));
                     RealizarVen.ExecuteNonQuery();
+                }
+            }
+            catch(Exception ex)
+            {
+                //MessageBox.Show("Venta realizada","Exito");
+                //MessageBox.Show(ex.Message);
+            }
+        }
+        public void suma()
+        {
+            float suma = 0.000F;
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.Cells[1].Value != null) //1 es "Total"
+                    suma += Convert.ToSingle(row.Cells[5].Value);
+                
+                
+            }
+            TotalPagar.Text = Convert.ToString(suma);
+        }
+
+        public void Cambio(decimal importe, decimal total)
+        {
+            decimal cambio;
+
+            cambio = total - importe;
+            TextCambio.Text = Convert.ToString("$ "+ cambio);
+            
+        }
+        private void dar_cambio(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar==(char)Keys.Enter)
+            {
+                Cambio(Convert.ToDecimal(TotalPagar.Text), Convert.ToDecimal(Importe.Text));
+            }
+        }
+        public void FuncionImprimir()
+        {
+            SqlDataAdapter Tabla = new SqlDataAdapter();
+            Ticket.TextLeft("Ropa y Calzado Rocha");
+            CrearImpresion.lineasSeparacion();
+
+            Ticket.TextLeft("Direccion: Zona centro");
+            Ticket.TextLeft("Fecha: " + DateTime.Now.ToShortDateString());
+            CrearImpresion.lineasSeparacion();
+
+            CrearImpresion.EncabezadoTicket();
+
+            foreach(DataGridViewRow fila in dataGridView1.Rows)
+            {//                               Nombre//                       Precio//                                        Cantidad                                     //TOTAL
+                Ticket.AgregaArticulo(fila.Cells[1].Value.ToString(),decimal.Parse(fila.Cells[3].Value.ToString()), int.Parse(fila.Cells[5].Value.ToString()), decimal.Parse(fila.Cells[6].Value.ToString()));
+                //Ticket.TextLeft(fila.Cells[1].Value.ToString());
+            }
+            CrearImpresion.lineasSeparacion();
+            Ticket.ImprimirTiket();
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            label6.Text = DateTime.Now.ToLongTimeString();
+        }
+        public void ActualizarInventario()
+        {
+            try
+            {
+                SqlCommand update = new SqlCommand("BajaInventario", conexion_BD);
+                update.CommandType = CommandType.StoredProcedure;
+
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    update.Parameters.Clear();
+                    update.Parameters.AddWithValue("@codigo", Convert.ToString(row.Cells[0].Value));
+                    update.Parameters.AddWithValue("@cantidad", Convert.ToInt32(row.Cells[5].Value));
+                    update.ExecuteNonQuery();
                 }
 
             }
@@ -165,17 +242,6 @@ namespace IntraPDV
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-        public void suma()
-        {
-            float suma = 0.00F;
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                if (row.Cells[1].Value != null) //1 es "Total"
-                    suma += Convert.ToSingle(row.Cells[6].Value);
-                
-            }
-            TotalPagar.Text = Convert.ToString(suma);
         }
     }
 }
