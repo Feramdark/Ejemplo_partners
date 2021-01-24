@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegistroEmpleado));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.BackMenu = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.minimizar = new System.Windows.Forms.PictureBox();
             this.apagar = new System.Windows.Forms.PictureBox();
@@ -61,13 +62,14 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.BackMenu = new System.Windows.Forms.PictureBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BackMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minimizar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.apagar)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BackMenu)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -82,6 +84,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(835, 41);
             this.panel1.TabIndex = 0;
+            // 
+            // BackMenu
+            // 
+            this.BackMenu.Image = ((System.Drawing.Image)(resources.GetObject("BackMenu.Image")));
+            this.BackMenu.Location = new System.Drawing.Point(0, -1);
+            this.BackMenu.Name = "BackMenu";
+            this.BackMenu.Size = new System.Drawing.Size(57, 42);
+            this.BackMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.BackMenu.TabIndex = 13;
+            this.BackMenu.TabStop = false;
+            this.BackMenu.Click += new System.EventHandler(this.BackMenu_Click);
             // 
             // label1
             // 
@@ -246,7 +259,7 @@
             // 
             this.tel.Location = new System.Drawing.Point(135, 236);
             this.tel.Name = "tel";
-            this.tel.Size = new System.Drawing.Size(111, 31);
+            this.tel.Size = new System.Drawing.Size(172, 31);
             this.tel.TabIndex = 10;
             // 
             // label12
@@ -323,7 +336,7 @@
             // 
             this.password.BackColor = System.Drawing.Color.White;
             this.password.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.password.Location = new System.Drawing.Point(196, 100);
+            this.password.Location = new System.Drawing.Point(196, 107);
             this.password.Name = "password";
             this.password.Size = new System.Drawing.Size(177, 27);
             this.password.TabIndex = 6;
@@ -358,44 +371,70 @@
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.LightCoral;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(345, 452);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(89, 36);
             this.button1.TabIndex = 10;
             this.button1.Text = "Actualizar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
+            this.button2.BackColor = System.Drawing.Color.LightCoral;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button2.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.Black;
             this.button2.Location = new System.Drawing.Point(250, 452);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(89, 36);
             this.button2.TabIndex = 11;
             this.button2.Text = "Registrar ";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(440, 452);
+            this.button3.BackColor = System.Drawing.Color.LightCoral;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button3.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.Location = new System.Drawing.Point(737, 464);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(89, 36);
             this.button3.TabIndex = 12;
             this.button3.Text = "Eliminar";
-            this.button3.UseVisualStyleBackColor = true;
+            this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // BackMenu
+            // button4
             // 
-            this.BackMenu.Image = ((System.Drawing.Image)(resources.GetObject("BackMenu.Image")));
-            this.BackMenu.Location = new System.Drawing.Point(0, -1);
-            this.BackMenu.Name = "BackMenu";
-            this.BackMenu.Size = new System.Drawing.Size(57, 42);
-            this.BackMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.BackMenu.TabIndex = 13;
-            this.BackMenu.TabStop = false;
-            this.BackMenu.Click += new System.EventHandler(this.BackMenu_Click);
+            this.button4.BackColor = System.Drawing.Color.LightCoral;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button4.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.Location = new System.Drawing.Point(440, 452);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(89, 36);
+            this.button4.TabIndex = 13;
+            this.button4.Text = "Bucar";
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.Color.White;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button5.ForeColor = System.Drawing.Color.Black;
+            this.button5.Location = new System.Drawing.Point(696, 47);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(139, 36);
+            this.button5.TabIndex = 14;
+            this.button5.Text = "Limpiar Campos";
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // RegistroEmpleado
             // 
@@ -403,6 +442,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(835, 528);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -423,13 +464,13 @@
             this.Text = "RegistroEmpleado";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BackMenu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minimizar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.apagar)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BackMenu)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -470,5 +511,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.PictureBox BackMenu;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
     }
 }

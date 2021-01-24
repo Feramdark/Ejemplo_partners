@@ -45,15 +45,15 @@ namespace IntraPDV
 
                 /*Variables del procedimiento*/
                 actTel.Parameters.AddWithValue("@id", id.Text);
-                actTel.Parameters.AddWithValue("@tel", tel.Text);
+                actTel.Parameters.AddWithValue("@tel",tel.Text);
                 //----------------------------------------------------------------------------------------------------
 
                 /*Procedimiento almacenado para actualizar el celular del empleado*/
                 SqlCommand actCel = new SqlCommand("actCel", conect);
-                actTel.CommandType = CommandType.StoredProcedure;
+                actCel.CommandType = CommandType.StoredProcedure;
                 /*Variables del procedimiento*/
-                actTel.Parameters.AddWithValue("@id", id.Text);
-                actTel.Parameters.AddWithValue("@cel", cel.Text);
+                actCel.Parameters.AddWithValue("@id", id.Text);
+                actCel.Parameters.AddWithValue("@cel", cel.Text);
                 //----------------------------------------------------------------------------------------------------
 
                 /*Las siguientes condicionales, posibilitan a que el sistema falle po alguna negligencia
@@ -63,18 +63,27 @@ namespace IntraPDV
                 if (id.Text != "" && password.Text != "")
                 {
                     actPass.ExecuteNonQuery();
+                    MessageBox.Show("Password actualizado");
+                   
                 }
                 /*Por si va a actualizar unicamente el telefono*/
                 if (id.Text != "" && tel.Text != "")
                 {
+                    Convert.ToDecimal(tel.Text);
                     actTel.ExecuteNonQuery();
+                    MessageBox.Show("Telefono actualizado");
+
                 }
                 /*Por si va a actualizar unicamente el telefono CELULAR*/
                 if (id.Text != "" && cel.Text != "")
                 {
+                    Convert.ToInt64(cel.Text);
                     actCel.ExecuteNonQuery();
+                    MessageBox.Show("Celular actualizado");
+                    
+
                 }
-                if (id.Text != "" && password.Text != "" && tel.Text != "" && cel.Text != "")
+                if (id.Text == "" && password.Text == "" && tel.Text == "" && cel.Text == "")
                 {
                     MessageBox.Show("Favor de Llenar los Campos que desee Actualizar",
                         "Ropa y Calzado Rocha", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -100,6 +109,18 @@ namespace IntraPDV
         {
             buscar_empleado buscar = new buscar_empleado();
             buscar.ShowDialog();
+        }
+
+        public void Limpiar() {
+            tel.Text = "";
+            id.Text = "";
+            cel.Text = "";
+            password.Text = "";
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Limpiar();
         }
     }
 }

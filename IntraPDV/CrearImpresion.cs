@@ -24,14 +24,14 @@ namespace IntraPDV
         //CONSTANTES
         public static string lineasSeparacion()
         {
-            string guion = "----------------------------------------";
+            string guion = "------------------------------------------";
 
             return line.AppendLine(guion).ToString();
         }
         //CONSTANTES
         public static void EncabezadoTicket()
         {
-            string LineaEncabezado = "Articulo       Cant   P.Unit    Valor";
+            string LineaEncabezado = "Articulo       Cant     Precio     Total";
 
             line.AppendLine(LineaEncabezado);
         }
@@ -63,7 +63,7 @@ namespace IntraPDV
             {
                 ticket += " ";                          // agrega espacios para alinear a la derecha
             }
-            line.AppendLine(ticket += parte1 + "\n");
+            line.AppendLine(ticket += parte1);
         }
         public void TextoCentro(string par1)
         {
@@ -81,23 +81,6 @@ namespace IntraPDV
                 ticket += " ";                           // Agrega espacios antes del texto a centrar
             }                                            // **********
             line.AppendLine(ticket += parte1 + "\n");
-
-        }
-        public void TextoExtremos(string par1, string par2)
-        {
-            max = par1.Length;
-            if (max > 18)
-            {
-                cort = max - 18;
-                parte1 = par1.Remove(18, cort);
-            }
-            else { parte2 = par2; }
-            max = 40 - (parte1.Length + parte2.Length);
-            for (int i = 0; i < max; i++)
-            {
-                ticket += " ";
-            }
-            line.AppendLine(ticket += parte2 + "\n");
 
         }
         public void AgregarArticulo(string par1, double total)
@@ -120,19 +103,26 @@ namespace IntraPDV
             line.AppendLine(ticket += parte2 + "\n");
 
         }
+        //                                 0               1           2            3
         public void AgregaArticulo(string Articulo, decimal precio, int cant, decimal subtotal)
         {
+            //cort = 13 - 8;
+            //parte1 = Articulo.Remove(10, cort);
+            //Articulo = parte1;
             if (cant.ToString().Length <= 3 && precio.ToString("c").Length <= 10 && subtotal.ToString("c").Length <= 11) // valida que cant precio y total esten dentro de rango
             {
                 string elementos = "", espacios = "";
                 bool bandera = false;
                 int nroEspacios = 0;
 
-                if (Articulo.Length > 40)                                 // **********
+                if (Articulo.Length > 30)                                 // **********
                 {
+                    //cort = 13 - 8;
+                    //parte1 = Articulo.Remove(10, cort);
+                    //Articulo = parte1;
                     //cort = max - 16;
                     //parte1 = Articulo.Remove(16, cort);          // corta a 16 la descripcion del articulo
-                    nroEspacios = (3 - cant.ToString().Length);
+                    nroEspacios = (2 - cant.ToString().Length);
                     espacios = "";
                     for (int i = 0; i < nroEspacios; i++)
                     {
@@ -141,7 +131,7 @@ namespace IntraPDV
                     elementos += espacios + cant.ToString();
 
                     // colocamos el precio a la derecha
-                    nroEspacios = (10 - precio.ToString().Length);
+                    nroEspacios = (8 - precio.ToString().Length);
                     espacios = "";
 
                     for (int i = 0; i < nroEspacios; i++)
@@ -151,7 +141,7 @@ namespace IntraPDV
                     elementos += espacios + precio.ToString();
 
                     //colocar el subtotal a la dercha
-                    nroEspacios = (11 - subtotal.ToString().Length);
+                    nroEspacios = (10 - subtotal.ToString().Length);
                     espacios = "";
 
                     for (int i = 0; i < nroEspacios; i++)
@@ -165,7 +155,7 @@ namespace IntraPDV
                     {
                         if (bandera == false)
                         {
-                            line.AppendLine(Articulo.Substring(CaracterActual, 16) + elementos);
+                            line.AppendLine(Articulo.Substring(CaracterActual, 16) + elementos);//Quitar elementos;
                             bandera = true;
                         }
                         else
@@ -181,13 +171,18 @@ namespace IntraPDV
                 }
                 else
                 {
-                    for (int i = 0; i < (16 - Articulo.Length); i++)
+                    //cort = 13 - 8;
+                    //cort = 2;
+                    //parte1 = Articulo.Remove(8, cort);
+                    //Articulo = parte1;
+                    for (int i = 0; i < (13 - Articulo.Length); i++)
                     {
                         espacios += " ";
 
                     }
+                    //Cantidad a la derecha
                     elementos = Articulo + espacios;
-                    nroEspacios = (3 - cant.ToString().Length);
+                    nroEspacios = (7 - cant.ToString().Length);
                     espacios = "";
                     for (int i = 0; i < nroEspacios; i++)
                     {
@@ -206,7 +201,7 @@ namespace IntraPDV
                     elementos += espacios + precio.ToString();
 
                     //colocar el subtotal a la dercha
-                    nroEspacios = (11 - subtotal.ToString().Length);
+                    nroEspacios = (9 - subtotal.ToString().Length);
                     espacios = "";
 
                     for (int i = 0; i < nroEspacios; i++)
@@ -261,10 +256,8 @@ namespace IntraPDV
             float leftMargin = e.MarginBounds.Left;
             float topMargin = e.MarginBounds.Top;
             string line = null;
-            printFont = new Font("Arial", 9);
+            printFont = new Font("Arial", 8);
             //e.Graphics.DrawString("texto prueba", printFont, Brushes.Black, new RectangleF(0, 10, 120, 20));
-
-
 
             // Calculate the number of lines per page.
             linesPerPage = e.MarginBounds.Height /
@@ -278,9 +271,7 @@ namespace IntraPDV
 
                 e.Graphics.DrawString(line, printFont, Brushes.Black,-2, yPos, new StringFormat());
                 count++;
-
             }
-
             // If more lines exist, print another page.
             if (line != null)
                 e.HasMorePages = true;

@@ -26,6 +26,7 @@ namespace IntraPDV
       int nWidthEllipse, // height of ellipse 
       int nHeightEllipse // width of ellipse 
      );
+        //SqlConnection con = BDConnect.connection();
         public Form1()
         {
             InitializeComponent();
@@ -107,13 +108,13 @@ namespace IntraPDV
                  * interfaces, es importante mencionar que necesitamos esas cache para conocer que usuario esta en el sistema*/
                 if (lector_bd.Read() == true)
                 {
-                    Interfaz_1 MenuPrincipal = new Interfaz_1();
+                    //Interfaz_1 MenuPrincipal = new Interfaz_1();
 
                     string rol = lector_bd["rol"].ToString();
                     if (rol == "administrador")
                     {
-                        this.Hide();
-                        MenuPrincipal.Show();
+                        //this.Hide();
+                        //MenuPrincipal.Show();
                     }
                  }
                  else

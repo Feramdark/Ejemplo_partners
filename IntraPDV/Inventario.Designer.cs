@@ -29,38 +29,34 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Inventario));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.apagar = new System.Windows.Forms.PictureBox();
             this.minimizar = new System.Windows.Forms.PictureBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.name_search = new System.Windows.Forms.TextBox();
-            this.id_search = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombre_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cantidad_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precio_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.model_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tipo_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.talla_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.depto_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descuento_produc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.depto_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.talla_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tipo_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.model_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precio_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidad_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombre_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.apagar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minimizar)).BeginInit();
-            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -72,7 +68,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1261, 35);
+            this.panel1.Size = new System.Drawing.Size(1266, 35);
             this.panel1.TabIndex = 4;
             // 
             // pictureBox2
@@ -92,7 +88,7 @@
             this.apagar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.apagar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.apagar.Image = ((System.Drawing.Image)(resources.GetObject("apagar.Image")));
-            this.apagar.Location = new System.Drawing.Point(1146, 0);
+            this.apagar.Location = new System.Drawing.Point(1227, 0);
             this.apagar.Name = "apagar";
             this.apagar.Size = new System.Drawing.Size(39, 35);
             this.apagar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -105,7 +101,7 @@
             this.minimizar.BackColor = System.Drawing.Color.White;
             this.minimizar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.minimizar.Image = ((System.Drawing.Image)(resources.GetObject("minimizar.Image")));
-            this.minimizar.Location = new System.Drawing.Point(1102, 0);
+            this.minimizar.Location = new System.Drawing.Point(1183, 0);
             this.minimizar.Name = "minimizar";
             this.minimizar.Size = new System.Drawing.Size(38, 35);
             this.minimizar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -113,108 +109,83 @@
             this.minimizar.TabStop = false;
             this.minimizar.Click += new System.EventHandler(this.minimizar_Click);
             // 
-            // groupBox1
+            // dateTimePicker1
             // 
-            this.groupBox1.BackColor = System.Drawing.Color.White;
-            this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.name_search);
-            this.groupBox1.Controls.Add(this.id_search);
-            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.groupBox1.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(12, 78);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(224, 417);
-            this.groupBox1.TabIndex = 5;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Acciones";
+            this.dateTimePicker1.CalendarFont = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.dateTimePicker1.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker1.Location = new System.Drawing.Point(926, 41);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(363, 31);
+            this.dateTimePicker1.TabIndex = 7;
             // 
-            // comboBox1
+            // descuento_produc
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Bebe",
-            "Boneteria",
-            "Caballero",
-            "Dama",
-            "Niña",
-            "Niño"});
-            this.comboBox1.Location = new System.Drawing.Point(6, 206);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(189, 31);
-            this.comboBox1.TabIndex = 14;
+            this.descuento_produc.HeaderText = "Descuento";
+            this.descuento_produc.Name = "descuento_produc";
+            this.descuento_produc.Width = 132;
             // 
-            // button1
+            // depto_producto
             // 
-            this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(6, 276);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(202, 38);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "Añadir Productos";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.depto_producto.HeaderText = "Depto";
+            this.depto_producto.Name = "depto_producto";
+            this.depto_producto.Width = 91;
             // 
-            // label3
+            // talla_producto
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(4, 166);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(145, 23);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "Departamento";
+            this.talla_producto.HeaderText = "Talla";
+            this.talla_producto.Name = "talla_producto";
+            this.talla_producto.Width = 79;
             // 
-            // label2
+            // tipo_producto
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(2, 96);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(81, 23);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "Modelo";
+            this.tipo_producto.HeaderText = "Tipo";
+            this.tipo_producto.Name = "tipo_producto";
+            this.tipo_producto.Width = 73;
             // 
-            // label1
+            // model_producto
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(2, 29);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 23);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Codigo";
+            this.model_producto.HeaderText = "Modelo";
+            this.model_producto.Name = "model_producto";
+            this.model_producto.Width = 106;
             // 
-            // name_search
+            // precio_producto
             // 
-            this.name_search.Location = new System.Drawing.Point(6, 122);
-            this.name_search.Name = "name_search";
-            this.name_search.Size = new System.Drawing.Size(189, 31);
-            this.name_search.TabIndex = 9;
+            this.precio_producto.HeaderText = "Precio";
+            this.precio_producto.Name = "precio_producto";
+            this.precio_producto.Width = 93;
             // 
-            // id_search
+            // cantidad_producto
             // 
-            this.id_search.Location = new System.Drawing.Point(6, 55);
-            this.id_search.Name = "id_search";
-            this.id_search.Size = new System.Drawing.Size(189, 31);
-            this.id_search.TabIndex = 8;
-            this.id_search.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CodigoBarras_Keypress);
+            this.cantidad_producto.HeaderText = "Cantidad";
+            this.cantidad_producto.Name = "cantidad_producto";
+            this.cantidad_producto.Width = 124;
+            // 
+            // nombre_producto
+            // 
+            this.nombre_producto.HeaderText = "Nombre";
+            this.nombre_producto.Name = "nombre_producto";
+            this.nombre_producto.Width = 110;
+            // 
+            // Codigo
+            // 
+            this.Codigo.HeaderText = "Codigo";
+            this.Codigo.Name = "Codigo";
+            this.Codigo.Width = 105;
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.MistyRose;
             this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
-            this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.MistyRose;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.MistyRose;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Codigo,
@@ -226,81 +197,38 @@
             this.talla_producto,
             this.depto_producto,
             this.descuento_produc});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.MistyRose;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.MistyRose;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.GridColor = System.Drawing.Color.Black;
-            this.dataGridView1.Location = new System.Drawing.Point(271, 78);
+            this.dataGridView1.Location = new System.Drawing.Point(276, 78);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.dataGridView1.Size = new System.Drawing.Size(946, 417);
+            this.dataGridView1.Size = new System.Drawing.Size(969, 503);
             this.dataGridView1.TabIndex = 6;
             // 
-            // dateTimePicker1
+            // button1
             // 
-            this.dateTimePicker1.CalendarFont = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.dateTimePicker1.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(690, 41);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(363, 31);
-            this.dateTimePicker1.TabIndex = 7;
-            // 
-            // Codigo
-            // 
-            this.Codigo.HeaderText = "Codigo";
-            this.Codigo.Name = "Codigo";
-            // 
-            // nombre_producto
-            // 
-            this.nombre_producto.HeaderText = "Nombre";
-            this.nombre_producto.Name = "nombre_producto";
-            // 
-            // cantidad_producto
-            // 
-            this.cantidad_producto.HeaderText = "Cantidad";
-            this.cantidad_producto.Name = "cantidad_producto";
-            // 
-            // precio_producto
-            // 
-            this.precio_producto.HeaderText = "Precio";
-            this.precio_producto.Name = "precio_producto";
-            // 
-            // model_producto
-            // 
-            this.model_producto.HeaderText = "Modelo";
-            this.model_producto.Name = "model_producto";
-            // 
-            // tipo_producto
-            // 
-            this.tipo_producto.HeaderText = "Tipo";
-            this.tipo_producto.Name = "tipo_producto";
-            // 
-            // talla_producto
-            // 
-            this.talla_producto.HeaderText = "Talla";
-            this.talla_producto.Name = "talla_producto";
-            // 
-            // depto_producto
-            // 
-            this.depto_producto.HeaderText = "Depto";
-            this.depto_producto.Name = "depto_producto";
-            // 
-            // descuento_produc
-            // 
-            this.descuento_produc.HeaderText = "Descuento";
-            this.descuento_produc.Name = "descuento_produc";
+            this.button1.BackColor = System.Drawing.Color.White;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(8, 72);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(202, 38);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "Añadir Productos";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.White;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(8, 343);
+            this.button2.Location = new System.Drawing.Point(8, 157);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(202, 38);
             this.button2.TabIndex = 15;
@@ -308,12 +236,37 @@
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.BackColor = System.Drawing.Color.White;
+            this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.groupBox1.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(12, 78);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(239, 220);
+            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Escriba los datos";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(-28, 431);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(172, 191);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 10;
+            this.pictureBox1.TabStop = false;
+            // 
             // Inventario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1261, 575);
+            this.ClientSize = new System.Drawing.Size(1266, 593);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox1);
@@ -326,9 +279,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.apagar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minimizar)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -338,26 +291,21 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox apagar;
         private System.Windows.Forms.PictureBox minimizar;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox name_search;
-        private System.Windows.Forms.TextBox id_search;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nombre_producto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cantidad_producto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn precio_producto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn model_producto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tipo_producto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn talla_producto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn depto_producto;
         private System.Windows.Forms.DataGridViewTextBoxColumn descuento_produc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn depto_producto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn talla_producto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tipo_producto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn model_producto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn precio_producto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cantidad_producto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombre_producto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

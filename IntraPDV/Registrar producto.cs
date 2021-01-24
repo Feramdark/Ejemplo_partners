@@ -18,9 +18,9 @@ namespace IntraPDV
         public Registrar_producto()
         {
             InitializeComponent();
-            //Interfaz_1 main_menu = new Interfaz_1();
-            //main_menu.Hide();
-            
+            //todos();
+            toolTip1.SetToolTip(this.textoDescuento, "Inserte el descuento a el producto seleccionado");
+            toolTip1.SetToolTip(this.codigoBarras, "Busque un producto");
         }
         DataTable inventario = new DataTable();
         private void apagar_Click(object sender, EventArgs e)
@@ -69,18 +69,110 @@ namespace IntraPDV
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message);
             }
         }
-        private void button2_Click(object sender, EventArgs e)
+        private void todos()
         {
-            /*DataTable dt = new DataTable();
-            dt.Rows.Clear();*/
-            dataGridView1.Rows.Clear();
+            try
+            {
+                SqlConnection connection = BDConnect.connection();
+                SqlCommand giveAllItems = new SqlCommand("consultaProductos", connection);
+                giveAllItems.CommandType = CommandType.StoredProcedure;
+
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.SelectCommand = giveAllItems;
+                adapter.Fill(inventario);
+                dataGridView1.DataSource = inventario;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        private void actualizarDescuento(string codigoProducto,int descuentoNuevo)
+        {
+            try
+            {
+                SqlConnection conectar = BDConnect.connection();
+                SqlCommand actDesc = new SqlCommand("actualDesc", conectar);
+                actDesc.CommandType = CommandType.StoredProcedure;
+
+                //parametros
+                actDesc.Parameters.AddWithValue("@codigo", codigoProducto);
+                actDesc.Parameters.AddWithValue("@descuento", descuentoNuevo);
+                actDesc.ExecuteNonQuery();
+                MessageBox.Show("Descuento Actualizado");
+                conectar.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void actualizarCantidad(string codigo,int nuevaCantidad)
+        {
+            try
+            {
+                SqlConnection conectar = BDConnect.connection();
+                SqlCommand actDesc = new SqlCommand("actualizarCant", conectar);
+                actDesc.CommandType = CommandType.StoredProcedure;
+
+                //parametros
+                actDesc.Parameters.AddWithValue("@codigo", codigo);
+                actDesc.Parameters.AddWithValue("@cantidad", nuevaCantidad);
+                actDesc.ExecuteNonQuery();
+                MessageBox.Show("Cantidad Actualizada");
+                conectar.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void actualizaPrecio(string codigo, decimal nuevaCantidad)
+        {
+            try
+            {
+                SqlConnection conectar = BDConnect.connection();
+                SqlCommand actDesc = new SqlCommand("actualizaProductos", conectar);
+                actDesc.CommandType = CommandType.StoredProcedure;
+
+                //parametros
+                actDesc.Parameters.AddWithValue("@codigo", codigo);
+                actDesc.Parameters.AddWithValue("@precio", nuevaCantidad);
+                actDesc.ExecuteNonQuery();
+                MessageBox.Show("Precio Actualizado");
+                conectar.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
-        private void btnActualizar_Click(object sender, EventArgs e)
+        private void actualizar_Click(object sender, EventArgs e)
+        {
+            if (codigoBarras.Text!="" && textoDescuento.Text !="")
+            {
+                actualizarDescuento(codigoBarras.Text, Int32.Parse(textoDescuento.Text));
+                dataGridView1.Rows.RemoveAt(0);
+            }
+            if (codigoBarras.Text != "" && cantidadActual.Text != "")
+            {
+                actualizarCantidad(codigoBarras.Text, Int32.Parse(cantidadActual.Text));
+            }
+            if(codigoBarras.Text!="" && precioNuevo.Text != "")
+            {
+                actualizaPrecio(codigoBarras.Text, Convert.ToDecimal(precioNuevo.Text));
+                dataGridView1.Rows.RemoveAt(0);
+            }
+
+            
+        }
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }

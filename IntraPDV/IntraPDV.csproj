@@ -69,6 +69,12 @@
       <DependentUpon>ConfiguracionServidor.cs</DependentUpon>
     </Compile>
     <Compile Include="CrearImpresion.cs" />
+    <Compile Include="devoPostCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="devoPostCompra.Designer.cs">
+      <DependentUpon>devoPostCompra.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +127,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ConfiguracionServidor.resx">
       <DependentUpon>ConfiguracionServidor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="devoPostCompra.resx">
+      <DependentUpon>devoPostCompra.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

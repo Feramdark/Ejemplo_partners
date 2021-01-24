@@ -21,7 +21,9 @@ namespace IntraPDV
             Form1 inicio_sesion = new Form1();
             inicio_sesion.Close();
             inicio_sesion.Dispose();
+
         }
+        static int folio = 0;
         //CONEXION CON BASE DE DATOS
         SqlConnection conexion_BD = BDConnect.connection();
         //TABLA DE DATOS GRIDVIEW
@@ -71,25 +73,27 @@ namespace IntraPDV
 
         private void button1_Click(object sender, EventArgs e)
         {
+            folio += 1;
+            incremento_enRam.Text = Convert.ToString(folio);
             if (MessageBox.Show("Deseas Realizar la Siguiente Venta", "Ropa y Calzado Rocha", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                ActualizarInventario();
-                RegistrarVenta();
-                horaRecibida.Text = label6.Text;
-                TicketForm ticket = new TicketForm();
-                ticket.horaText.Text = horaRecibida.Text;
-                ticket.totalText.Text = TotalPagar.Text;
-                ticket.importeText.Text = Importe.Text;
-                ticket.cambioText.Text = TextCambio.Text;
-                this.Hide();
-                this.Dispose();
-                ticket.Show();
-                ticket.MyTicket();
+                {
+                    ActualizarInventario();
+                    RegistrarVenta();
+                    horaRecibida.Text = label6.Text;
+                    TicketForm ticket = new TicketForm();
+                    ticket.horaText.Text = horaRecibida.Text;
+                    ticket.totalText.Text = TotalPagar.Text;
+                    ticket.importeText.Text = Importe.Text;
+                    ticket.cambioText.Text = TextCambio.Text;
 
+                    this.Hide();
+                    this.Dispose();
+                    ticket.Show();
+                    ticket.MyTicket();
 
-            }
-            
-
+                }
+          
+            //MessageBox.Show("Inserta el importe \nPor Favor", "FALTA EL IMPORTE", MessageBoxButtons.OK,MessageBoxIcon.Warning);
         }
 
         private void CodigoBarras_KeyPress(object sender, KeyPressEventArgs e)
@@ -118,15 +122,15 @@ namespace IntraPDV
                 {
                     if (fila.Cells[0].Value.ToString() == CodigoBarras.Text)
                     {
-                        int cant = Convert.ToInt32(fila.Cells[4].Value);
-                        float precio = Convert.ToSingle(fila.Cells[2].Value);
-                        float descuento = Convert.ToSingle(fila.Cells[3].Value);
-                        float total = Convert.ToSingle(fila.Cells[5].Value);
+                        int cant = Convert.ToInt32(fila.Cells[5].Value);//4
+                        float precio = Convert.ToSingle(fila.Cells[3].Value);//2
+                        float descuento = Convert.ToSingle(fila.Cells[4].Value);//3
+                        float total = Convert.ToSingle(fila.Cells[6].Value);//5
                         ///////////////////////////////////////////////////////////////////////
                         cant = cant + 1;
                         total = (precio - ((precio * descuento) / 100)) * cant;
-                        fila.Cells[4].Value = cant;
-                        fila.Cells[5].Value = total;
+                        fila.Cells[5].Value = cant;
+                        fila.Cells[6].Value = total;
                         flag = true;
                     }
                 }
@@ -142,7 +146,7 @@ namespace IntraPDV
         }
 
         //Termina funcion para buscar producto
-        public void RegistrarVenta()
+        public void RegistrarVenta()//Modificar para agregar el nuevo valor de la venta. el folio
         {
             try
             {
@@ -154,29 +158,31 @@ namespace IntraPDV
                     RealizarVen.Parameters.Clear();
 
                     RealizarVen.Parameters.AddWithValue("@fecha", Convert.ToDateTime(dateTimePicker1.Text));
-                    RealizarVen.Parameters.AddWithValue("@cantidad", Convert.ToInt32(row.Cells[4].Value));
-                    RealizarVen.Parameters.AddWithValue("@total", Convert.ToDouble(row.Cells[5].Value));
-                    RealizarVen.Parameters.AddWithValue("@id_producto",Convert.ToString(row.Cells[0].Value));
+                    RealizarVen.Parameters.AddWithValue("@cantidad", Convert.ToInt32(row.Cells[5].Value));
+                    RealizarVen.Parameters.AddWithValue("@total", Convert.ToDouble(row.Cells[6].Value));
+                    RealizarVen.Parameters.AddWithValue("@id_producto", Convert.ToString(row.Cells[0].Value));
                     RealizarVen.Parameters.AddWithValue("@id_empleado", IdUsuario.Text);
                     RealizarVen.Parameters.AddWithValue("@hora", Convert.ToDateTime(label6.Text));
                     RealizarVen.ExecuteNonQuery();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 //MessageBox.Show("Venta realizada","Exito");
                 //MessageBox.Show(ex.Message);
+            }
+            finally {
+                conexion_BD.Close();
             }
         }
         public void suma()
         {
-            float suma = 0.000F;
+            float suma = 0.00F;
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
                 if (row.Cells[1].Value != null) //1 es "Total"
-                    suma += Convert.ToSingle(row.Cells[5].Value);
-                
-                
+                    suma += Convert.ToSingle(row.Cells[6].Value);
             }
             TotalPagar.Text = Convert.ToString(suma);
         }
@@ -191,33 +197,13 @@ namespace IntraPDV
         }
         private void dar_cambio(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar==(char)Keys.Enter)
-            {
-                Cambio(Convert.ToDecimal(TotalPagar.Text), Convert.ToDecimal(Importe.Text));
-            }
+          
+                if (e.KeyChar == (char)Keys.Enter)
+                {
+                    Cambio(Convert.ToDecimal(TotalPagar.Text), Convert.ToDecimal(Importe.Text));
+                }
+         
         }
-        public void FuncionImprimir()
-        {
-            SqlDataAdapter Tabla = new SqlDataAdapter();
-            Ticket.TextLeft("Ropa y Calzado Rocha");
-            CrearImpresion.lineasSeparacion();
-
-            Ticket.TextLeft("Direccion: Zona centro");
-            Ticket.TextLeft("Fecha: " + DateTime.Now.ToShortDateString());
-            CrearImpresion.lineasSeparacion();
-
-            CrearImpresion.EncabezadoTicket();
-
-            foreach(DataGridViewRow fila in dataGridView1.Rows)
-            {//                               Nombre//                       Precio//                                        Cantidad                                     //TOTAL
-                Ticket.AgregaArticulo(fila.Cells[1].Value.ToString(),decimal.Parse(fila.Cells[3].Value.ToString()), int.Parse(fila.Cells[5].Value.ToString()), decimal.Parse(fila.Cells[6].Value.ToString()));
-                //Ticket.TextLeft(fila.Cells[1].Value.ToString());
-            }
-            CrearImpresion.lineasSeparacion();
-            Ticket.ImprimirTiket();
-
-        }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             label6.Text = DateTime.Now.ToLongTimeString();
@@ -236,12 +222,63 @@ namespace IntraPDV
                     update.Parameters.AddWithValue("@cantidad", Convert.ToInt32(row.Cells[5].Value));
                     update.ExecuteNonQuery();
                 }
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void btncancelar_Click(object sender, EventArgs e)
+        {
+            folio +=1;
+            incremento_enRam.Text = Convert.ToString(folio);
+        }
+
+        private void devolucion_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                foreach (DataGridViewRow fila in dataGridView1.Rows)
+                {
+                    if (fila.Cells[0].Value != null)
+                    {
+
+                        if (fila.Cells[0].Value.ToString() == devolucion.Text)
+                        {
+                            int cant = Convert.ToInt32(fila.Cells[5].Value);
+                            float precio = Convert.ToSingle(fila.Cells[3].Value);
+                            float descuento = Convert.ToSingle(fila.Cells[4].Value);
+                            float total = Convert.ToSingle(fila.Cells[6].Value);
+                            ///////////////////////////////////////////////////////////////////////
+                            cant = cant - 1;
+                            total = (precio - ((precio * descuento) / 100)) * cant;
+                            fila.Cells[5].Value = cant;
+                            fila.Cells[6].Value = total;
+                            devolucion.Text = "";
+                        }
+                    }
+                }
+                suma();  /////volver a sumar el total
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            dataGridView1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
+        }
+
+        private void devolucionPosCompraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            devoPostCompra devolu = new devoPostCompra();
+            devolu.Show();
+            this.Hide();
+           
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

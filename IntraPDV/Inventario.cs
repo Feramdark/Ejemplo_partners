@@ -39,12 +39,6 @@ namespace IntraPDV
         {
             InsertarProductos();
         }
-
-        private void search_produc_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -72,37 +66,20 @@ namespace IntraPDV
                     InsertarInventario.Parameters.AddWithValue("@descuento", fila.Cells["descuento_produc"].Value);
                     InsertarInventario.Parameters.AddWithValue("@fecha_ingr", Convert.ToDateTime(dateTimePicker1.Text));
 
-
                     InsertarInventario.ExecuteNonQuery();
-
                     InsertarInventario.Parameters.Clear(); 
                 }
-
-
             }
             catch (Exception ex)
             {
-                DialogResult respuesta = MessageBox.Show("Desea continuar o Cancelar la operacion","Productos insertados",MessageBoxButtons.OKCancel,MessageBoxIcon.Information);
+                DialogResult respuesta = MessageBox.Show("Desea Aceptar o Cancelar la operacion","Productos insertados",MessageBoxButtons.OKCancel,MessageBoxIcon.Information);
                 if (respuesta==DialogResult.OK)
                 {
                     MessageBox.Show("Productos Guardados Exitosamente");
                     dataGridView1.Rows.Clear();
                 }
-
-            }
-
-
-
-        }
-
-        private void CodigoBarras_Keypress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)Keys.Enter)
-            {
-                dataGridView1.Rows.Add(id_search.Text);
             }
         }
-
         private void button2_Click(object sender, EventArgs e)
         {
             dataGridView1.Rows.Clear();

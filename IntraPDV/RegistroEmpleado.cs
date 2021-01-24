@@ -18,7 +18,7 @@ namespace IntraPDV
             InitializeComponent();
         }
 
-        /*public void registrar()
+        public void registrar()
         {
             SqlConnection conect = BDConnect.connection();
 
@@ -62,10 +62,10 @@ namespace IntraPDV
             {
                 conect.Close();
             }
-        }*/
+        }
 
 
-       /* public void eliminarDatosEmpleado()
+        public void eliminarDatosEmpleado()
         {
             SqlConnection conect = BDConnect.connection();
             try
@@ -97,7 +97,7 @@ namespace IntraPDV
             {
                 conect.Close();
             }
-        }*/
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -107,12 +107,12 @@ namespace IntraPDV
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //registrar();
+            registrar();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //eliminarDatosEmpleado();
+            eliminarDatosEmpleado();
         }
 
         private void apagar_Click(object sender, EventArgs e)
@@ -134,6 +134,30 @@ namespace IntraPDV
             this.Close();
             Interfaz_1 MainMenu = new Interfaz_1();
             MainMenu.Show();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            buscar_empleado buscar = new buscar_empleado();
+            buscar.ShowDialog();
+        }
+
+        public void Limpiar() {
+            id.Text = "";
+            nombre.Text = "";
+            apellidoM.Text = "";
+            apellidoP.Text = "";
+            password.Text = "";
+            tel.Text = "";
+            cel.Text = "";
+            lugar.Text = "";
+            calle.Text = "";
+            nmero.Text = "";
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Limpiar();
         }
     }
 }
