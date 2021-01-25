@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.28307.1259
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntraPDV", "IntraPDV\IntraPDV.csproj", "{C4CAC9AF-EC90-409E-93FD-60F5874A19C3}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "IntraPDV_1", "IntraPDV_1\IntraPDV_1.vdproj", "{C1E44C93-6C5C-4DB8-8707-CF4C4B2D1CD2}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,8 +15,6 @@ Global
 		{C4CAC9AF-EC90-409E-93FD-60F5874A19C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4CAC9AF-EC90-409E-93FD-60F5874A19C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4CAC9AF-EC90-409E-93FD-60F5874A19C3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C1E44C93-6C5C-4DB8-8707-CF4C4B2D1CD2}.Debug|Any CPU.ActiveCfg = Debug
-		{C1E44C93-6C5C-4DB8-8707-CF4C4B2D1CD2}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
