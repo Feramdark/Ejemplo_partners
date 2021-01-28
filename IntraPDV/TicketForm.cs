@@ -48,8 +48,9 @@ namespace IntraPDV
                 CrearImpresion.EncabezadoTicket();
                 foreach (DataGridViewRow fila in dataGridView1.Rows)
                 {
-                    Ticket.TextLeft(" " + fila.Cells[0].Value.ToString());//Producto arriba descripcion abajo.
+                    Ticket.TextLeft(fila.Cells[0].Value.ToString()+" Talla:"+ fila.Cells[7].Value.ToString());//Producto arriba descripcion abajo.
 
+                    //Cabecera -> Codigo producto   Cantidad    Precio   Total.
                     Ticket.AgregaArticulo(fila.Cells[6].Value.ToString() + " ", Convert.ToDecimal(fila.Cells[3].Value),
                         Convert.ToInt32(fila.Cells[2].Value), Convert.ToDecimal(fila.Cells[5].Value));
                 }

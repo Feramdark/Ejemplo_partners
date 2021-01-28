@@ -14,6 +14,7 @@ namespace IntraPDV
 {
     public partial class Interfaz_1 : Form
     {
+        static int folio = 0;
         CrearImpresion Ticket = new CrearImpresion();
         public Interfaz_1()
         {
@@ -23,7 +24,7 @@ namespace IntraPDV
             inicio_sesion.Dispose();
 
         }
-        static int folio = 0;
+
         //CONEXION CON BASE DE DATOS
         SqlConnection conexion_BD = BDConnect.connection();
         //TABLA DE DATOS GRIDVIEW
@@ -164,6 +165,7 @@ namespace IntraPDV
                     RealizarVen.Parameters.AddWithValue("@id_empleado", IdUsuario.Text);
                     RealizarVen.Parameters.AddWithValue("@hora", Convert.ToDateTime(label6.Text));
                     RealizarVen.ExecuteNonQuery();
+                    RealizarVen.Parameters.Clear();
                 }
             }
             catch (Exception ex)
@@ -182,9 +184,9 @@ namespace IntraPDV
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
                 if (row.Cells[1].Value != null) //1 es "Total"
-                    suma += Convert.ToSingle(row.Cells[6].Value);
+                    suma += Convert.ToSingle(row.Cells[6].Value); //incremento de la suma de todos los elementos que se encuentran es esa celda.
             }
-            TotalPagar.Text = Convert.ToString(suma);
+            TotalPagar.Text = Convert.ToString(suma);//Cantidad total de la suma de todos los elementos
         }
 
         public void Cambio(decimal importe, decimal total)
@@ -266,6 +268,7 @@ namespace IntraPDV
         private void button1_Click_1(object sender, EventArgs e)
         {
             dataGridView1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
+            suma();//Volver a realizar la suma
         }
 
         private void devolucionPosCompraToolStripMenuItem_Click(object sender, EventArgs e)
@@ -276,9 +279,10 @@ namespace IntraPDV
            
         }
 
-        private void label8_Click(object sender, EventArgs e)
+        private void sistemaDeApartadoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            interfazApartado sistema_apartado = new interfazApartado();
+            sistema_apartado.ShowDialog();
         }
     }
 }

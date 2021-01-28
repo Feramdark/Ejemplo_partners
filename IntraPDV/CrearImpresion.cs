@@ -35,6 +35,12 @@ namespace IntraPDV
 
             line.AppendLine(LineaEncabezado);
         }
+        public static void EncabezadoApartar()
+        {
+            string LineaEncabezado = "Articulo       Cant     Precio     Abono";
+        
+            line.AppendLine(LineaEncabezado);
+        }
 
         ///////////////////////////////POSICION DEL TEXTO////////////////////////////
         public void TextLeft(string par1)

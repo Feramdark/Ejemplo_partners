@@ -78,13 +78,26 @@ namespace IntraPDV
 
         private void imprimir_Click(object sender, EventArgs e)
         {
-            CrearImpresion ticket = new CrearImpresion();
+            CrearImpresion Ticket = new CrearImpresion();
+            Ticket.TextoCentro("INFORME VENTA DIARIA");
+            Ticket.TextLeft(" Velia Perez Zavala");
+            Ticket.TextLeft(" R.F.C. PEZV-690103-270");
+            Ticket.TextLeft(" Aquiles Serdan #105 OTE");
+            Ticket.TextLeft(" Colonia centro");
+            Ticket.TextLeft(" Gpe. Victoria,DGO C.P 34700");
+            CrearImpresion.lineasSeparacion();//-----------------------------------------
+            Ticket.TextoCentro("Fecha: " + DateTime.Today.Day + "/" + DateTime.Today.Month + "/" + DateTime.Today.Year);
+            Ticket.TextLeft(" Hora:       " + DateTime.Today.TimeOfDay);
+            Ticket.TextLeft(" Le atendio:    " + "Fam: Rocha Pérez");
+            CrearImpresion.lineasSeparacion();//-----------------------------------------
+            CrearImpresion.EncabezadoTicket();
 
             foreach (DataGridViewRow item in dataGridView1.Rows)
             {
-                ticket.TextoCentro(item.Cells[0].Value.ToString());
-                ticket.ImprimirTiket();
+                Ticket.TextoCentro(item.Cells[0].Value.ToString());
+                
             }
+            Ticket.ImprimirTiket();
         }
     }
 }

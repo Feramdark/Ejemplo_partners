@@ -39,6 +39,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.precioNuevo = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.cantidadActual = new System.Windows.Forms.TextBox();
             this.actualizar = new System.Windows.Forms.Button();
@@ -48,8 +50,6 @@
             this.codigoBarras = new System.Windows.Forms.TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.precioNuevo = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BackMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minimizar)).BeginInit();
@@ -164,15 +164,31 @@
             this.groupBox1.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 59);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(224, 388);
+            this.groupBox1.Size = new System.Drawing.Size(250, 416);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Buscar y Actualizar";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(5, 274);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(167, 23);
+            this.label4.TabIndex = 29;
+            this.label4.Text = "Actualizar Precio";
+            // 
+            // precioNuevo
+            // 
+            this.precioNuevo.Location = new System.Drawing.Point(9, 300);
+            this.precioNuevo.Name = "precioNuevo";
+            this.precioNuevo.Size = new System.Drawing.Size(182, 31);
+            this.precioNuevo.TabIndex = 28;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(5, 196);
+            this.label3.Location = new System.Drawing.Point(4, 198);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(198, 23);
             this.label3.TabIndex = 27;
@@ -180,7 +196,7 @@
             // 
             // cantidadActual
             // 
-            this.cantidadActual.Location = new System.Drawing.Point(9, 222);
+            this.cantidadActual.Location = new System.Drawing.Point(8, 224);
             this.cantidadActual.Name = "cantidadActual";
             this.cantidadActual.Size = new System.Drawing.Size(182, 31);
             this.cantidadActual.TabIndex = 26;
@@ -192,7 +208,7 @@
             this.actualizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.actualizar.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.actualizar.ForeColor = System.Drawing.Color.Black;
-            this.actualizar.Location = new System.Drawing.Point(39, 337);
+            this.actualizar.Location = new System.Drawing.Point(41, 386);
             this.actualizar.Name = "actualizar";
             this.actualizar.Size = new System.Drawing.Size(150, 30);
             this.actualizar.TabIndex = 25;
@@ -236,28 +252,12 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(0, 432);
+            this.pictureBox2.Location = new System.Drawing.Point(51, 481);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(142, 123);
+            this.pictureBox2.Size = new System.Drawing.Size(124, 74);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 9;
             this.pictureBox2.TabStop = false;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(5, 274);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(167, 23);
-            this.label4.TabIndex = 29;
-            this.label4.Text = "Actualizar Precio";
-            // 
-            // precioNuevo
-            // 
-            this.precioNuevo.Location = new System.Drawing.Point(9, 300);
-            this.precioNuevo.Name = "precioNuevo";
-            this.precioNuevo.Size = new System.Drawing.Size(182, 31);
-            this.precioNuevo.TabIndex = 28;
             // 
             // Registrar_producto
             // 

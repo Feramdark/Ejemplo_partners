@@ -40,11 +40,12 @@
             this.añadirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inventarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checarInventarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.administracionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.empleadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sistemaDeApartadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configuraciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cambioDeConexiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.devolucionPosCompraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.administracionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.empleadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RealizarCobro = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.CodigoBarras = new System.Windows.Forms.TextBox();
@@ -129,12 +130,13 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.añadirProductoToolStripMenuItem,
             this.inventarioToolStripMenuItem,
-            this.administracionToolStripMenuItem,
+            this.sistemaDeApartadoToolStripMenuItem,
             this.configuraciónToolStripMenuItem,
-            this.devolucionPosCompraToolStripMenuItem});
+            this.devolucionPosCompraToolStripMenuItem,
+            this.administracionToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 5);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(847, 33);
+            this.menuStrip1.Size = new System.Drawing.Size(1050, 33);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -151,8 +153,8 @@
             // añadirToolStripMenuItem
             // 
             this.añadirToolStripMenuItem.Name = "añadirToolStripMenuItem";
-            this.añadirToolStripMenuItem.Size = new System.Drawing.Size(140, 30);
-            this.añadirToolStripMenuItem.Text = "Buscar";
+            this.añadirToolStripMenuItem.Size = new System.Drawing.Size(263, 30);
+            this.añadirToolStripMenuItem.Text = "Actualizar Inventario";
             this.añadirToolStripMenuItem.Click += new System.EventHandler(this.añadirToolStripMenuItem_Click);
             // 
             // inventarioToolStripMenuItem
@@ -166,24 +168,16 @@
             // checarInventarioToolStripMenuItem
             // 
             this.checarInventarioToolStripMenuItem.Name = "checarInventarioToolStripMenuItem";
-            this.checarInventarioToolStripMenuItem.Size = new System.Drawing.Size(268, 30);
-            this.checarInventarioToolStripMenuItem.Text = "Actualizar Inventario ";
+            this.checarInventarioToolStripMenuItem.Size = new System.Drawing.Size(244, 30);
+            this.checarInventarioToolStripMenuItem.Text = "Añadir Inventario. ";
             this.checarInventarioToolStripMenuItem.Click += new System.EventHandler(this.checarInventarioToolStripMenuItem_Click);
             // 
-            // administracionToolStripMenuItem
+            // sistemaDeApartadoToolStripMenuItem
             // 
-            this.administracionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.empleadosToolStripMenuItem});
-            this.administracionToolStripMenuItem.Name = "administracionToolStripMenuItem";
-            this.administracionToolStripMenuItem.Size = new System.Drawing.Size(154, 29);
-            this.administracionToolStripMenuItem.Text = "Administracion";
-            // 
-            // empleadosToolStripMenuItem
-            // 
-            this.empleadosToolStripMenuItem.Name = "empleadosToolStripMenuItem";
-            this.empleadosToolStripMenuItem.Size = new System.Drawing.Size(177, 30);
-            this.empleadosToolStripMenuItem.Text = "Empleados";
-            this.empleadosToolStripMenuItem.Click += new System.EventHandler(this.empleadosToolStripMenuItem_Click);
+            this.sistemaDeApartadoToolStripMenuItem.Name = "sistemaDeApartadoToolStripMenuItem";
+            this.sistemaDeApartadoToolStripMenuItem.Size = new System.Drawing.Size(203, 29);
+            this.sistemaDeApartadoToolStripMenuItem.Text = "Sistema de Apartado";
+            this.sistemaDeApartadoToolStripMenuItem.Click += new System.EventHandler(this.sistemaDeApartadoToolStripMenuItem_Click);
             // 
             // configuraciónToolStripMenuItem
             // 
@@ -207,11 +201,26 @@
             this.devolucionPosCompraToolStripMenuItem.Text = "Devolucion Post-Compra";
             this.devolucionPosCompraToolStripMenuItem.Click += new System.EventHandler(this.devolucionPosCompraToolStripMenuItem_Click);
             // 
+            // administracionToolStripMenuItem
+            // 
+            this.administracionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.empleadosToolStripMenuItem});
+            this.administracionToolStripMenuItem.Name = "administracionToolStripMenuItem";
+            this.administracionToolStripMenuItem.Size = new System.Drawing.Size(154, 29);
+            this.administracionToolStripMenuItem.Text = "Administracion";
+            // 
+            // empleadosToolStripMenuItem
+            // 
+            this.empleadosToolStripMenuItem.Name = "empleadosToolStripMenuItem";
+            this.empleadosToolStripMenuItem.Size = new System.Drawing.Size(177, 30);
+            this.empleadosToolStripMenuItem.Text = "Empleados";
+            this.empleadosToolStripMenuItem.Click += new System.EventHandler(this.empleadosToolStripMenuItem_Click);
+            // 
             // RealizarCobro
             // 
             this.RealizarCobro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.RealizarCobro.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RealizarCobro.Location = new System.Drawing.Point(1045, 488);
+            this.RealizarCobro.Location = new System.Drawing.Point(1090, 493);
             this.RealizarCobro.Name = "RealizarCobro";
             this.RealizarCobro.Size = new System.Drawing.Size(173, 47);
             this.RealizarCobro.TabIndex = 3;
@@ -222,6 +231,7 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.MistyRose;
@@ -245,7 +255,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(197, 111);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dataGridView1.Size = new System.Drawing.Size(913, 333);
+            this.dataGridView1.Size = new System.Drawing.Size(913, 359);
             this.dataGridView1.TabIndex = 5;
             // 
             // CodigoBarras
@@ -274,7 +284,7 @@
             this.dateTimePicker1.CalendarForeColor = System.Drawing.Color.Black;
             this.dateTimePicker1.Enabled = false;
             this.dateTimePicker1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(925, 50);
+            this.dateTimePicker1.Location = new System.Drawing.Point(955, 50);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(308, 27);
             this.dateTimePicker1.TabIndex = 7;
@@ -282,7 +292,7 @@
             // IdUsuario
             // 
             this.IdUsuario.AutoSize = true;
-            this.IdUsuario.Location = new System.Drawing.Point(526, 67);
+            this.IdUsuario.Location = new System.Drawing.Point(495, 78);
             this.IdUsuario.Name = "IdUsuario";
             this.IdUsuario.Size = new System.Drawing.Size(42, 13);
             this.IdUsuario.TabIndex = 8;
@@ -293,7 +303,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(575, 475);
+            this.label2.Location = new System.Drawing.Point(662, 510);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(92, 32);
             this.label2.TabIndex = 9;
@@ -303,7 +313,7 @@
             // 
             this.TotalPagar.AutoSize = true;
             this.TotalPagar.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TotalPagar.Location = new System.Drawing.Point(812, 475);
+            this.TotalPagar.Location = new System.Drawing.Point(899, 510);
             this.TotalPagar.Name = "TotalPagar";
             this.TotalPagar.Size = new System.Drawing.Size(68, 32);
             this.TotalPagar.TabIndex = 10;
@@ -322,7 +332,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(575, 523);
+            this.label3.Location = new System.Drawing.Point(662, 558);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(126, 32);
             this.label3.TabIndex = 12;
@@ -331,7 +341,7 @@
             // Importe
             // 
             this.Importe.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Importe.Location = new System.Drawing.Point(746, 514);
+            this.Importe.Location = new System.Drawing.Point(833, 549);
             this.Importe.Name = "Importe";
             this.Importe.Size = new System.Drawing.Size(134, 41);
             this.Importe.TabIndex = 2;
@@ -341,7 +351,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(575, 568);
+            this.label4.Location = new System.Drawing.Point(662, 603);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(127, 32);
             this.label4.TabIndex = 14;
@@ -351,7 +361,7 @@
             // 
             this.TextCambio.AutoSize = true;
             this.TextCambio.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TextCambio.Location = new System.Drawing.Point(812, 568);
+            this.TextCambio.Location = new System.Drawing.Point(899, 603);
             this.TextCambio.Name = "TextCambio";
             this.TextCambio.Size = new System.Drawing.Size(68, 32);
             this.TextCambio.TabIndex = 15;
@@ -361,7 +371,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(740, 475);
+            this.label5.Location = new System.Drawing.Point(827, 510);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(30, 32);
             this.label5.TabIndex = 16;
@@ -371,7 +381,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(645, 59);
+            this.label6.Location = new System.Drawing.Point(664, 78);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(69, 23);
             this.label6.TabIndex = 17;
@@ -394,7 +404,7 @@
             // 
             this.btncancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btncancelar.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btncancelar.Location = new System.Drawing.Point(1045, 567);
+            this.btncancelar.Location = new System.Drawing.Point(1090, 572);
             this.btncancelar.Name = "btncancelar";
             this.btncancelar.Size = new System.Drawing.Size(173, 33);
             this.btncancelar.TabIndex = 19;
@@ -426,9 +436,9 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(277, 422);
+            this.pictureBox3.Location = new System.Drawing.Point(266, 470);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(221, 263);
+            this.pictureBox3.Size = new System.Drawing.Size(221, 215);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 22;
             this.pictureBox3.TabStop = false;
@@ -490,7 +500,6 @@
             this.label8.Size = new System.Drawing.Size(146, 16);
             this.label8.TabIndex = 26;
             this.label8.Text = " Código del Producto";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // incremento_enRam
             // 
@@ -592,5 +601,6 @@
         private System.Windows.Forms.ToolStripMenuItem devolucionPosCompraToolStripMenuItem;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label incremento_enRam;
+        private System.Windows.Forms.ToolStripMenuItem sistemaDeApartadoToolStripMenuItem;
     }
 }
