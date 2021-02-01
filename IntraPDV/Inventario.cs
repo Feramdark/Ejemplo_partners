@@ -69,7 +69,7 @@ namespace IntraPDV
                         InsertarInventario.Parameters.AddWithValue("@descuento", fila.Cells["descuento_produc"].Value);
                         InsertarInventario.Parameters.AddWithValue("@fecha_ingr", Convert.ToDateTime(dateTimePicker1.Text));
 
-                        InsertarInventario.ExecuteNonQuery();
+                        
                     }
                     else{
                         MessageBox.Show("Asegurese de llenar todos los campos", "ERROR CON LA INSERCION", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -79,7 +79,8 @@ namespace IntraPDV
                 DialogResult respuesta = MessageBox.Show("Productos Guardados Exitosamente", "OPERACION EXITOSA", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 if (respuesta == DialogResult.OK)
                 {
-                    dataGridView1.Rows.Clear();
+                    InsertarInventario.ExecuteNonQuery();
+                    //dataGridView1.Rows.Clear();
                 }
             }
             catch (Exception ex)
@@ -89,7 +90,7 @@ namespace IntraPDV
         }
         private void button2_Click(object sender, EventArgs e)
         {
-            dataGridView1.Rows.Clear();
+            //dataGridView1.Rows.Clear();
         }
     }
 }

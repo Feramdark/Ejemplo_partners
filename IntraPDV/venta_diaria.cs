@@ -17,9 +17,11 @@ namespace IntraPDV
         {
             InitializeComponent();
         }
+        static string totalDia = "";
         SqlConnection conexion = BDConnect.connection();
         private void button1_Click(object sender, EventArgs e)
         {
+            dataGridView1.AllowUserToAddRows = false;
             buscarVenta();
         }
         public void buscarVenta()
@@ -43,6 +45,15 @@ namespace IntraPDV
                 adaptador.Fill(tabla);
                 adap.Fill(tabla);
                 dataGridView1.DataSource = tabla;
+
+                /*foreach (DataGridViewRow item in dataGridView1.Rows)
+                {
+                    Ticket.TextLeft(item.Cells[3].Value.ToString());//codigo
+                    Ticket.AgregaArticulo(item.Cells[2].Value.ToString() + "", Convert.ToDecimal(item.Cells[4].Value),
+                           Convert.ToInt32(item.Cells[6].Value), Convert.ToDecimal(item.Cells[7].Value));
+                    totalDia = item.Cells[8].Value.ToString();
+
+                }*/
             }
             catch (Exception ex)
             {
@@ -92,11 +103,8 @@ namespace IntraPDV
             CrearImpresion.lineasSeparacion();//-----------------------------------------
             CrearImpresion.EncabezadoTicket();
 
-            foreach (DataGridViewRow item in dataGridView1.Rows)
-            {
-                Ticket.TextoCentro(item.Cells[0].Value.ToString());
-                
-            }
+
+            Ticket.TextLeft("TOTAL: "+totalDia);//nombre
             Ticket.ImprimirTiket();
         }
     }

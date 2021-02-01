@@ -70,13 +70,13 @@ namespace IntraPDV
                 Ticket.TextLeft("Importe:     $ "+ importeText.Text);
                 Ticket.TextLeft("Cambio:    "+ cambioText.Text);
                 CrearImpresion.lineasSeparacion();//-----------------------------------------
-                Ticket.TextoCentro("*Gracias por preferirnos*");
+                Ticket.TextoCentro("*Gracias por su compra*");
                 CrearImpresion.lineasSeparacion();//-----------------------------------------
                 Ticket.ImprimirTiket();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message);
             }
 
             this.Close();
