@@ -18,11 +18,11 @@ namespace IntraPDV
         public Registrar_producto()
         {
             InitializeComponent();
-            //todos();
+            todos();
             toolTip1.SetToolTip(this.textoDescuento, "Inserte el descuento a el producto seleccionado");
             toolTip1.SetToolTip(this.codigoBarras, "Busque un producto");
         }
-        DataTable inventario = new DataTable();
+
         private void apagar_Click(object sender, EventArgs e)
         {
             DialogResult respuesta = MessageBox.Show("¿Desea salir de la aplicación?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -62,6 +62,7 @@ namespace IntraPDV
 
                 buscar.Parameters.AddWithValue("@codigo", codigoProd);
                 SqlDataAdapter adaptador = new SqlDataAdapter();
+                DataTable inventario = new DataTable();
                 adaptador.SelectCommand = buscar;
                 adaptador.Fill(inventario);
                 dataGridView1.DataSource = inventario;
@@ -74,22 +75,23 @@ namespace IntraPDV
         }
         private void todos()
         {
+            SqlConnection connection = BDConnect.connection();
             try
             {
-                SqlConnection connection = BDConnect.connection();
                 SqlCommand giveAllItems = new SqlCommand("consultaProductos", connection);
                 giveAllItems.CommandType = CommandType.StoredProcedure;
-
                 SqlDataAdapter adapter = new SqlDataAdapter();
+                DataTable inventario = new DataTable();
                 adapter.SelectCommand = giveAllItems;
                 adapter.Fill(inventario);
                 dataGridView1.DataSource = inventario;
+                giveAllItems.ExecuteNonQuery();
             }
             catch (Exception)
             {
 
-                throw;
             }
+            finally { connection.Close(); }
         }
         private void actualizarDescuento(string codigoProducto,int descuentoNuevo)
         {
@@ -158,23 +160,69 @@ namespace IntraPDV
             if (codigoBarras.Text!="" && textoDescuento.Text !="")
             {
                 actualizarDescuento(codigoBarras.Text, Int32.Parse(textoDescuento.Text));
-                dataGridView1.Rows.RemoveAt(0);
+                buscarPorCode(codigoBarras.Text);
             }
             if (codigoBarras.Text != "" && cantidadActual.Text != "")
             {
                 actualizarCantidad(codigoBarras.Text, Int32.Parse(cantidadActual.Text));
+                buscarPorCode(codigoBarras.Text);
             }
             if(codigoBarras.Text!="" && precioNuevo.Text != "")
             {
                 actualizaPrecio(codigoBarras.Text, Convert.ToDecimal(precioNuevo.Text));
-                dataGridView1.Rows.RemoveAt(0);
+                buscarPorCode(codigoBarras.Text);
             }
 
             
         }
-        private void textBox1_TextChanged(object sender, EventArgs e)
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            codigoBarras.Clear();
+            cantidadActual.Clear();
+            textoDescuento.Clear();
+            precioNuevo.Clear();
+        }
+
+        private void buscarDescr(string descripcion)
+        {
+            SqlConnection conectar = BDConnect.connection();
+            try
+            {
+
+                SqlCommand busca = new SqlCommand("buscaProducto", conectar);
+                busca.CommandType = CommandType.StoredProcedure;
+                busca.Parameters.AddWithValue("@producto", textBox1.Text);
+
+                DataTable tabla = new DataTable();
+                SqlDataAdapter adp = new SqlDataAdapter();
+                adp.SelectCommand = busca;
+                adp.Fill(tabla);
+                dataGridView1.DataSource = tabla;
+                busca.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            finally
+            {
+                conectar.Close();
+            }
+        }
+
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
         {
 
+            if (textBox1.Text != "")
+            {
+                buscarDescr(textBox1.Text);
+            }
+            else
+            {
+                dataGridView1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
+            }
         }
     }
 }

@@ -13,11 +13,14 @@ namespace IntraPDV
 {
     public partial class TicketForm : Form
     {
+        static string numeroFolio = "";
         CrearImpresion Ticket = new CrearImpresion();
+        Conversion con = new Conversion();
         public TicketForm()
         {
             InitializeComponent();
         }
+        string numero_letra ="";
         SqlConnection connect_BD = BDConnect.connection();
         public void MyTicket()
         {
@@ -38,21 +41,24 @@ namespace IntraPDV
                 Ticket.TextLeft(" Velia Perez Zavala");
                 Ticket.TextLeft(" R.F.C. PEZV-690103-270");
                 Ticket.TextLeft(" Aquiles Serdan #105 OTE");
-                Ticket.TextLeft(" Colonia centro");
+                Ticket.TextLeft(" Colonia Centro");
                 Ticket.TextLeft(" Gpe. Victoria,DGO C.P 34700");
                 CrearImpresion.lineasSeparacion();//-----------------------------------------
+                Ticket.TextLeft("Folio: " + folioTick.Text);
                 Ticket.TextoCentro("Fecha: " + DateTime.Today.Day+ "/" +DateTime.Today.Month+ "/" +DateTime.Today.Year);
                 Ticket.TextLeft(" Hora:       " + horaText.Text);
                 Ticket.TextLeft(" Le atendio:    " + "Fam: Rocha Pérez");
                 CrearImpresion.lineasSeparacion();//-----------------------------------------
                 CrearImpresion.EncabezadoTicket();
+
                 foreach (DataGridViewRow fila in dataGridView1.Rows)
                 {
-                    Ticket.TextLeft(fila.Cells[0].Value.ToString()+" Talla:"+ fila.Cells[7].Value.ToString());//Producto arriba descripcion abajo.
-
+                    Ticket.TextLeft(fila.Cells[1].Value.ToString()+" T: "+ fila.Cells[9].Value.ToString());//Producto arriba descripcion abajo.
+                    numeroFolio = Convert.ToString(fila.Cells[8].Value);
+                    //Ticket.TextLeft("Desc: "+fila.Cells[5].Value.ToString());
                     //Cabecera -> Codigo producto   Cantidad    Precio   Total.
-                    Ticket.AgregaArticulo(fila.Cells[6].Value.ToString() + " ", Convert.ToDecimal(fila.Cells[3].Value),
-                        Convert.ToInt32(fila.Cells[2].Value), Convert.ToDecimal(fila.Cells[5].Value));
+                    Ticket.AgregaArticulo(fila.Cells[0].Value.ToString() + " ", Convert.ToDecimal(fila.Cells[4].Value),
+                        Convert.ToInt32(fila.Cells[3].Value), Convert.ToDecimal(fila.Cells[7].Value));
                 }
             }
             catch{}
@@ -65,12 +71,14 @@ namespace IntraPDV
             mainMenu.Show();
             try
             {
+                numero_letra = totalText.Text;
                 CrearImpresion.lineasSeparacion();
-                Ticket.TextLeft("Total:         $ "+ totalText.Text);
-                Ticket.TextLeft("Importe:     $ "+ importeText.Text);
-                Ticket.TextLeft("Cambio:    "+ cambioText.Text);
+                Ticket.TextoDerecha("Total: $" + totalText.Text);
+                Ticket.TextoDerecha("Pago: $"+ importeText.Text);
+                Ticket.TextoDerecha("Cambio: "+ cambioText.Text);
+                Ticket.TextLeft(con.enletras(numero_letra).ToUpper());
                 CrearImpresion.lineasSeparacion();//-----------------------------------------
-                Ticket.TextoCentro("*Gracias por su compra*");
+                Ticket.TextoCentro("¡Gracias por su compra!");
                 CrearImpresion.lineasSeparacion();//-----------------------------------------
                 Ticket.ImprimirTiket();
             }

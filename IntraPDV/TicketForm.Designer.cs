@@ -39,6 +39,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.folioTick = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,7 +59,7 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(282, 59);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(551, 279);
+            this.dataGridView1.Size = new System.Drawing.Size(300, 279);
             this.dataGridView1.TabIndex = 1;
             // 
             // horaText
@@ -148,11 +149,21 @@
             this.label4.TabIndex = 10;
             this.label4.Text = "Cambio:";
             // 
+            // folioTick
+            // 
+            this.folioTick.AutoSize = true;
+            this.folioTick.Location = new System.Drawing.Point(16, 119);
+            this.folioTick.Name = "folioTick";
+            this.folioTick.Size = new System.Drawing.Size(35, 13);
+            this.folioTick.TabIndex = 11;
+            this.folioTick.Text = "label5";
+            // 
             // TicketForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(866, 369);
+            this.ClientSize = new System.Drawing.Size(252, 369);
+            this.Controls.Add(this.folioTick);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -185,5 +196,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        public System.Windows.Forms.Label folioTick;
     }
 }
