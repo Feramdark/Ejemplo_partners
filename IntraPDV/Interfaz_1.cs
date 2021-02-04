@@ -279,6 +279,8 @@ namespace IntraPDV
            
         }
 
+        /*Boton hacia la interfaz de apartado*/
+
         private void sistemaDeApartadoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             interfazApartado sistema_apartado = new interfazApartado();
