@@ -23,5 +23,9 @@ namespace IntraPDV
             //MessageBox.Show("Conexion lista");
             return sqlQuery;
         }
+
+        /*public DataTable showItems() {
+            SqlCommand cmd = new SqlCommand ("updateContent")
+        }*/
     }
 }

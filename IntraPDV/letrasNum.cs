@@ -26,9 +26,9 @@ namespace IntraPDV
 
                 entero = Convert.ToInt64(Math.Truncate(nro));
                 decimales = Convert.ToInt32(Math.Round((nro - entero) * 100, 2));
-                if (decimales > 0)
+                if (decimales >= 0)
                 {
-                    dec = "\n"+decimales.ToString() + "/100";
+                    dec ="\n PESOS "+ decimales.ToString() + "/100 M.N.)";
                 }
 
                 res = toText(Convert.ToDouble(entero)) + dec;
@@ -55,9 +55,9 @@ namespace IntraPDV
                 else if (value == 13) Num2Text = "TRECE";
                 else if (value == 14) Num2Text = "CATORCE";
                 else if (value == 15) Num2Text = "QUINCE";
-                else if (value < 20) Num2Text = "DIECI" + toText(value - 10);
+                else if (value < 20) Num2Text = "DIECI" + toText(value - 10); 
                 else if (value == 20) Num2Text = "VEINTE";
-                else if (value < 30) Num2Text = "VEINTI" + toText(value - 20)+"\n PESOS 0/100 M.N.";
+                else if (value < 30) Num2Text = "VEINTI" + toText(value - 20);
                 else if (value == 30) Num2Text = "TREINTA";
                 else if (value == 40) Num2Text = "CUARENTA";
                 else if (value == 50) Num2Text = "CINCUENTA";
@@ -65,14 +65,14 @@ namespace IntraPDV
                 else if (value == 70) Num2Text = "SETENTA";
                 else if (value == 80) Num2Text = "OCHENTA";
                 else if (value == 90) Num2Text = "NOVENTA";
-                else if (value < 100) Num2Text = toText(Math.Truncate(value / 10) * 10) + " Y " + toText(value % 10) + "\n PESOS 0/100 M.N ";
+                else if (value < 100) Num2Text = toText(Math.Truncate(value / 10) * 10) + " Y " + toText(value % 10);
                 else if (value == 100) Num2Text = "CIEN";
                 else if (value < 200) Num2Text = "CIENTO " + toText(value - 100);
                 else if ((value == 200) || (value == 300) || (value == 400) || (value == 600) || (value == 800)) Num2Text = toText(Math.Truncate(value / 100)) + "CIENTOS";
                 else if (value == 500) Num2Text = "QUINIENTOS";
                 else if (value == 700) Num2Text = "SETECIENTOS";
                 else if (value == 900) Num2Text = "NOVECIENTOS";
-                else if (value < 1000) Num2Text = toText(Math.Truncate(value / 100) * 100) + " " + toText(value % 100)+"\n PESOS 0/100 M.N";
+                else if (value < 1000) Num2Text = toText(Math.Truncate(value / 100) * 100) + " " + toText(value % 100);
                 else if (value == 1000) Num2Text = "MIL";
                 else if (value < 2000) Num2Text = "MIL " + toText(value % 1000);
                 else if (value < 1000000)

@@ -13,7 +13,6 @@ namespace IntraPDV
 {
     public partial class TicketForm : Form
     {
-        static string numeroFolio = "";
         CrearImpresion Ticket = new CrearImpresion();
         Conversion con = new Conversion();
         public TicketForm()
@@ -21,6 +20,7 @@ namespace IntraPDV
             InitializeComponent();
         }
         string numero_letra ="";
+        int productos = 0;
         SqlConnection connect_BD = BDConnect.connection();
         public void MyTicket()
         {
@@ -43,27 +43,27 @@ namespace IntraPDV
                 Ticket.TextLeft(" Aquiles Serdan #105 OTE");
                 Ticket.TextLeft(" Colonia Centro");
                 Ticket.TextLeft(" Gpe. Victoria,DGO C.P 34700");
-                CrearImpresion.lineasSeparacion();//-----------------------------------------
                 Ticket.TextLeft("Folio: " + folioTick.Text);
-                Ticket.TextoCentro("Fecha: " + DateTime.Today.Day+ "/" +DateTime.Today.Month+ "/" +DateTime.Today.Year);
+                CrearImpresion.lineasSeparacion();//-----------------------------------------
                 Ticket.TextLeft(" Hora:       " + horaText.Text);
+                Ticket.TextoCentro("Fecha: " + DateTime.Today.Day+ "/" +DateTime.Today.Month+ "/" +DateTime.Today.Year);
                 Ticket.TextLeft(" Le atendio:    " + "Fam: Rocha Pérez");
                 CrearImpresion.lineasSeparacion();//-----------------------------------------
                 CrearImpresion.EncabezadoTicket();
-
                 foreach (DataGridViewRow fila in dataGridView1.Rows)
                 {
-                    Ticket.TextLeft(fila.Cells[1].Value.ToString()+" T: "+ fila.Cells[9].Value.ToString());//Producto arriba descripcion abajo.
-                    numeroFolio = Convert.ToString(fila.Cells[8].Value);
-                    //Ticket.TextLeft("Desc: "+fila.Cells[5].Value.ToString());
-                    //Cabecera -> Codigo producto   Cantidad    Precio   Total.
-                    Ticket.AgregaArticulo(fila.Cells[0].Value.ToString() + " ", Convert.ToDecimal(fila.Cells[4].Value),
-                        Convert.ToInt32(fila.Cells[3].Value), Convert.ToDecimal(fila.Cells[7].Value));
+                    Ticket.TextLeft(fila.Cells[1].Value.ToString()+" Dsc: "+ fila.Cells[5].Value.ToString());//Producto/descuento arriba descripcion abajo.
+                    Ticket.TextoDerecha(fila.Cells[4].Value.ToString()+" - " + fila.Cells[6].Value.ToString());//total-descuento
+                    Ticket.AgregaArticulo(fila.Cells[0].Value.ToString() + " ", 
+                       Convert.ToDecimal(fila.Cells[4].Value),
+                       Convert.ToInt32(fila.Cells[3].Value), 
+                       Convert.ToDecimal(fila.Cells[7].Value));
+                    productos++;
                 }
+                numProd.Text = productos.ToString();
             }
             catch{}
             finally { connect_BD.Close(); }
-
         }
         private void btnImprimir_Click(object sender, EventArgs e)
         {
@@ -76,7 +76,7 @@ namespace IntraPDV
                 Ticket.TextoDerecha("Total: $" + totalText.Text);
                 Ticket.TextoDerecha("Pago: $"+ importeText.Text);
                 Ticket.TextoDerecha("Cambio: "+ cambioText.Text);
-                Ticket.TextLeft(con.enletras(numero_letra).ToUpper());
+                Ticket.TextLeft("("+con.enletras(numero_letra).ToLower());
                 CrearImpresion.lineasSeparacion();//-----------------------------------------
                 Ticket.TextoCentro("¡Gracias por su compra!");
                 CrearImpresion.lineasSeparacion();//-----------------------------------------
@@ -88,6 +88,14 @@ namespace IntraPDV
             }
 
             this.Close();
+        }
+
+        private void cancelPrint_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            this.Dispose();
+            Interfaz_1 mainInterfaz = new Interfaz_1();
+            mainInterfaz.Show();
         }
     }
 }

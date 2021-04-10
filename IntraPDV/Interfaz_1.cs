@@ -69,13 +69,12 @@ namespace IntraPDV
         private void cambioDeConexiónToolStripMenuItem_Click(object sender, EventArgs e)
         {
             venta_diaria venta = new venta_diaria();
-            this.Hide();
             venta.ShowDialog();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Deseas Realizar la Siguiente Venta", "Ropa y Calzado Rocha", MessageBoxButtons.YesNo) == DialogResult.Yes){
+            if (MessageBox.Show("Deseas Realizar la Siguiente Venta", "Ropa y Calzado Rocha", MessageBoxButtons.YesNo,MessageBoxIcon.Information) == DialogResult.Yes){
                 ActualizarInventario();
                 num_venta();
                 RegistrarVenta();
@@ -94,6 +93,7 @@ namespace IntraPDV
           
             //MessageBox.Show("Inserta el importe \nPor Favor", "FALTA EL IMPORTE", MessageBoxButtons.OK,MessageBoxIcon.Warning);
         }
+
 
         private void CodigoBarras_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -197,11 +197,15 @@ namespace IntraPDV
         }
         private void dar_cambio(object sender, KeyPressEventArgs e)
         {
-          
-                if (e.KeyChar == (char)Keys.Enter)
+
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                if (TotalPagar.Text != null)
                 {
-                    Cambio(Convert.ToDecimal(TotalPagar.Text), Convert.ToDecimal(Importe.Text));
-                }
+                    Cambio(Convert.ToDecimal(TotalPagar.Text), Convert.ToDecimal(Importe.Text)); //error si esta vacio el campo de texto
+                    RealizarCobro.Focus();//Doble enter para cobrar :v
+                }          
+            }
          
         }
         private void timer1_Tick(object sender, EventArgs e)
@@ -213,9 +217,8 @@ namespace IntraPDV
             try
             {
                 SqlConnection connection = BDConnect.connection();
-                SqlCommand update = new SqlCommand("BajaInventario", connection);
+                SqlCommand update = new SqlCommand("BajaInventario", connection); //procedimiento almacenado
                 update.CommandType = CommandType.StoredProcedure;
-
                 foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
                     update.Parameters.Clear();
@@ -233,7 +236,7 @@ namespace IntraPDV
 
         private void btncancelar_Click(object sender, EventArgs e)
         {
-            
+
         }
         private void button1_Click_1(object sender, EventArgs e)
         {
@@ -325,7 +328,6 @@ namespace IntraPDV
             }
             suma();
         }
-
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             aplicaCambios();

@@ -56,31 +56,32 @@ namespace IntraPDV
                 {
                     if (fila.Cells[6].Value != null && fila.Cells[7].Value != null && fila.Cells[8].Value != null)
                     {
-                        InsertarInventario.Parameters.Clear();
 
-                        InsertarInventario.Parameters.AddWithValue("@id_pro", fila.Cells["Codigo"].Value.ToString());
-                        InsertarInventario.Parameters.AddWithValue("@name_pro", fila.Cells["nombre_producto"].Value.ToString());
+                        InsertarInventario.Parameters.AddWithValue("@id_pro", fila.Cells["Codigo"].Value.ToString().Replace(" ",String.Empty).Trim());
+                        InsertarInventario.Parameters.AddWithValue("@name_pro", fila.Cells["nombre_producto"].Value.ToString().Trim());
                         InsertarInventario.Parameters.AddWithValue("@cantidad", Convert.ToInt32(fila.Cells["cantidad_producto"].Value));
                         InsertarInventario.Parameters.AddWithValue("@precio", fila.Cells["precio_producto"].Value);
-                        InsertarInventario.Parameters.AddWithValue("@modelo", fila.Cells["model_producto"].Value);
-                        InsertarInventario.Parameters.AddWithValue("@tipo", fila.Cells["tipo_producto"].Value);
+                        InsertarInventario.Parameters.AddWithValue("@modelo", fila.Cells["model_producto"].Value.ToString().Trim());
+                        InsertarInventario.Parameters.AddWithValue("@tipo", fila.Cells["tipo_producto"].Value.ToString().Trim());
                         InsertarInventario.Parameters.AddWithValue("@talla", fila.Cells["talla_producto"].Value);
                         InsertarInventario.Parameters.AddWithValue("@departamento", fila.Cells["depto_producto"].Value);
                         InsertarInventario.Parameters.AddWithValue("@descuento", fila.Cells["descuento_produc"].Value);
                         InsertarInventario.Parameters.AddWithValue("@fecha_ingr", Convert.ToDateTime(dateTimePicker1.Text));
 
-                        
+                        InsertarInventario.ExecuteNonQuery();//->Ejecuta el procedimiento por cada linea.
+                        InsertarInventario.Parameters.Clear();//->limpia los parametros de cada fila.
                     }
                     else{
                         MessageBox.Show("Asegurese de llenar todos los campos", "ERROR CON LA INSERCION", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                dataGridView1.AllowUserToAddRows = true;
+                
                 DialogResult respuesta = MessageBox.Show("Productos Guardados Exitosamente", "OPERACION EXITOSA", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 if (respuesta == DialogResult.OK)
                 {
-                    InsertarInventario.ExecuteNonQuery();
-                    //dataGridView1.Rows.Clear();
+                    dataGridView1.AllowUserToAddRows = true;
+                    dataGridView1.Rows.Clear();
+                    conexion_BD.Close();
                 }
             }
             catch (Exception ex)

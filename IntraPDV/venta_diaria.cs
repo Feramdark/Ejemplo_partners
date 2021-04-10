@@ -17,12 +17,21 @@ namespace IntraPDV
         {
             InitializeComponent();
         }
+       
+        static string nombre = "";
+        static string cantidad = "";
+        static string descuento = "";
+        static string desc = "";
+        static string precio = "";
+        static string totalPro = "";
         static string totalDia = "";
+        static string hora = "";
         SqlConnection conexion = BDConnect.connection();
         private void button1_Click(object sender, EventArgs e)
         {
             dataGridView1.AllowUserToAddRows = false;
             buscarVenta();
+            totalEnTexto.Text = totalDia;
         }
         public void buscarVenta()
         {
@@ -40,20 +49,18 @@ namespace IntraPDV
                 SqlDataAdapter adaptador = new SqlDataAdapter();
                 SqlDataAdapter adap = new SqlDataAdapter();
                 DataTable tabla = new DataTable();
+                DataTable totalVenta = new DataTable();
                 adaptador.SelectCommand = buscar_venta;
                 adap.SelectCommand = total;
                 adaptador.Fill(tabla);
-                adap.Fill(tabla);
+                adap.Fill(totalVenta);
                 dataGridView1.DataSource = tabla;
+                dataGridTotal.DataSource = totalVenta;
 
-                /*foreach (DataGridViewRow item in dataGridView1.Rows)
+                foreach (DataGridViewRow item in dataGridTotal.Rows)
                 {
-                    Ticket.TextLeft(item.Cells[3].Value.ToString());//codigo
-                    Ticket.AgregaArticulo(item.Cells[2].Value.ToString() + "", Convert.ToDecimal(item.Cells[4].Value),
-                           Convert.ToInt32(item.Cells[6].Value), Convert.ToDecimal(item.Cells[7].Value));
-                    totalDia = item.Cells[8].Value.ToString();
-
-                }*/
+                    totalDia = item.Cells[0].Value.ToString();
+                }
             }
             catch (Exception ex)
             {
@@ -82,14 +89,15 @@ namespace IntraPDV
         private void BackMenu_Click(object sender, EventArgs e)
         {
             this.Close();
-            Interfaz_1 MainMenu = new Interfaz_1();
-            MainMenu.Show();
+            //Interfaz_1 MainMenu = new Interfaz_1();
+            //MainMenu.Show();
             this.Dispose();
         }
 
         private void imprimir_Click(object sender, EventArgs e)
         {
             CrearImpresion Ticket = new CrearImpresion();
+            Conversion letras = new Conversion();
             Ticket.TextoCentro("INFORME VENTA DIARIA");
             Ticket.TextLeft(" Velia Perez Zavala");
             Ticket.TextLeft(" R.F.C. PEZV-690103-270");
@@ -97,15 +105,25 @@ namespace IntraPDV
             Ticket.TextLeft(" Colonia centro");
             Ticket.TextLeft(" Gpe. Victoria,DGO C.P 34700");
             CrearImpresion.lineasSeparacion();//-----------------------------------------
-            Ticket.TextoCentro("Fecha: " + DateTime.Today.Day + "/" + DateTime.Today.Month + "/" + DateTime.Today.Year);
-            Ticket.TextLeft(" Hora:       " + DateTime.Today.TimeOfDay);
-            Ticket.TextLeft(" Le atendio:    " + "Fam: Rocha Pérez");
+            Ticket.TextLeft("Fecha: " + dateTimePicker1.Value.ToString());//DateTime.Today.Day + "/" + DateTime.Today.Month + "/" + DateTime.Today.Year);
+            Ticket.TextLeft(" Hora:       " + hora);
             CrearImpresion.lineasSeparacion();//-----------------------------------------
             CrearImpresion.EncabezadoTicket();
 
-
+            foreach (DataGridViewRow item in dataGridView1.Rows)
+            {
+                Ticket.TextLeft(item.Cells[4].Value.ToString());
+                Ticket.AgregaArticulo(item.Cells[3].Value.ToString()+" "
+                    ,Convert.ToDecimal(item.Cells[5].Value),Convert.ToInt32(item.Cells[8].Value),Convert.ToDecimal(item.Cells[9].Value));
+            }
+            CrearImpresion.lineasSeparacion();//-------------------------------------------
             Ticket.TextLeft("TOTAL: "+totalDia);//nombre
+            Ticket.TextLeft(letras.enletras(totalDia).ToLower());
             Ticket.ImprimirTiket();
+        }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            hora = DateTime.Now.ToLongTimeString();
         }
     }
 }

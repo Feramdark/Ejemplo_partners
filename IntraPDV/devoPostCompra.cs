@@ -44,12 +44,12 @@ namespace IntraPDV
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (codVent.Text != "")
+            if (folios.Text != "")
             {
                 buscarVenta();
             }
             else {
-                MessageBox.Show("Favor de Ingresar la Venta que desea buscar");
+                MessageBox.Show("Favor de Ingresar el Folio de la venta que desea buscar");
             }
             
         }
@@ -62,8 +62,8 @@ namespace IntraPDV
                 DevolverVenta();
                 devolverProducto();
                 buscarVenta();
+                MessageBox.Show("Producto devuelto","OPERACION EXITOSA");
             }
-
             else
             {
                 MessageBox.Show("Favor de Ingresar todos los datos completos");
@@ -80,6 +80,7 @@ namespace IntraPDV
                     Convert.ToInt32(codVent.Text);
                     eliminarVenta();
                     buscarVenta();
+                    MessageBox.Show("Venta eliminada", "OPERACION EXITOSA");
                 }
             }
 
@@ -90,9 +91,9 @@ namespace IntraPDV
             SqlConnection con = BDConnect.connection();
             try
             {
-                SqlCommand buscar = new SqlCommand("ConsultaVenta", con);
+                SqlCommand buscar = new SqlCommand("buscaVentaXFolio", con);
                 buscar.CommandType = CommandType.StoredProcedure;
-                buscar.Parameters.AddWithValue("@codigo", Convert.ToInt32(codVent.Text));
+                buscar.Parameters.AddWithValue("@folio", Convert.ToInt32(folios.Text));
 
 
                 SqlDataAdapter adatador = new SqlDataAdapter();

@@ -15,10 +15,11 @@ namespace IntraPDV
     {
         static string codigoProducto = "";
         static string nombreProducto = "";
-        static string talla = "";
         static float precio = 0.00F;
         static float restantePagar = 0.00F;
         static string nombreCte = "";
+        static int cantidad = 0;
+        static float abono = 0.00F;
         
         public interfazApartado()
         {
@@ -26,6 +27,8 @@ namespace IntraPDV
         }
         DataTable productos = new DataTable();
         CrearImpresion CrearImpresion = new CrearImpresion();
+        KeyEventArgs evento = new KeyEventArgs(Keys.F5);
+
 
         private void buscar(object sender, KeyPressEventArgs e)
         {
@@ -33,7 +36,10 @@ namespace IntraPDV
             {
                 if (codigoBarras.Text != null)
                 {
-                    buscarPorCode(Convert.ToString(codigoBarras.Text));
+                    string codigo_barras = codigoBarras.Text;
+                    string textoSeguro = codigo_barras.Replace(" ", String.Empty);
+                    buscarPorCode(Convert.ToString(textoSeguro));
+                    codigoBarras.Text = "";
                     
                 }
             }
@@ -44,8 +50,10 @@ namespace IntraPDV
             {
                 if (codigoBarras.Text != null)
                 {
+                    abono = Single.Parse(importe.Text);
                     cantidadRestante.Text = resta(Convert.ToSingle(importe.Text), precio).ToString();
                     restantePagar = resta(Convert.ToSingle(importe.Text), precio);
+                    
                 }
             }
         }
@@ -55,10 +63,10 @@ namespace IntraPDV
             try
             {
                 SqlConnection conectar = BDConnect.connection();
-                SqlCommand buscar = new SqlCommand("buscarCodigo", conectar);
+                SqlCommand buscar = new SqlCommand("buscarPtoAparta", conectar);
 
                 buscar.CommandType = CommandType.StoredProcedure;
-                buscar.Parameters.AddWithValue("@codigo", codigoProd);
+                buscar.Parameters.AddWithValue("@codigoDeProducto", codigoProd);
                 SqlDataAdapter adaptador = new SqlDataAdapter();
                 adaptador.SelectCommand = buscar;
                 adaptador.Fill(productos);
@@ -67,10 +75,11 @@ namespace IntraPDV
                 foreach (DataGridViewRow celda in tablaProductos.Rows)
                 {
                     codigoProducto = Convert.ToString(celda.Cells[0].Value);
-                    nombreProducto = Convert.ToString(celda.Cells[1].Value);
-                    precio = Convert.ToSingle(celda.Cells[3].Value);
-                    talla = Convert.ToString(celda.Cells[4].Value);
+                    cantidad = Convert.ToInt32(celda.Cells[1].Value);
+                    nombreProducto = Convert.ToString(celda.Cells[2].Value);
+                    precio = Convert.ToSingle(celda.Cells[4].Value);                    
                 }
+                suma();
                 conectar.Close();
             }
             catch (Exception ex)
@@ -82,6 +91,7 @@ namespace IntraPDV
         private void guardarInformacion_Click(object sender, EventArgs e)
         {
             nombreCte = nombreCliente.Text;
+
             if (nombreCte != null && codigoProducto != null && nombreProducto != null)
             {
                 SqlConnection conectar = BDConnect.connection();
@@ -89,15 +99,19 @@ namespace IntraPDV
                 insertar.Parameters.Clear();
 
                 insertar.CommandType = CommandType.StoredProcedure;
-                insertar.Parameters.AddWithValue("@codigo", codigoProducto);
-                insertar.Parameters.AddWithValue("@nombre", nombreProducto);
-                insertar.Parameters.AddWithValue("@talla", talla);
-                insertar.Parameters.AddWithValue("@precio", precio);
-                insertar.Parameters.AddWithValue("@restante", restantePagar);
                 insertar.Parameters.AddWithValue("@nombreCli", nombreCte.ToUpper());
+                insertar.Parameters.AddWithValue("@codigo", codigoProducto);
+                insertar.Parameters.AddWithValue("@precio", precio);
+                insertar.Parameters.AddWithValue("@cantidad", cantidad);
+                insertar.Parameters.AddWithValue("@restante", restantePagar);
                 insertar.Parameters.AddWithValue("@fecha", Convert.ToDateTime(dateTimePicker1.Text));
+                insertar.Parameters.AddWithValue("@abono", abono);
+
+                // el otro procedimiento
+
 
                 insertar.ExecuteNonQuery();
+
                 if (insertar != null)
                 {
                     DialogResult resultado = MessageBox.Show("Datos insertados con exito");
@@ -134,7 +148,7 @@ namespace IntraPDV
             CrearImpresion.EncabezadoApartar();//---------------------------------------------------------------------
 
             CrearImpresion.TextLeft(nombreProducto);
-            CrearImpresion.AgregaArticulo(codigoProducto, Convert.ToDecimal(precio), 1, Convert.ToDecimal(importe.Text));
+            CrearImpresion.AgregaArticulo(codigoProducto, Convert.ToDecimal(precio), cantidad, Convert.ToDecimal(importe.Text));
             CrearImpresion.lineasSeparacion();//------------------------------------------------------
 
             CrearImpresion.TextLeft("Usted abono: $"+ importe.Text);
@@ -144,7 +158,47 @@ namespace IntraPDV
             CrearImpresion.TextoCentro("Presentar este comprobante");
             CrearImpresion.TextoCentro("al realizar la compra");
             CrearImpresion.lineasSeparacion();
-            CrearImpresion.TextoCentro("*Gracias por preferirnos*");
+            CrearImpresion.TextoCentro("****Gracias por su compra****");
+        }
+
+        private void cambios(object sender, DataGridViewCellEventArgs e)
+        {
+            foreach (DataGridViewRow fila in tablaProductos.Rows)
+            {
+                if(fila.Cells[0].Value != null)
+                {
+                    int cant = Convert.ToInt32(fila.Cells[1].Value);
+                    float precio = Convert.ToSingle(fila.Cells[4].Value);
+                    float descuento = Convert.ToSingle(fila.Cells[5].Value);
+                    float total = 0.00F;
+
+                    total = (precio - (precio * descuento) / 100) * cant;
+                    fila.Cells[6].Value = total;
+                }
+                suma();
+                codigoBarras.Focus();
+            }
+        }
+        public void suma()
+        {
+            float suma = 0.00F;
+            foreach (DataGridViewRow row in tablaProductos.Rows)
+            {
+                if (row.Cells[5].Value != null) //1 es "Total"
+                    suma += Convert.ToSingle(row.Cells[4].Value); //incremento de la suma de todos los elementos que se encuentran es esa celda.
+            }
+            cantidadRestante.Text = suma.ToString().Replace(" ", String.Empty);
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            /*int total_filas = tablaProductos.RowCount;
+            int cont = 0;
+            nombreCliente.Text = total_filas.ToString();
+            nombreCliente.Clear();
+            importe.ClearUndo();
+            cantidadRestante.Text = "0.00";*/
         }
     }
 }

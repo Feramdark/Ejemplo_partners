@@ -45,6 +45,8 @@
             this.cantidad = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
+            this.folios = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minimizar)).BeginInit();
@@ -127,58 +129,61 @@
             // 
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(46, 83);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 95);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(588, 235);
+            this.dataGridView1.Size = new System.Drawing.Size(701, 366);
             this.dataGridView1.TabIndex = 1;
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.PaleTurquoise;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Location = new System.Drawing.Point(876, 98);
+            this.button1.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(989, 61);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(84, 35);
+            this.button1.Size = new System.Drawing.Size(92, 30);
             this.button1.TabIndex = 2;
             this.button1.Text = "Buscar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(652, 79);
+            this.label2.Location = new System.Drawing.Point(719, 155);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(201, 20);
+            this.label2.Size = new System.Drawing.Size(137, 20);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Ingresar Codigo de Venta";
+            this.label2.Text = "Codigo de Venta";
             // 
             // codVent
             // 
-            this.codVent.Location = new System.Drawing.Point(656, 102);
+            this.codVent.Location = new System.Drawing.Point(894, 149);
             this.codVent.Name = "codVent";
-            this.codVent.Size = new System.Drawing.Size(197, 26);
+            this.codVent.Size = new System.Drawing.Size(174, 26);
             this.codVent.TabIndex = 4;
             // 
             // codProduct
             // 
-            this.codProduct.Location = new System.Drawing.Point(656, 205);
+            this.codProduct.Location = new System.Drawing.Point(894, 203);
             this.codProduct.Name = "codProduct";
-            this.codProduct.Size = new System.Drawing.Size(197, 26);
+            this.codProduct.Size = new System.Drawing.Size(174, 26);
             this.codProduct.TabIndex = 5;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(652, 166);
+            this.label3.Location = new System.Drawing.Point(719, 203);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(224, 20);
+            this.label3.Size = new System.Drawing.Size(160, 20);
             this.label3.TabIndex = 6;
-            this.label3.Text = "Ingresar Codigo de Producto";
+            this.label3.Text = "Codigo de Producto";
             // 
             // button2
             // 
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button2.Location = new System.Drawing.Point(707, 322);
+            this.button2.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Location = new System.Drawing.Point(972, 296);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(96, 35);
             this.button2.TabIndex = 7;
@@ -188,37 +193,57 @@
             // 
             // cantidad
             // 
-            this.cantidad.Location = new System.Drawing.Point(704, 276);
+            this.cantidad.Location = new System.Drawing.Point(894, 249);
             this.cantidad.Name = "cantidad";
-            this.cantidad.Size = new System.Drawing.Size(99, 26);
+            this.cantidad.Size = new System.Drawing.Size(174, 26);
             this.cantidad.TabIndex = 8;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(712, 253);
+            this.label4.Location = new System.Drawing.Point(719, 252);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(78, 20);
+            this.label4.Size = new System.Drawing.Size(164, 20);
             this.label4.TabIndex = 9;
-            this.label4.Text = "Cantidad";
+            this.label4.Text = "Cantidad a devolver";
             // 
             // button3
             // 
+            this.button3.BackColor = System.Drawing.Color.MistyRose;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button3.Location = new System.Drawing.Point(976, 98);
+            this.button3.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.Location = new System.Drawing.Point(932, 367);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(96, 35);
+            this.button3.Size = new System.Drawing.Size(136, 35);
             this.button3.TabIndex = 10;
             this.button3.Text = "Eliminar Venta";
-            this.button3.UseVisualStyleBackColor = true;
+            this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // folios
+            // 
+            this.folios.Location = new System.Drawing.Point(827, 66);
+            this.folios.Name = "folios";
+            this.folios.Size = new System.Drawing.Size(156, 26);
+            this.folios.TabIndex = 11;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(707, 66);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(114, 20);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Folio del ticket";
             // 
             // devoPostCompra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1097, 416);
+            this.ClientSize = new System.Drawing.Size(1097, 473);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.folios);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cantidad);
@@ -265,5 +290,7 @@
         private System.Windows.Forms.TextBox cantidad;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.TextBox folios;
+        private System.Windows.Forms.Label label5;
     }
 }

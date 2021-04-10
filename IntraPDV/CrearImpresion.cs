@@ -46,7 +46,7 @@ namespace IntraPDV
         public void TextLeft(string par1)
         {
             max = par1.Length;
-            if (max > 40)                                 // **********
+            if (max > 70)                                 // **********
             {
                 cort = max - 40;
                 parte1 = par1.Remove(40, cort);        // si es mayor que 40 caracteres, lo corta
@@ -107,8 +107,8 @@ namespace IntraPDV
                 ticket += " ";
             }
             line.AppendLine(ticket += parte2 + "\n");
-
         }
+
         //                                 0               1           2            3
         public void AgregaArticulo(string Articulo, decimal precio, int cant, decimal subtotal)
         {
@@ -121,7 +121,7 @@ namespace IntraPDV
                 bool bandera = false;
                 int nroEspacios = 0;
 
-                if (Articulo.Length > 30)                                 // **********
+                if (Articulo.Length > 30)                                 // ********** El mismo problema con el numero de caracteres ya sea que los recortes o hagas tu funcion
                 {
                     //cort = 13 - 8;
                     //parte1 = Articulo.Remove(10, cort);
@@ -135,7 +135,6 @@ namespace IntraPDV
                         espacios += " ";
                     }
                     elementos += espacios + cant.ToString();
-
                     // colocamos el precio a la derecha
                     nroEspacios = (8 - precio.ToString().Length);
                     espacios = "";

@@ -36,8 +36,6 @@
             this.apagar = new System.Windows.Forms.PictureBox();
             this.minimizar = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.añadirProductoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.añadirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inventarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checarInventarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.actualizarInventarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -125,7 +123,6 @@
             this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.menuStrip1.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.añadirProductoToolStripMenuItem,
             this.inventarioToolStripMenuItem,
             this.sistemaDeApartadoToolStripMenuItem,
             this.configuraciónToolStripMenuItem,
@@ -133,25 +130,9 @@
             this.administracionToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 5);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1050, 33);
+            this.menuStrip1.Size = new System.Drawing.Size(887, 33);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
-            // 
-            // añadirProductoToolStripMenuItem
-            // 
-            this.añadirProductoToolStripMenuItem.BackColor = System.Drawing.Color.White;
-            this.añadirProductoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.añadirToolStripMenuItem});
-            this.añadirProductoToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.añadirProductoToolStripMenuItem.Name = "añadirProductoToolStripMenuItem";
-            this.añadirProductoToolStripMenuItem.Size = new System.Drawing.Size(163, 29);
-            this.añadirProductoToolStripMenuItem.Text = "Buscar Producto";
-            // 
-            // añadirToolStripMenuItem
-            // 
-            this.añadirToolStripMenuItem.Name = "añadirToolStripMenuItem";
-            this.añadirToolStripMenuItem.Size = new System.Drawing.Size(263, 30);
-            this.añadirToolStripMenuItem.Text = "Actualizar Inventario";
             // 
             // inventarioToolStripMenuItem
             // 
@@ -260,7 +241,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridView1.Size = new System.Drawing.Size(1110, 406);
-            this.dataGridView1.TabIndex = 5;
+            this.dataGridView1.TabIndex = 9;
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             // 
             // CodigoBarras
@@ -287,9 +268,8 @@
             // dateTimePicker1
             // 
             this.dateTimePicker1.CalendarForeColor = System.Drawing.Color.Black;
-            this.dateTimePicker1.Enabled = false;
             this.dateTimePicker1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(955, 44);
+            this.dateTimePicker1.Location = new System.Drawing.Point(955, 42);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(308, 27);
             this.dateTimePicker1.TabIndex = 7;
@@ -386,7 +366,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(951, 79);
+            this.label6.Location = new System.Drawing.Point(951, 81);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(69, 23);
             this.label6.TabIndex = 17;
@@ -412,7 +392,7 @@
             this.btncancelar.Location = new System.Drawing.Point(1090, 595);
             this.btncancelar.Name = "btncancelar";
             this.btncancelar.Size = new System.Drawing.Size(173, 33);
-            this.btncancelar.TabIndex = 19;
+            this.btncancelar.TabIndex = 5;
             this.btncancelar.Tag = "cobrar";
             this.btncancelar.Text = "Cancelar Venta";
             this.btncancelar.UseVisualStyleBackColor = true;
@@ -421,7 +401,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(-51, 179);
+            this.pictureBox1.Location = new System.Drawing.Point(-52, 178);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(238, 547);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -431,7 +411,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(-17, 41);
+            this.pictureBox2.Location = new System.Drawing.Point(-25, 37);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(204, 186);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -441,7 +421,7 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(163, 523);
+            this.pictureBox3.Location = new System.Drawing.Point(161, 523);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(219, 201);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -457,7 +437,7 @@
             this.button1.Location = new System.Drawing.Point(1090, 648);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(173, 40);
-            this.button1.TabIndex = 11;
+            this.button1.TabIndex = 4;
             this.button1.Text = "Quitar producto";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
@@ -516,7 +496,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Interfaz_1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Interfaz_1";
+            this.Text = "IntraPDV";
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.apagar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minimizar)).EndInit();
@@ -536,8 +516,6 @@
         private System.Windows.Forms.PictureBox minimizar;
         private System.Windows.Forms.PictureBox apagar;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem añadirProductoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem añadirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem inventarioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem checarInventarioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem administracionToolStripMenuItem;
