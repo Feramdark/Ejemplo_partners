@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Interfaz_1));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.apagar = new System.Windows.Forms.PictureBox();
             this.minimizar = new System.Windows.Forms.PictureBox();
@@ -42,7 +42,6 @@
             this.sistemaDeApartadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.agregarClienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.detallesApartadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.detallesApartadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configuraciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cambioDeConexiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.devolucionPosCompraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,7 +71,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.folio = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.realizarAbonoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.apagar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minimizar)).BeginInit();
@@ -165,33 +163,24 @@
             // 
             this.sistemaDeApartadoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.agregarClienteToolStripMenuItem,
-            this.detallesApartadoToolStripMenuItem,
-            this.detallesApartadosToolStripMenuItem});
+            this.detallesApartadoToolStripMenuItem});
             this.sistemaDeApartadoToolStripMenuItem.Name = "sistemaDeApartadoToolStripMenuItem";
             this.sistemaDeApartadoToolStripMenuItem.Size = new System.Drawing.Size(203, 29);
             this.sistemaDeApartadoToolStripMenuItem.Text = "Sistema de Apartado";
             // 
             // agregarClienteToolStripMenuItem
             // 
-            this.agregarClienteToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.realizarAbonoToolStripMenuItem});
             this.agregarClienteToolStripMenuItem.Name = "agregarClienteToolStripMenuItem";
-            this.agregarClienteToolStripMenuItem.Size = new System.Drawing.Size(247, 30);
+            this.agregarClienteToolStripMenuItem.Size = new System.Drawing.Size(237, 30);
             this.agregarClienteToolStripMenuItem.Text = "Realizar Apartado";
             this.agregarClienteToolStripMenuItem.Click += new System.EventHandler(this.agregarClienteToolStripMenuItem_Click);
             // 
             // detallesApartadoToolStripMenuItem
             // 
             this.detallesApartadoToolStripMenuItem.Name = "detallesApartadoToolStripMenuItem";
-            this.detallesApartadoToolStripMenuItem.Size = new System.Drawing.Size(247, 30);
+            this.detallesApartadoToolStripMenuItem.Size = new System.Drawing.Size(237, 30);
             this.detallesApartadoToolStripMenuItem.Text = "Lista Apartados";
             this.detallesApartadoToolStripMenuItem.Click += new System.EventHandler(this.detallesApartadoToolStripMenuItem_Click);
-            // 
-            // detallesApartadosToolStripMenuItem
-            // 
-            this.detallesApartadosToolStripMenuItem.Name = "detallesApartadosToolStripMenuItem";
-            this.detallesApartadosToolStripMenuItem.Size = new System.Drawing.Size(247, 30);
-            this.detallesApartadosToolStripMenuItem.Text = "Detalles Apartados";
             // 
             // configuraciónToolStripMenuItem
             // 
@@ -249,23 +238,23 @@
             this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.MistyRose;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.MistyRose;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.MistyRose;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.MistyRose;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.MistyRose;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.Location = new System.Drawing.Point(163, 111);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
@@ -491,12 +480,6 @@
             this.label7.TabIndex = 28;
             this.label7.Text = "Ticket#";
             // 
-            // realizarAbonoToolStripMenuItem
-            // 
-            this.realizarAbonoToolStripMenuItem.Name = "realizarAbonoToolStripMenuItem";
-            this.realizarAbonoToolStripMenuItem.Size = new System.Drawing.Size(213, 30);
-            this.realizarAbonoToolStripMenuItem.Text = "Realizar Abono";
-            // 
             // Interfaz_1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -586,7 +569,5 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ToolStripMenuItem agregarClienteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem detallesApartadoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem detallesApartadosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem realizarAbonoToolStripMenuItem;
     }
 }

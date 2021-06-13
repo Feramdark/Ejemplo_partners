@@ -31,13 +31,13 @@ namespace IntraPDV
         //CONSTANTES
         public static void EncabezadoTicket()
         {
-            string LineaEncabezado = "Articulo       Cant     Precio     Total";
+            string LineaEncabezado = "Articulo       CANT     Precio     Total";
 
             line.AppendLine(LineaEncabezado);
         }
         public static void EncabezadoApartar()
         {
-            string LineaEncabezado = "Articulo     Cant     Precio    Anticipo";
+            string LineaEncabezado = "Articulo     Cant     Precio";
             line.AppendLine(LineaEncabezado);
         }
         public static void tituloTicket()
@@ -80,13 +80,13 @@ namespace IntraPDV
         {
             ticket = "";
             max = par1.Length;
-            if (max > 50)                                 // **********
+            if (max > 40)                                 // **********
             {
-                cort = max - 50;
-                parte1 = par1.Remove(50, cort);          // si es mayor que 40 caracteres, lo corta
+                cort = max - 40;
+                parte1 = par1.Remove(40, cort);          // si es mayor que 40 caracteres, lo corta
             }
             else { parte1 = par1; }                      // **********
-            max = (int)(50 - parte1.Length) / 2;         // saca la cantidad de espacios libres y divide entre dos
+            max = (int)(40 - parte1.Length) / 2;         // saca la cantidad de espacios libres y divide entre dos
             for (int i = 0; i < max; i++)                // **********
             {
                 ticket += " ";                           // Agrega espacios antes del texto a centrar
@@ -117,9 +117,6 @@ namespace IntraPDV
         //                                 0               1           2            3
         public void AgregaArticulo(string Articulo, decimal precio, int cant, decimal subtotal)
         {
-            //cort = 13 - 8;
-            //parte1 = Articulo.Remove(10, cort);
-            //Articulo = parte1;
             if (cant.ToString().Length <= 3 && precio.ToString("c").Length <= 10 && subtotal.ToString("c").Length <= 11) // valida que cant precio y total esten dentro de rango
             {
                 string elementos = "", espacios = "";
@@ -266,6 +263,10 @@ namespace IntraPDV
             float leftMargin = e.MarginBounds.Left;
             float topMargin = e.MarginBounds.Top;
             string line = null;
+            int y = 20;
+            string img = @"C:\iconoPDV.jpeg";
+
+            Image image = Image.FromFile(img);
             printFont = new Font("Arial", 8);
             //e.Graphics.DrawString("texto prueba", printFont, Brushes.Black, new RectangleF(0, 10, 120, 20));
 
@@ -273,12 +274,12 @@ namespace IntraPDV
             linesPerPage = e.MarginBounds.Height /
                printFont.GetHeight(e.Graphics);
 
+            e.Graphics.DrawImage(image, new Rectangle(15, 8, 150, 110));
             // Print each line of the file.
             while (count < linesPerPage &&
                ((line = streamToPrint.ReadLine()) != null))
             {
                 yPos = topMargin + (count * printFont.GetHeight(e.Graphics));
-
                 e.Graphics.DrawString(line, printFont, Brushes.Black,-2, yPos-15, new StringFormat());
                 count++;
             }

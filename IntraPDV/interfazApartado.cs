@@ -17,11 +17,12 @@ namespace IntraPDV
         string nombreProducto = "";
         float restantePagar = 0.00F;
         string idCte = "";
-        
+
         public interfazApartado()
         {
             InitializeComponent();
             consultaClientes();
+            UltimoFolio();
             //this.Location = Screen.PrimaryScreen.WorkingArea.Location;
             //this.Size = Screen.PrimaryScreen.WorkingArea.Size;
         }
@@ -156,8 +157,9 @@ namespace IntraPDV
         }
         private void imprimirComprobante()
         {
-            CrearImpresion.tituloTicket();
-            CrearImpresion.TextoCentro("COMPROBANTE DE APARTADO");
+            CrearImpresion.TextoCentro("        ");
+            CrearImpresion.TextoCentro("        ");
+            CrearImpresion.TextoCentro("Nota de Apartado");
             CrearImpresion.TextLeft(" Velia Perez Zavala");
             CrearImpresion.TextLeft(" R.F.C. PEZV-690103-270");
             CrearImpresion.TextLeft(" Aquiles Serdan #105 OTE");
@@ -186,7 +188,8 @@ namespace IntraPDV
             CrearImpresion.TextoDerecha("Cambio:   $" + cambioLabel.Text);
             CrearImpresion.TextoDerecha("Restan:   $"+ Convert.ToString(cantidadRestante.Text));
             CrearImpresion.lineasSeparacion();
-            CrearImpresion.TextoCentro("Apartado a un mes de plazo \n No se aceptan cambios en apartado");
+            CrearImpresion.TextoCentro("Apartado a un mes de plazo");
+            CrearImpresion.TextoCentro("No se aceptan cambios en apartado");
             CrearImpresion.lineasSeparacion();
             CrearImpresion.TextoCentro("****Gracias por su compra****");
         }
@@ -223,9 +226,7 @@ namespace IntraPDV
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //CrearImpresion.tituloTicket();
-            CrearImpresion.TextoCentro("Ropa y calzado");
-            CrearImpresion.TextoCentro("ROCHA");
+
             CrearImpresion.TextoCentro("Comprobante Apartado");
             CrearImpresion.TextLeft(" Velia Perez Zavala");
             CrearImpresion.TextLeft(" R.F.C. PEZV-690103-270");
@@ -257,7 +258,7 @@ namespace IntraPDV
             CrearImpresion.lineasSeparacion();
             CrearImpresion.TextoCentro("****Gracias por su compra****");
             CrearImpresion.ImprimirTiket();
-        }
+        } //PRUEBAS
         private void consultaClientes()
         {
           
@@ -312,6 +313,30 @@ namespace IntraPDV
         {
             cajaAnticipotxt.Text = importe.Text;
         }
+        public void UltimoFolio()
+        {
+            SqlConnection con = BDConnect.connection();
+            SqlDataReader lector;
+            SqlCommand foli = new SqlCommand("ultimoFolio", con);
+            foli.CommandType = CommandType.StoredProcedure;
+            try
+            {
+                lector = foli.ExecuteReader();
+                if (lector.Read())
+                {
+                    folio.Text = lector.GetInt32(0).ToString();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al consultar" + ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
 
         private void operation_press(object sender, KeyPressEventArgs e)
         {
@@ -330,7 +355,7 @@ namespace IntraPDV
                     float rest = resta(anticipo, total);
                     cambioLabel.Text = Convert.ToString(resta(anticipo, total));
 
-                    if (rest <= total)
+                    /*if (rest <= total)
                     {
                         cantidadRestante.Text = "" + 0;
                         MessageBox.Show("EL VALOR ES IGUAL A LO QUE CUESTA EL PRODUCTO");
@@ -339,19 +364,58 @@ namespace IntraPDV
                     {
                         cantidadRestante.Text = "" + 0;
                         MessageBox.Show("EL VALOR ES IGUAL A LO QUE CUESTA EL PRODUCTO");
-                    }
+                    }*/
                 }
                 else if (anticipo<=total)
                 {
                     cantidadRestante.Text = resta(total, anticipo).ToString();
                     float rest = float.Parse(cantidadRestante.Text);
 
-                    if (rest<total)
+                    /*if (rest<total)
                     {
                         MessageBox.Show("ACTUALIZAR LA COLUMNA DE ANTICIPO");
-                    }
+                    }*/
                 }
             }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            float pago = float.Parse(importe.Text);
+            float anticipo = float.Parse(cajaAnticipotxt.Text);
+
+            float restante = float.Parse(cantidadRestante.Text);
+            float total = float.Parse(totalSumapts.Text);
+
+            cambioLabel.Text = Convert.ToString(resta(pago, anticipo));
+
+            if (anticipo >= total)
+            {
+                float rest = resta(anticipo, total);
+                cambioLabel.Text = Convert.ToString(resta(anticipo, total));
+
+                /*if (rest <= total)
+                {
+                    cantidadRestante.Text = "" + 0;
+                    MessageBox.Show("EL VALOR ES IGUAL A LO QUE CUESTA EL PRODUCTO");
+                }
+                else if (rest>= total)
+                {
+                    cantidadRestante.Text = "" + 0;
+                    MessageBox.Show("EL VALOR ES IGUAL A LO QUE CUESTA EL PRODUCTO");
+                }*/
+            }
+            else if (anticipo <= total)
+            {
+                cantidadRestante.Text = resta(total, anticipo).ToString();
+                float rest = float.Parse(cantidadRestante.Text);
+
+                /*if (rest<total)
+                {
+                    MessageBox.Show("ACTUALIZAR LA COLUMNA DE ANTICIPO");
+                }*/
+            }
+            guardarInformacion.Focus();
         }
     }
 }

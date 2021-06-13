@@ -37,12 +37,13 @@ namespace IntraPDV
                 adaptador.SelectCommand = ticke;
                 adaptador.Fill(tabla);
                 dataGridView1.DataSource = tabla;
-                Ticket.TextoCentro("Ropa y Calzado ROCHA");
-                Ticket.TextLeft(" Velia Perez Zavala");
-                Ticket.TextLeft(" R.F.C. PEZV-690103-270");
-                Ticket.TextLeft(" Aquiles Serdan #105 OTE");
-                Ticket.TextLeft(" Colonia Centro");
-                Ticket.TextLeft(" Gpe. Victoria,DGO C.P 34700");
+                Ticket.TextLeft("          ");
+                Ticket.TextLeft("          ");
+                Ticket.TextLeft("  Velia Perez Zavala");
+                Ticket.TextLeft("  R.F.C. PEZV-690103-270");
+                Ticket.TextLeft("  Aquiles Serdan #105 OTE");
+                Ticket.TextLeft("  Colonia Centro");
+                Ticket.TextLeft("  Gpe. Victoria,DGO C.P 34700");
                 Ticket.TextLeft("Folio: " + folioTick.Text);
                 CrearImpresion.lineasSeparacion();//-----------------------------------------
                 Ticket.TextLeft(" Hora:       " + horaText.Text);

@@ -60,6 +60,9 @@
             this.importe = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.folio = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tablaProductos)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabla_clientes)).BeginInit();
@@ -266,6 +269,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button4);
+            this.groupBox2.Controls.Add(this.button5);
             this.groupBox2.Controls.Add(this.cambioLabel);
             this.groupBox2.Controls.Add(this.label);
             this.groupBox2.Controls.Add(this.cajaAnticipotxt);
@@ -282,7 +287,7 @@
             this.groupBox2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(12, 78);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(528, 182);
+            this.groupBox2.Size = new System.Drawing.Size(518, 195);
             this.groupBox2.TabIndex = 20;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Informacion";
@@ -291,7 +296,7 @@
             // 
             this.cambioLabel.AutoSize = true;
             this.cambioLabel.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cambioLabel.Location = new System.Drawing.Point(347, 39);
+            this.cambioLabel.Location = new System.Drawing.Point(415, 38);
             this.cambioLabel.Name = "cambioLabel";
             this.cambioLabel.Size = new System.Drawing.Size(48, 23);
             this.cambioLabel.TabIndex = 38;
@@ -301,7 +306,7 @@
             // 
             this.label.AutoSize = true;
             this.label.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label.Location = new System.Drawing.Point(251, 40);
+            this.label.Location = new System.Drawing.Point(319, 39);
             this.label.Name = "label";
             this.label.Size = new System.Drawing.Size(90, 19);
             this.label.TabIndex = 37;
@@ -330,7 +335,7 @@
             // 
             this.totalSumapts.AutoSize = true;
             this.totalSumapts.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalSumapts.Location = new System.Drawing.Point(347, 95);
+            this.totalSumapts.Location = new System.Drawing.Point(415, 94);
             this.totalSumapts.Name = "totalSumapts";
             this.totalSumapts.Size = new System.Drawing.Size(48, 23);
             this.totalSumapts.TabIndex = 34;
@@ -340,7 +345,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(279, 99);
+            this.label9.Location = new System.Drawing.Point(347, 98);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(62, 19);
             this.label9.TabIndex = 33;
@@ -350,7 +355,7 @@
             // 
             this.idClientetxt.AutoSize = true;
             this.idClientetxt.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.idClientetxt.Location = new System.Drawing.Point(176, 26);
+            this.idClientetxt.Location = new System.Drawing.Point(209, 25);
             this.idClientetxt.Name = "idClientetxt";
             this.idClientetxt.Size = new System.Drawing.Size(36, 19);
             this.idClientetxt.TabIndex = 32;
@@ -370,7 +375,7 @@
             // 
             this.cantidadRestante.AutoSize = true;
             this.cantidadRestante.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cantidadRestante.Location = new System.Drawing.Point(347, 67);
+            this.cantidadRestante.Location = new System.Drawing.Point(415, 66);
             this.cantidadRestante.Name = "cantidadRestante";
             this.cantidadRestante.Size = new System.Drawing.Size(48, 23);
             this.cantidadRestante.TabIndex = 30;
@@ -380,7 +385,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(275, 69);
+            this.label5.Location = new System.Drawing.Point(343, 68);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(66, 19);
             this.label5.TabIndex = 29;
@@ -415,12 +420,48 @@
             this.label1.TabIndex = 26;
             this.label1.Text = "Apartar a:";
             // 
+            // folio
+            // 
+            this.folio.AutoSize = true;
+            this.folio.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.folio.Location = new System.Drawing.Point(232, 53);
+            this.folio.Name = "folio";
+            this.folio.Size = new System.Drawing.Size(0, 19);
+            this.folio.TabIndex = 33;
+            // 
+            // button4
+            // 
+            this.button4.BackColor = System.Drawing.Color.IndianRed;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.ForeColor = System.Drawing.Color.White;
+            this.button4.Location = new System.Drawing.Point(420, 153);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(92, 36);
+            this.button4.TabIndex = 40;
+            this.button4.Text = "Cancelar";
+            this.button4.UseVisualStyleBackColor = false;
+            // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button5.Location = new System.Drawing.Point(307, 153);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(102, 36);
+            this.button5.TabIndex = 39;
+            this.button5.Text = "Continuar";
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // interfazApartado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(888, 592);
+            this.Controls.Add(this.folio);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.groupBox1);
@@ -474,5 +515,8 @@
         private System.Windows.Forms.TextBox importe;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label folio;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
     }
 }
