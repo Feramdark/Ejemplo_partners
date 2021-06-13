@@ -47,7 +47,7 @@ namespace IntraPDV
                 CrearImpresion.lineasSeparacion();//-----------------------------------------
                 Ticket.TextLeft(" Hora:       " + horaText.Text);
                 Ticket.TextoCentro("Fecha: " + DateTime.Today.Day+ "/" +DateTime.Today.Month+ "/" +DateTime.Today.Year);
-                Ticket.TextLeft(" Le atendio:    " + "Fam: Rocha Pérez");
+                Ticket.TextLeft(" Le atendio:   " + "Fam: Rocha Pérez");
                 CrearImpresion.lineasSeparacion();//-----------------------------------------
                 CrearImpresion.EncabezadoTicket();
                 foreach (DataGridViewRow fila in dataGridView1.Rows)
@@ -58,23 +58,25 @@ namespace IntraPDV
                        Convert.ToDecimal(fila.Cells[4].Value),
                        Convert.ToInt32(fila.Cells[3].Value), 
                        Convert.ToDecimal(fila.Cells[7].Value));
-                    productos++;
+                    //productos++;
                 }
-                numProd.Text = productos.ToString();
+                //numProd.Text = productos.ToString();
             }
             catch{}
             finally { connect_BD.Close(); }
         }
         private void btnImprimir_Click(object sender, EventArgs e)
         {
+            MyTicket();
             Interfaz_1 mainMenu = new Interfaz_1();
             mainMenu.Show();
             try
             {
                 numero_letra = totalText.Text;
                 CrearImpresion.lineasSeparacion();
-                Ticket.TextoDerecha("Total: $" + totalText.Text);
-                Ticket.TextoDerecha("Pago: $"+ importeText.Text);
+                Ticket.TextLeft("N° articulos: " + numProd.Text);
+                Ticket.TextoDerecha("  Total:   $" + totalText.Text);
+                Ticket.TextoDerecha("Pago:  $"+ importeText.Text);
                 Ticket.TextoDerecha("Cambio: "+ cambioText.Text);
                 Ticket.TextLeft("("+con.enletras(numero_letra).ToLower());
                 CrearImpresion.lineasSeparacion();//-----------------------------------------

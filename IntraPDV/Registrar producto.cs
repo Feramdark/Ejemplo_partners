@@ -11,7 +11,7 @@ using System.Data.SqlClient;
 
 namespace IntraPDV
 {
-    
+
     public partial class Registrar_producto : Form
     {
         CrearImpresion ticket = new CrearImpresion();
@@ -53,12 +53,13 @@ namespace IntraPDV
 
         private void buscarCodigo(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar==(char)Keys.Enter)
+            if (e.KeyChar == (char)Keys.Enter)
             {
                 buscarPorCode(codigoBarras.Text);
             }
+            contadores();
         }
-        
+
         private void buscarPorCode(string codigoProd)
         {
             SqlConnection conectar = BDConnect.connection();
@@ -80,6 +81,31 @@ namespace IntraPDV
                 MessageBox.Show(ex.Message);
                 conectar.Close();
             }
+        }
+        private void buscarNom(string des) // busqueda por Nombre 
+        {
+            SqlConnection conectar = BDConnect.connection();
+            try
+            {
+                SqlCommand busca = new SqlCommand("buscar", conectar);
+                busca.CommandType = CommandType.StoredProcedure;
+                busca.Parameters.AddWithValue("@nombre", des);
+
+                DataTable tabla = new DataTable();
+                SqlDataAdapter adp = new SqlDataAdapter();
+                adp.SelectCommand = busca;
+                adp.Fill(tabla);
+                dataGridView1.DataSource = tabla;
+                busca.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            finally
+            { conectar.Close(); }
+            contadores();
         }
 
 
@@ -105,7 +131,7 @@ namespace IntraPDV
         }
 
 
-        private void actualizarDescuento(string codigoProducto,int descuentoNuevo)
+        private void actualizarDescuento(string codigoProducto, int descuentoNuevo)
         {
             SqlConnection conectar = BDConnect.connection();
             try
@@ -117,15 +143,15 @@ namespace IntraPDV
                 actDesc.Parameters.AddWithValue("@codigo", codigoProducto);
                 actDesc.Parameters.AddWithValue("@descuento", descuentoNuevo);
                 actDesc.ExecuteNonQuery();
-                MessageBox.Show("Descuento Actualizado");
+                MessageBox.Show("Descuento Actualizado", "Operación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            finally {conectar.Close();}
+            finally { conectar.Close(); }
         }
-        private void actualizarCantidad(string codigo,int nuevaCantidad)
+        private void actualizarCantidad(string codigo, int nuevaCantidad)
         {
             SqlConnection conectar = BDConnect.connection();
             try
@@ -137,7 +163,7 @@ namespace IntraPDV
                 actDesc.Parameters.AddWithValue("@codigo", codigo);
                 actDesc.Parameters.AddWithValue("@cantidad", nuevaCantidad);
                 actDesc.ExecuteNonQuery();
-                MessageBox.Show("Cantidad Actualizada");
+                MessageBox.Show("Cantidad Actualizada", "Operación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 conectar.Close();
             }
             catch (Exception ex)
@@ -158,24 +184,7 @@ namespace IntraPDV
                 actDesc.Parameters.AddWithValue("@codigo", codigo);
                 actDesc.Parameters.AddWithValue("@precio", nuevaCantidad);
                 actDesc.ExecuteNonQuery();
-                MessageBox.Show("Precio Actualizado");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally{ conectar.Close();}
-        }
-        private void actualizarNombre(string codigo, string nombreNew, string modelo) {
-
-            SqlConnection conectar = BDConnect.connection();
-            try
-            {
-                SqlCommand cmd = new SqlCommand(string.Format("update productos set nombre = '{0}', modelo = '{1}' where codigo_barras = '{2}'",
-                    new string[] { nombreNew, modelo, codigo}), conectar);
-                cmd.ExecuteNonQuery();
-
-                MessageBox.Show("Los datos han sido actualizados", "Informacion Actualizada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Precio Actualizado", "Operación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -183,7 +192,23 @@ namespace IntraPDV
             }
             finally { conectar.Close(); }
         }
+        private void actualizarNombre(string codigo, string nombreNew, string modelo) {
 
+            SqlConnection conectar = BDConnect.connection();
+            try
+            {
+                SqlCommand cmd = new SqlCommand(string.Format("update productos set nombre = '{0}', modelo = '{1}' where codigo_barras = '{2}'",
+                    new string[] { nombreNew, modelo, codigo }), conectar);
+                cmd.ExecuteNonQuery();
+
+                MessageBox.Show("Los datos han sido actualizados.", "Informacion Actualizada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally { conectar.Close(); }
+        }
         private void eliminarProducto(string code)
         {
             SqlConnection con = BDConnect.connection();
@@ -192,11 +217,29 @@ namespace IntraPDV
                 SqlCommand cmd = new SqlCommand(string.Format("DELETE FROM productos WHERE codigo_barras = '{0}'", code), con);
                 cmd.ExecuteNonQuery();
 
-                MessageBox.Show("Los datos se han removido del sistema", "Operacion Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Los datos se han removido del sistema.", "Operacion Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
 
+                MessageBox.Show(ex.Message);
+            }
+            finally { con.Close(); }
+        }
+
+        private void talla(string code, string talla, string tipo,string dep)
+        {
+            SqlConnection con = BDConnect.connection();
+            try
+            {
+                SqlCommand cmd = new SqlCommand(string.Format("UPDATE productos set talla = '{0}', tipo ='{1}', departamento ='{2}' WHERE codigo_barras = '{3}'",
+                    new string[] { talla, tipo, dep, code }), con);
+                cmd.ExecuteNonQuery();
+
+                MessageBox.Show("Los datos se han actualizado.", "Operacion Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
                 MessageBox.Show(ex.Message);
             }
             finally { con.Close(); }
@@ -233,20 +276,35 @@ namespace IntraPDV
                     actualizarNombre(cd, nom, mod);
                     buscarPorCode(codigoBarras.Text);
 
-                    codigoBarras.Clear();
                     nombrePto.Clear();
                     descPto.Clear();
                 }
+                if (codigoBarras.Text != "" && tipoPto.Text != "" && tallaPto.Text != "")
+                {
+                    string cd = codigoBarras.Text.Trim();
+                    string tip = tipoPto.Text.Trim();
+                    string tal = tallaPto.Text.Trim();
+                    string dpto = deptoPro.Text.Trim();
+
+                    talla(cd, tal, tip,dpto);
+                    buscarPorCode(codigoBarras.Text);
+
+
+                    tipoPto.Clear();
+                    tallaPto.Clear();
+                    deptoPro.Clear();
+                }
+
             }
             else
             {
-                MessageBox.Show("Habilite los campos de Edicion","Imposible actualizar",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                MessageBox.Show("Habilite los campos de edición", "Imposible actualizar", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            
+            contadores();
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {   
+        {
             codigoBarras.Clear();
             textBox1.Clear();
             cantidadActual.Clear();
@@ -277,11 +335,11 @@ namespace IntraPDV
                 MessageBox.Show(e.Message);
             }
             finally
-            {conectar.Close();}
+            { conectar.Close(); }
             contadores();
         }
 
-        private void textBox1_TextChanged_1(object sender, EventArgs e)
+        private void textBox1_TextChanged_1(object sender, EventArgs e)// buscar por nombre
         {
 
             if (textBox1.Text != "")
@@ -306,7 +364,7 @@ namespace IntraPDV
                 if (row.Cells[1].Value != null) 
                     suma += Convert.ToSingle(row.Cells[3].Value); //incremento de la suma de todos los elementos que se encuentran es esa celda.
             }
-            label1.Text = Convert.ToString(suma);//Cantidad total de la suma de todos los elementos
+            cantProd.Text = Convert.ToString(suma);//Cantidad total de la suma de todos los elementos
         }
 
         private List<string> showDeptos()
@@ -361,6 +419,9 @@ namespace IntraPDV
                     codigoBarras.Text = Convert.ToString(fila.Cells[0].Value);
                     nombrePto.Text = Convert.ToString(fila.Cells[2].Value);
                     descPto.Text = Convert.ToString(fila.Cells[4].Value);
+                    tallaPto.Text = Convert.ToString(fila.Cells[9].Value);
+                    tipoPto.Text = Convert.ToString(fila.Cells[8].Value);
+                    deptoPro.Text = Convert.ToString(fila.Cells[7].Value);
                 }
                 catch (Exception ex)
                 {
@@ -420,6 +481,27 @@ namespace IntraPDV
             else if (!editCheck.Checked)
             {
                 groupUpdate.Enabled = false;
+            }
+        }
+
+        private void buscar(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                buscarPorCode(codigo.Text);
+            }
+            contadores();
+        }
+
+        private void search_pro(object sender, EventArgs e)
+        {
+            if (nombrePro.Text != "")
+            {
+                buscarNom(nombrePro.Text);
+            }
+            else
+            {
+                dataGridView1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
             }
         }
     }

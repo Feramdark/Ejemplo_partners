@@ -31,6 +31,7 @@ namespace IntraPDV
         //TABLA DE DATOS GRIDVIEW
         DataTable tabDatos = new DataTable();
         //TABLA DE DATOS GRIDVIEW
+        int productos = 0;
 
         private void apagar_Click(object sender, EventArgs e)
         {
@@ -85,11 +86,16 @@ namespace IntraPDV
                 ticket.importeText.Text = Importe.Text;
                 ticket.cambioText.Text = TextCambio.Text;
                 ticket.folioTick.Text = folio.Text;
+                foreach (DataGridViewRow fila in dataGridView1.Rows)
+                {
+                    productos+=Convert.ToInt32(fila.Cells[5].Value.ToString());
+                }
+                ticket.numProd.Text = productos.ToString();
                 this.Hide();
-                this.Dispose();
                 ticket.Show();
-                ticket.MyTicket();
-             }
+                this.Dispose();
+                this.Refresh();
+            }
           
             //MessageBox.Show("Inserta el importe \nPor Favor", "FALTA EL IMPORTE", MessageBoxButtons.OK,MessageBoxIcon.Warning);
         }
@@ -186,6 +192,16 @@ namespace IntraPDV
             }
             TotalPagar.Text = Convert.ToString(suma);//Cantidad total de la suma de todos los elementos
         }
+        public void sumaCant()
+        {
+            float suma = 0.00F;
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.Cells[1].Value != null) //1 es "Total"
+                    suma += Convert.ToSingle(row.Cells[6].Value); //incremento de la suma de todos los elementos que se encuentran es esa celda.
+            }
+            TotalPagar.Text = Convert.ToString(suma);//Cantidad total de la suma de todos los elementos
+        }
 
         public void Cambio(decimal importe, decimal total)
         {
@@ -253,12 +269,6 @@ namespace IntraPDV
         }
 
         /*Boton hacia la interfaz de apartado*/
-
-        private void sistemaDeApartadoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            interfazApartado sistema_apartado = new interfazApartado();
-            sistema_apartado.ShowDialog();
-        }
         private void num_venta()
         {
             SqlCommand siguienteFolio = new SqlCommand("SiguienteFolio", conexion_BD);
@@ -331,8 +341,19 @@ namespace IntraPDV
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             aplicaCambios();
+            CodigoBarras.Focus();
         }
 
+        private void agregarClienteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            interfazApartado sistema_apartado = new interfazApartado();
+            sistema_apartado.ShowDialog();
+        }
 
+        private void detallesApartadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            lista_apartados list = new lista_apartados();
+            list.ShowDialog();
+        }
     }
 }

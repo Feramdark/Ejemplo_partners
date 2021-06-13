@@ -17,7 +17,7 @@ namespace IntraPDV
         {
             InitializeComponent();
         }
-        SqlConnection conexion_BD = BDConnect.connection();
+
 
         DataTable TablaInventario = new DataTable();
 
@@ -47,6 +47,7 @@ namespace IntraPDV
         }
         public void InsertarProductos()
         {
+            SqlConnection conexion_BD = BDConnect.connection();
             dataGridView1.AllowUserToAddRows = false;
             try
             {
@@ -81,17 +82,19 @@ namespace IntraPDV
                 {
                     dataGridView1.AllowUserToAddRows = true;
                     dataGridView1.Rows.Clear();
-                    conexion_BD.Close();
+                    
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+            finally { conexion_BD.Close(); }
         }
         private void button2_Click(object sender, EventArgs e)
         {
             //dataGridView1.Rows.Clear();
+            this.Refresh();
         }
     }
 }

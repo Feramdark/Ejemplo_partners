@@ -78,3 +78,5 @@ C:\Users\luisz\Desktop\ProyectoFinal_Rocha\clonarProyecto\Rocha_Stores\IntraPDV\
 C:\Users\luisz\Desktop\ProyectoFinal_Rocha\clonarProyecto\Rocha_Stores\IntraPDV\obj\Debug\IntraPDV.exe
 C:\Users\luisz\Desktop\ProyectoFinal_Rocha\clonarProyecto\Rocha_Stores\IntraPDV\obj\Debug\IntraPDV.pdb
 C:\Users\luisz\Desktop\ProyectoFinal_Rocha\clonarProyecto\Rocha_Stores\IntraPDV\obj\Debug\IntraPDV.interfazApartado.resources
+C:\Users\luisz\Desktop\ProyectoFinal_Rocha\clonarProyecto\Rocha_Stores\IntraPDV\obj\Debug\IntraPDV.addCliente.resources
+C:\Users\luisz\Desktop\ProyectoFinal_Rocha\clonarProyecto\Rocha_Stores\IntraPDV\obj\Debug\IntraPDV.lista_apartados.resources

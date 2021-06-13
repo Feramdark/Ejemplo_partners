@@ -37,8 +37,13 @@ namespace IntraPDV
         }
         public static void EncabezadoApartar()
         {
-            string LineaEncabezado = "Articulo       Cant     Precio     Abono";
-        
+            string LineaEncabezado = "Articulo     Cant     Precio    Anticipo";
+            line.AppendLine(LineaEncabezado);
+        }
+        public static void tituloTicket()
+        {
+            string LineaEncabezado = "      Ropa y Calzado\n" +
+                "         ROCHA";
             line.AppendLine(LineaEncabezado);
         }
 
@@ -48,8 +53,8 @@ namespace IntraPDV
             max = par1.Length;
             if (max > 70)                                 // **********
             {
-                cort = max - 40;
-                parte1 = par1.Remove(40, cort);        // si es mayor que 40 caracteres, lo corta
+                cort = max - 70;
+                parte1 = par1.Remove(70, cort);        // si es mayor que 40 caracteres, lo corta
             }
             else { parte1 = par1; }                      // **********
             line.AppendLine(ticket = parte1);
@@ -75,18 +80,18 @@ namespace IntraPDV
         {
             ticket = "";
             max = par1.Length;
-            if (max > 40)                                 // **********
+            if (max > 50)                                 // **********
             {
-                cort = max - 40;
-                parte1 = par1.Remove(40, cort);          // si es mayor que 40 caracteres, lo corta
+                cort = max - 50;
+                parte1 = par1.Remove(50, cort);          // si es mayor que 40 caracteres, lo corta
             }
             else { parte1 = par1; }                      // **********
-            max = (int)(40 - parte1.Length) / 2;         // saca la cantidad de espacios libres y divide entre dos
+            max = (int)(50 - parte1.Length) / 2;         // saca la cantidad de espacios libres y divide entre dos
             for (int i = 0; i < max; i++)                // **********
             {
                 ticket += " ";                           // Agrega espacios antes del texto a centrar
             }                                            // **********
-            line.AppendLine(ticket += parte1 + "\n");
+            line.AppendLine(ticket += parte1);
 
         }
         public void AgregarArticulo(string par1, double total)
@@ -274,7 +279,7 @@ namespace IntraPDV
             {
                 yPos = topMargin + (count * printFont.GetHeight(e.Graphics));
 
-                e.Graphics.DrawString(line, printFont, Brushes.Black,-2, yPos, new StringFormat());
+                e.Graphics.DrawString(line, printFont, Brushes.Black,-2, yPos-15, new StringFormat());
                 count++;
             }
             // If more lines exist, print another page.
