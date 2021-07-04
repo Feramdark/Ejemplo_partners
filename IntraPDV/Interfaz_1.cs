@@ -96,8 +96,7 @@ namespace IntraPDV
                 this.Dispose();
                 this.Refresh();
             }
-          
-            //MessageBox.Show("Inserta el importe \nPor Favor", "FALTA EL IMPORTE", MessageBoxButtons.OK,MessageBoxIcon.Warning);
+
         }
 
 
@@ -264,7 +263,7 @@ namespace IntraPDV
         {
             devoPostCompra devolu = new devoPostCompra();
             devolu.Show();
-            this.Hide();
+            //this.Hide();
            
         }
 

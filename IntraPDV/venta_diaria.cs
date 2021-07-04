@@ -16,6 +16,10 @@ namespace IntraPDV
         public venta_diaria()
         {
             InitializeComponent();
+            totalApartados.Visible = false;
+            pagosDiarios.Visible = false;
+            labelAnticipo.Visible = false;
+            labelPagos.Visible = false;
         }
        
         static string nombre = "";
@@ -32,15 +36,45 @@ namespace IntraPDV
             dataGridView1.AllowUserToAddRows = false;
             buscarVenta();
             totalEnTexto.Text = totalDia;
+
+            suma();
+            sumaPagos();
+
+            
+            if(totalEnTexto.Text != "")
+            {
+                float a = suma();
+                float b = sumaPagos();
+                float c = Convert.ToSingle(totalEnTexto.Text);
+
+                //-------------------------
+                float res = a + b + c;
+                totalDiario.Text = res.ToString();
+
+            }
+            else
+            {
+                float a = suma();
+                float b = sumaPagos();
+
+                float res = a + b;
+                totalDiario.Text = res.ToString();
+            }
         }
         public void buscarVenta()
         {
+            apartados ap = new apartados();
             try
             {
                 SqlCommand buscar_venta = new SqlCommand("busca_VentaDiaria", conexion);
                 buscar_venta.CommandType = CommandType.StoredProcedure;
 
                 buscar_venta.Parameters.AddWithValue("@fecha", Convert.ToDateTime(dateTimePicker1.Text));
+
+                totalApartados.DataSource = ap.listaAnticipos(conexion, dateTimePicker1.Text);
+                pagosDiarios.DataSource = ap.listaPagosfecha(conexion, dateTimePicker1.Text);
+
+
 
                 SqlCommand total = new SqlCommand("sumaTotal_Venta",conexion); 
                 total.CommandType = CommandType.StoredProcedure;
@@ -60,6 +94,7 @@ namespace IntraPDV
                 foreach (DataGridViewRow item in dataGridTotal.Rows)
                 {
                     totalDia = item.Cells[0].Value.ToString();
+
                 }
             }
             catch (Exception ex)
@@ -98,32 +133,137 @@ namespace IntraPDV
         {
             CrearImpresion Ticket = new CrearImpresion();
             Conversion letras = new Conversion();
-            Ticket.TextoCentro("INFORME VENTA DIARIA");
-            Ticket.TextLeft(" Velia Perez Zavala");
-            Ticket.TextLeft(" R.F.C. PEZV-690103-270");
-            Ticket.TextLeft(" Aquiles Serdan #105 OTE");
-            Ticket.TextLeft(" Colonia centro");
-            Ticket.TextLeft(" Gpe. Victoria,DGO C.P 34700");
+            Ticket.TextLeft("          ");
+            Ticket.TextLeft("          ");
+            Ticket.TextoCentro("Velia Perez Zavala");
+            Ticket.TextLeft("     R.F.C. PEZV-690103-270");
+            Ticket.TextLeft("     Aquiles Serdan #105 OTE");
+            Ticket.TextLeft("     Colonia Centro");
+            Ticket.TextLeft("     Gpe. Victoria,DGO C.P 34700");
             CrearImpresion.lineasSeparacion();//-----------------------------------------
+            Ticket.TextoCentro("Corte del día");
             Ticket.TextLeft("Fecha: " + dateTimePicker1.Value.ToString());//DateTime.Today.Day + "/" + DateTime.Today.Month + "/" + DateTime.Today.Year);
-            Ticket.TextLeft(" Hora:       " + hora);
             CrearImpresion.lineasSeparacion();//-----------------------------------------
             CrearImpresion.EncabezadoTicket();
 
-            foreach (DataGridViewRow item in dataGridView1.Rows)
+            foreach (DataGridViewRow fila in dataGridView1.Rows)
             {
-                Ticket.TextLeft(item.Cells[4].Value.ToString());
-                Ticket.AgregaArticulo(item.Cells[3].Value.ToString()+" "
-                    ,Convert.ToDecimal(item.Cells[5].Value),Convert.ToInt32(item.Cells[8].Value),Convert.ToDecimal(item.Cells[9].Value));
+                int desc = Convert.ToInt32(fila.Cells[6].Value);
+                if (desc == 0)
+                {
+                    Ticket.TextLeft(fila.Cells[3].Value.ToString()); //Codigo producto
+                    Ticket.TextLeft(fila.Cells[4].Value.ToString()); // Nombre producto
+
+                    //                                                      cantidad                             Precio unitario                             Precio*cantidad            
+                    Ticket.TextLeft("                 " + "      " + fila.Cells[8].Value.ToString() + "      " + fila.Cells[5].Value.ToString() + "      " + fila.Cells[9].Value.ToString());
+                }
+                else
+                {
+                    Ticket.TextLeft(fila.Cells[3].Value.ToString()); // codigo producto
+                    //              Nombre producto                   MENOS         tanto porciento                                    
+                    Ticket.TextLeft(fila.Cells[4].Value.ToString() + "  -" + fila.Cells[6].Value.ToString() + " %");
+                    //                                                      precio unitario - lo que es de porcentaje                    
+                    Ticket.TextLeft("                        " + "p.u $" + fila.Cells[5].Value.ToString() + "   -" + fila.Cells[7].Value.ToString());//total-descuento
+
+                    //                                                      cantidad                             Precio unitario                             Precio*cantidad            
+                    Ticket.TextLeft("                 " + "      " + fila.Cells[8].Value.ToString() + "      " + fila.Cells[5].Value.ToString() + "      " + fila.Cells[9].Value.ToString());
+                }
+
             }
+
+            if (labelAnticipos.Text != "0")
+            {
+                Ticket.TextoCentro("-------------APARTADOS------------");
+                foreach (DataGridViewRow item in totalApartados.Rows)
+                {
+                    string celdaCodigo = item.Cells[0].Value.ToString();
+
+                    if (celdaCodigo != null)
+                    {
+
+                        //Ticket.TextLeft(item.Cells[0].Value.ToString()); //Codigo Apartado
+                        Ticket.TextLeft(item.Cells[2].Value.ToString()); // Nombre cliente
+
+                        //Ticket.TextLeft("                 " + "      " + "Anticipo: " + "      " + item.Cells[3].Value.ToString() + "      " + "---");
+                        Ticket.TextLeft("Anticipo: " + "      " + item.Cells[3].Value.ToString() + "      " + "---");
+
+                    }
+                }
+            }
+            if (labelPagoText.Text !="0")
+            {
+                foreach (DataGridViewRow fila in pagosDiarios.Rows)
+                {
+                    string celdaCodigo = fila.Cells[0].Value.ToString();
+
+                    if (celdaCodigo != null)
+                    {
+                        //Ticket.TextLeft(fila.Cells[0].Value.ToString()); //Codigo Pago
+                        Ticket.TextLeft(fila.Cells[1].Value.ToString()); // Nombre cliente
+
+                        //Ticket.TextLeft("                 " + "      " + "Anticipo: " + "      " + item.Cells[3].Value.ToString() + "      " + "---");
+                        Ticket.TextLeft("Pago: " + "      " + fila.Cells[4].Value.ToString() + "      " + "---");
+                    }
+                }
+            }
+            
             CrearImpresion.lineasSeparacion();//-------------------------------------------
-            Ticket.TextLeft("TOTAL: "+totalDia);//nombre
-            Ticket.TextLeft(letras.enletras(totalDia).ToLower());
+            Ticket.TextLeft("Ventas: $" + totalEnTexto.Text);//nombre
+            Ticket.TextLeft("Anticipos: $" + labelAnticipos.Text);//nombre
+            Ticket.TextLeft("Pagos: $" + labelPagoText.Text);//nombre
+            Ticket.TextLeft("TOTAL DÍA: $"+ totalDiario.Text);//nombre
+            Ticket.TextLeft("("+letras.enletras(totalDiario.Text).ToLower());
             Ticket.ImprimirTiket();
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
             hora = DateTime.Now.ToLongTimeString();
+        }
+
+        
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (totalApartados.Visible == false && pagosDiarios.Visible == false)
+            {
+
+                pagosDiarios.Visible = true;
+                totalApartados.Visible = true;
+                labelAnticipo.Visible = true;
+                labelPagos.Visible = true;
+                dataGridView1.Visible = false;
+                button2.Text = "Regresar a ventas";
+            }
+            else if(dataGridView1.Visible == false)
+            {
+                dataGridView1.Visible = true;
+                labelAnticipo.Visible = false;
+                labelPagos.Visible = false;
+                totalApartados.Visible = false;
+                pagosDiarios.Visible = false;
+                button2.Text = "Ver Pagos";
+
+            }
+        }
+
+        private float suma()
+        {
+            float resultado = 0.00F;
+            foreach(DataGridViewRow fila in totalApartados.Rows)
+            {
+                resultado += Convert.ToSingle(fila.Cells[3].Value);
+            }
+            labelAnticipos.Text = resultado.ToString();
+            return resultado;
+        }
+        private float sumaPagos()
+        {
+            float resultado = 0.00F;
+            foreach (DataGridViewRow fila in pagosDiarios.Rows)
+            {
+                resultado += Convert.ToSingle(fila.Cells[4].Value);
+            }
+            labelPagoText.Text = resultado.ToString();
+            return resultado;
         }
     }
 }

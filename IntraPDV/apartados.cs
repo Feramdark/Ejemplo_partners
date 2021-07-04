@@ -53,7 +53,7 @@ namespace IntraPDV
         }
         public bool eliminarClientes(SqlConnection con,string nom)
         {
-            SqlCommand query = new SqlCommand(string.Format("DELETE FROM clientes WHERE nombre = '{0}'", new string[] { nom }), con);
+            SqlCommand query = new SqlCommand(string.Format("DELETE FROM clientes WHERE id_cliente = '{0}'", new string[] { nom }), con);
             int requestResult = query.ExecuteNonQuery();
             con.Close();
             if (requestResult > 0) return true;
@@ -116,7 +116,7 @@ namespace IntraPDV
             if (res > 0) return true;
             else return false;
         }
-
+        
         public DataTable listaProductosApartados(SqlConnection con,string id)
         {
             SqlCommand consulta = new SqlCommand("consultaApartados", con);
@@ -143,6 +143,63 @@ namespace IntraPDV
             ad.Fill(ds, "pagos");
             con.Close();
             return ds.Tables["pagos"];
+        }
+        
+        public DataTable listaAnticipos(SqlConnection con,string fecha)
+        {
+            if (con.State == ConnectionState.Closed)
+            {
+                con.Open();
+            }
+            SqlCommand command = new SqlCommand("consultaAnticipos", con);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@fecha", Convert.ToDateTime(fecha));
+
+
+            SqlDataAdapter ad = new SqlDataAdapter(command);
+            DataSet ds = new DataSet();
+
+            ad.Fill(ds, "anti");
+            con.Close();
+            return ds.Tables["anti"];
+        }
+        public DataTable listaPagosfecha(SqlConnection con, string fecha){
+            if (con.State == ConnectionState.Closed)
+            {
+                con.Open();
+            }
+            SqlCommand command = new SqlCommand("consultaPagosFecha", con);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@fecha", Convert.ToDateTime(fecha));
+
+
+            SqlDataAdapter ad = new SqlDataAdapter(command);
+            DataSet ds = new DataSet();
+
+            ad.Fill(ds, "pagos");
+            con.Close();
+            return ds.Tables["pagos"];
+
+        }
+
+        public bool eliminarPtoApartado(SqlConnection con,string idApa)
+        {
+            SqlCommand command = new SqlCommand(string.Format("DELETE apartados_list WHERE idApartado = '{0}'", new string[] { idApa }), con);
+            int result = command.ExecuteNonQuery();
+            if (result > 0) { return true; }
+            else return false;
+        }
+        public bool eliminarCtaApartado(SqlConnection con, string idCte)
+        {
+            SqlCommand command = new SqlCommand(string.Format("DELETE cuenta_apartado WHERE id_cliente = '{0}'", new string[] { idCte }), con);
+            int result = command.ExecuteNonQuery();
+            if (result > 0) { return true; }
+            else return false;
+        }
+
+        public bool actualizaCuenta(SqlConnection con, string idCl, int cant, float montoTotal, float anticipo, float restante, string date)
+        {
+
         }
     }   
 }

@@ -71,6 +71,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.folio = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.listaDeCreditoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.apagar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minimizar)).BeginInit();
@@ -163,7 +164,8 @@
             // 
             this.sistemaDeApartadoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.agregarClienteToolStripMenuItem,
-            this.detallesApartadoToolStripMenuItem});
+            this.detallesApartadoToolStripMenuItem,
+            this.listaDeCreditoToolStripMenuItem});
             this.sistemaDeApartadoToolStripMenuItem.Name = "sistemaDeApartadoToolStripMenuItem";
             this.sistemaDeApartadoToolStripMenuItem.Size = new System.Drawing.Size(203, 29);
             this.sistemaDeApartadoToolStripMenuItem.Text = "Sistema de Apartado";
@@ -480,6 +482,12 @@
             this.label7.TabIndex = 28;
             this.label7.Text = "Ticket#";
             // 
+            // listaDeCreditoToolStripMenuItem
+            // 
+            this.listaDeCreditoToolStripMenuItem.Name = "listaDeCreditoToolStripMenuItem";
+            this.listaDeCreditoToolStripMenuItem.Size = new System.Drawing.Size(237, 30);
+            this.listaDeCreditoToolStripMenuItem.Text = "Lista de Credito";
+            // 
             // Interfaz_1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -569,5 +577,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ToolStripMenuItem agregarClienteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem detallesApartadoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem listaDeCreditoToolStripMenuItem;
     }
 }

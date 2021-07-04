@@ -31,10 +31,12 @@ namespace IntraPDV
                 this.Dispose();
                 this.Close();
                 client_List.Items.Clear();
-                //consultaClientes();
-                
+                interfazApartado ap = new interfazApartado();
+                ap.ShowDialog();
+
             }
             else MessageBox.Show("Error con la insercion");
+           
 
         }
 

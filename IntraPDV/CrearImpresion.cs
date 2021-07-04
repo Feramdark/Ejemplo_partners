@@ -264,7 +264,7 @@ namespace IntraPDV
             float topMargin = e.MarginBounds.Top;
             string line = null;
             int y = 20;
-            string img = @"C:\iconoPDV.jpeg";
+            string img = @"C:\iconoPDV.png";
 
             Image image = Image.FromFile(img);
             printFont = new Font("Arial", 8);
@@ -274,7 +274,7 @@ namespace IntraPDV
             linesPerPage = e.MarginBounds.Height /
                printFont.GetHeight(e.Graphics);
 
-            e.Graphics.DrawImage(image, new Rectangle(15, 8, 150, 110));
+            e.Graphics.DrawImage(image, new Rectangle(28, 9, 93, 100));
             // Print each line of the file.
             while (count < linesPerPage &&
                ((line = streamToPrint.ReadLine()) != null))

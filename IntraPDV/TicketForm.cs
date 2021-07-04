@@ -39,30 +39,39 @@ namespace IntraPDV
                 dataGridView1.DataSource = tabla;
                 Ticket.TextLeft("          ");
                 Ticket.TextLeft("          ");
-                Ticket.TextLeft("  Velia Perez Zavala");
-                Ticket.TextLeft("  R.F.C. PEZV-690103-270");
-                Ticket.TextLeft("  Aquiles Serdan #105 OTE");
-                Ticket.TextLeft("  Colonia Centro");
-                Ticket.TextLeft("  Gpe. Victoria,DGO C.P 34700");
+                Ticket.TextoCentro("Velia Perez Zavala");
+                Ticket.TextLeft("     R.F.C. PEZV-690103-270");
+                Ticket.TextLeft("     Aquiles Serdan #105 OTE");
+                Ticket.TextLeft("     Colonia Centro");
+                Ticket.TextLeft("     Gpe. Victoria,DGO C.P 34700");
                 Ticket.TextLeft("Folio: " + folioTick.Text);
                 CrearImpresion.lineasSeparacion();//-----------------------------------------
-                Ticket.TextLeft(" Hora:       " + horaText.Text);
                 Ticket.TextoCentro("Fecha: " + DateTime.Today.Day+ "/" +DateTime.Today.Month+ "/" +DateTime.Today.Year);
+                Ticket.TextLeft(" Hora:       " + horaText.Text);
                 Ticket.TextLeft(" Le atendio:   " + "Fam: Rocha Pérez");
                 CrearImpresion.lineasSeparacion();//-----------------------------------------
                 CrearImpresion.EncabezadoTicket();
                 foreach (DataGridViewRow fila in dataGridView1.Rows)
                 {
-                    Ticket.TextLeft(fila.Cells[1].Value.ToString()+" Dsc: "+ fila.Cells[5].Value.ToString());//Producto/descuento arriba descripcion abajo.
-                    Ticket.TextoDerecha(fila.Cells[4].Value.ToString()+" - " + fila.Cells[6].Value.ToString());//total-descuento
-                    Ticket.AgregaArticulo(fila.Cells[0].Value.ToString() + " ", 
-                       Convert.ToDecimal(fila.Cells[4].Value),
-                       Convert.ToInt32(fila.Cells[3].Value), 
-                       Convert.ToDecimal(fila.Cells[7].Value));
-                    //productos++;
+                    int desc = Convert.ToInt32(fila.Cells[5].Value);
+
+                    if (desc == 0)
+                    {
+                        Ticket.TextLeft(fila.Cells[0].Value.ToString());
+                        Ticket.TextLeft(fila.Cells[1].Value.ToString());
+                        Ticket.TextLeft("                 " + "      " + fila.Cells[3].Value.ToString() + "      " + fila.Cells[4].Value.ToString() + "      " + fila.Cells[7].Value.ToString());
+                    }
+                    else
+                    {
+                        Ticket.TextLeft(fila.Cells[0].Value.ToString());
+                        Ticket.TextLeft(fila.Cells[1].Value.ToString() + "  -" + fila.Cells[5].Value.ToString()+" %");
+                        Ticket.TextLeft("                        "+"p.u $"+fila.Cells[4].Value.ToString() + "   -" + fila.Cells[6].Value.ToString());//total-descuento
+                        Ticket.TextLeft("                 " + "      " + fila.Cells[3].Value.ToString() + "      " + fila.Cells[4].Value.ToString() + "      " + fila.Cells[7].Value.ToString());
+                    }
+
                 }
-                //numProd.Text = productos.ToString();
-            }
+        
+                }
             catch{}
             finally { connect_BD.Close(); }
         }

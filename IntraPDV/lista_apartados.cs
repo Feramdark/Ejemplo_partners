@@ -16,36 +16,57 @@ namespace IntraPDV
         public lista_apartados()
         {
             InitializeComponent();
+            folioTexto.Text = UltimoFolio();
+            
         }
+        bool flag = false;
         CrearImpresion CrearImpresion = new CrearImpresion();
         private void showAps(object sender, EventArgs e)
         {
-            SqlConnection con = BDConnect.connection();  
+            SqlConnection con = BDConnect.connection();
             apartados aps = new apartados();
-            tableApartados.DataSource=aps.listaApartados(con);
+            tableCuentas.DataSource = aps.listaApartados(con);
+        }
+        private float sumaAbonos()
+        {
+            float resultado = 0.00F;
+            foreach (DataGridViewRow fila in listaPagos.Rows)
+            {
+                resultado += Convert.ToSingle(fila.Cells[3].Value);
+            }
+            labelSumaPagos.Text = resultado.ToString();
+            return resultado;
         }
 
-        private void GetInfoClick(object sender, DataGridViewCellEventArgs e)
+        private void GetInfoClick(object sender, DataGridViewCellEventArgs e) //Tabla principal de las cuentas
         {
             SqlConnection con = BDConnect.connection();
             apartados aps = new apartados();
-            if (e.RowIndex>=0)
+            if (e.RowIndex >= 0)
             {
                 try
                 {
-                    DataGridViewRow fila = tableApartados.Rows[e.RowIndex];
+                    DataGridViewRow fila = tableCuentas.Rows[e.RowIndex];
                     nameClient.Text = fila.Cells[2].Value.ToString();
                     idApartLabel.Text = fila.Cells[0].Value.ToString();
                     montoTotaltxt.Text = fila.Cells[7].Value.ToString();
                     idClientLabel.Text = fila.Cells[1].Value.ToString();
-               
+
+                    labelAnticipo.Text = fila.Cells[5].Value.ToString();
+                    total_deuda.Text = fila.Cells[4].Value.ToString();
 
                     string idCliente = idClientLabel.Text;
-                    listaPagos.DataSource = aps.listaPagos(con,idCliente);
+                    listaPagos.DataSource = aps.listaPagos(con, idCliente);
                     listaProductosCliente.DataSource = aps.listaProductosApartados(con, idCliente);
 
-                    /*float val = Convert.ToSingle(montoTotaltxt.Text);
-                    comparaPrecioPts(val);*/
+                    float anticipo = Convert.ToSingle(labelAnticipo.Text);
+                    sumaAbonos();
+
+                    float res = anticipo + sumaAbonos();
+
+                    labelMontoAbonado.Text = res.ToString();
+
+                    comparaPrecioPts(res);
                 }
                 catch (Exception e3)
                 {
@@ -57,16 +78,17 @@ namespace IntraPDV
         private void comparaPrecioPts(float restante)
         {
             float precio_producto;
-            foreach(DataGridViewRow mifila in listaProductosCliente.Rows)
+            foreach (DataGridViewRow mifila in listaProductosCliente.Rows)
             {
                 precio_producto = Convert.ToSingle(mifila.Cells[2].Value);
-                if (precio_producto<restante)
+                if (restante >= precio_producto)
                 {
-                    mifila.DefaultCellStyle.BackColor = Color.MediumSpringGreen;
+                    entregarProducto.Enabled = true;
                 }
                 else
                 {
-                    mifila.DefaultCellStyle.BackColor = Color.Transparent;
+                    entregarProducto.Enabled = false;
+                    MessageBox.Show("No cumple con el monto  del producto");
                 }
 
             }
@@ -79,133 +101,29 @@ namespace IntraPDV
 
         private void operationKeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == Convert.ToChar(Keys.Enter))
-            {
-                apartados ap = new apartados();
-                float importe = float.Parse(cajaPagotxt.Text);
-                float abono = float.Parse(cajaAbonotxt.Text);
-                float total = float.Parse(montoTotaltxt.Text);
-                //restante= total-abono 
 
-
-                pagoClienteLabel.Text = importe.ToString();
-                abonoLabel.Text = abono.ToString();
-                cambioLabel.Text = Convert.ToString(resta(importe,abono));
-
-                if (abono >= total)
-                {
-                    restanteLabel.Text = Convert.ToString(resta(abono, total));
-                    cambioLabel.Text = Convert.ToString(resta(abono, total));
-
-                    SqlConnection con = BDConnect.connection();
-
-
-                    float restante = float.Parse(restanteLabel.Text);
-                    int idApart = Convert.ToInt32(idApartLabel.Text);
-                    int idClie = Convert.ToInt32(idClientLabel.Text);
-                    float restAnt = float.Parse(montoTotaltxt.Text);//restante Anterior
-                    float pagoNvo = float.Parse(cajaAbonotxt.Text);
-                    float debe = restante;
-                    string fecha = dateTimePicker1.Text;
-
-                    if (restante <= total)
-                    {
-                        bool update = ap.ActualizarRestante(con, restante.ToString(), abonoLabel.Text, idApartLabel.Text);
-                        bool insert = ap.RegistraPgo(con, idApart, idClie, restAnt, pagoNvo, debe, fecha);
-                        if (insert && update)
-                        {
-                            restanteLabel.Text = "" + 0;
-                            MessageBox.Show("Apartado liquidado");
-                            tableApartados.DataSource = ap.listaApartados(con);
-
-                        }
-
-                        /*imprimirComprobante();
-                        CrearImpresion.ImprimirTiket();*/
-
-                        //update tabla productos resta cantidad del producto a el producto
-                        //delete apartado x id
-                        //delete pagos x id
-                        //imprimir ticket
-                    }
-                    else if (restante>=total)
-                    {
-                        bool update = ap.ActualizarRestante(con, restante.ToString(), abonoLabel.Text, idApartLabel.Text);
-                        bool insert = ap.RegistraPgo(con, idApart, idClie, restAnt, pagoNvo, debe, fecha);
-
-                        if (insert && update)
-                        {
-                            restanteLabel.Text = "" + 0;
-                            MessageBox.Show("Apartado liquidado");
-                            tableApartados.DataSource = ap.listaApartados(con);
-                        }
-
-                        /*imprimirComprobante();
-                        CrearImpresion.ImprimirTiket();*/
-                    }
-
-                }
-                else if (abono <= total)
-                {
-
-                    restanteLabel.Text = Convert.ToString(resta(total,abono));
-                    float restante = float.Parse(restanteLabel.Text);
-                    //variables insertar
-                    int idApart = Convert.ToInt32(idApartLabel.Text);
-                    int idClie = Convert.ToInt32(idClientLabel.Text);
-                    float restAnt = float.Parse(montoTotaltxt.Text);//restante Anterior
-                    float pagoNvo = float.Parse(cajaAbonotxt.Text);
-                    float debe = restante;
-                    string fecha = dateTimePicker1.Text;
-
-                    SqlConnection con = BDConnect.connection();
-
-                    if (restante < total)
-                    {
-                        try
-                        {
-                            bool update = ap.ActualizarRestante(con,restante.ToString(),abonoLabel.Text,idApartLabel.Text);
-                            bool insert = ap.RegistraPgo(con, idApart, idClie, restAnt, pagoNvo, debe, fecha);
-                            if (update && insert)
-                            {
-                                MessageBox.Show("Actualizacion Exitosa","PAGO REGISTRADO",MessageBoxButtons.OK,MessageBoxIcon.Information);
-                                tableApartados.DataSource = ap.listaApartados(con);
-
-                            }
-                            else MessageBox.Show(insert.ToString());
-
-
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message);
-                        }
-
-                        //registrar el pago
-                    }
-                }
-            }
         }
-        private float resta(float a,float b)
+        private float resta(float a, float b)
         {
             float resultado = a - b;
             return resultado;
         }
         private void imprimirComprobante()
         {
-            CrearImpresion.TextoCentro("Ropa y Calzado ROCHA");
-            CrearImpresion.TextLeft(" Velia Perez Zavala");
-            CrearImpresion.TextLeft(" R.F.C. PEZV-690103-270");
-            CrearImpresion.TextLeft(" Aquiles Serdan #105 OTE");
-            CrearImpresion.TextLeft(" Colonia centro");
-            CrearImpresion.TextLeft(" Gpe. Victoria,DGO C.P 34700");
+            CrearImpresion.TextLeft("          ");
+            CrearImpresion.TextLeft("          ");
+            CrearImpresion.TextoCentro("Velia Perez Zavala");
+            CrearImpresion.TextLeft("     R.F.C. PEZV-690103-270");
+            CrearImpresion.TextLeft("     Aquiles Serdan #105 OTE");
+            CrearImpresion.TextLeft("     Colonia Centro");
+            CrearImpresion.TextLeft("     Gpe. Victoria,DGO C.P 34700");
             CrearImpresion.lineasSeparacion();
             CrearImpresion.TextoCentro("Comprobante de Abono");
             CrearImpresion.TextoCentro("Fecha: " + DateTime.Today.Day + "/" + DateTime.Today.Month + "/" + DateTime.Today.Year);
-            CrearImpresion.TextLeft("Nombre: " + nameClient.Text + " "+"Folio: "+ idApartLabel.Text);
-            
+            CrearImpresion.TextLeft("Nombre: " + nameClient.Text + " " + "Folio: " + idApartLabel.Text);
+
             CrearImpresion.lineasSeparacion();
-            CrearImpresion.EncabezadoApartar();//---------------------------------------------------------------------
+            //CrearImpresion.EncabezadoApartar();//---------------------------------------------------------------------
 
             /*foreach (DataGridViewRow celda in tablaProductos.Rows)
             {
@@ -214,6 +132,10 @@ namespace IntraPDV
                     Convert.ToDecimal(celda.Cells[3].Value), Convert.ToInt32(celda.Cells[1].Value), Convert.ToDecimal(importe.Text));
 
             }*/
+            if (flag)
+            {
+                CrearImpresion.TextLeft("Apartado finalizado");
+            }
             CrearImpresion.lineasSeparacion();//----------------------------------------------------------
             CrearImpresion.TextLeft("Pago: $" + pagoClienteLabel.Text);
             CrearImpresion.TextLeft("Usted abono: $" + abonoLabel.Text);
@@ -263,12 +185,16 @@ namespace IntraPDV
                     {
                         restanteLabel.Text = "" + 0;
                         MessageBox.Show("Apartado liquidado");
-                        tableApartados.DataSource = ap.listaApartados(con);
+                        tableCuentas.DataSource = ap.listaApartados(con);
+                        bajaInventario(idproducto_label.Text,Convert.ToInt32(cantidadProductolabel.Text));
+                        ap.eliminarPtoApartado(con, idPtoApartadoLabel.Text);
+
+                        flag = true;
 
                     }
 
-                    /*imprimirComprobante();
-                    CrearImpresion.ImprimirTiket();*/
+                    imprimirComprobante();
+                    CrearImpresion.ImprimirTiket();
 
                     //update tabla productos resta cantidad del producto a el producto
                     //delete apartado x id
@@ -284,7 +210,7 @@ namespace IntraPDV
                     {
                         restanteLabel.Text = "" + 0;
                         MessageBox.Show("Apartado liquidado");
-                        tableApartados.DataSource = ap.listaApartados(con);
+                        tableCuentas.DataSource = ap.listaApartados(con);
                     }
 
                     /*imprimirComprobante();
@@ -316,7 +242,7 @@ namespace IntraPDV
                         if (update && insert)
                         {
                             MessageBox.Show("Actualizacion Exitosa", "PAGO REGISTRADO", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            tableApartados.DataSource = ap.listaApartados(con);
+                            tableCuentas.DataSource = ap.listaApartados(con);
 
                         }
                         else MessageBox.Show(insert.ToString());
@@ -333,6 +259,114 @@ namespace IntraPDV
             }
             /*imprimirComprobante();
             CrearImpresion.ImprimirTiket();*/
+        }
+        private string UltimoFolio()
+        {
+            SqlConnection con = BDConnect.connection();
+            SqlDataReader lector;
+            SqlCommand folio = new SqlCommand("ultimoFolio", con);
+            folio.CommandType = CommandType.StoredProcedure;
+            try
+            {
+                lector = folio.ExecuteReader();
+                if (lector.Read())
+                {
+                    return lector.GetInt32(0).ToString();
+                }
+                else { return null; }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al consultar" + ex.Message);
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }            
+        }
+        public void bajaInventario(string idpto,int cantidad) // elimina el producto segun la cantidad de este
+        {
+            SqlConnection con = BDConnect.connection();
+            try
+            {
+                SqlCommand command = new SqlCommand("BajaInventario", con);
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("@codigo", idpto);
+                command.Parameters.AddWithValue("@cantidad", cantidad);
+                int res = command.ExecuteNonQuery();
+
+                if (res > 0)
+                {
+                    MessageBox.Show("OPERACION EXITOSA");
+                }
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message);
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)//Boton para entregar el articulo
+        {
+            SqlConnection con = BDConnect.connection();
+            apartados aps = new apartados();
+
+            float abonoTotal = Convert.ToSingle(labelMontoAbonado.Text);
+            float deuda = Convert.ToSingle(total_deuda.Text);
+
+            string idProducto = idproducto_label.Text;
+            int cant = Convert.ToInt32(cantidadProductolabel.Text);
+            bajaInventario(idProducto, cant);
+
+            bool result = aps.eliminarPtoApartado(con, idPtoApartadoLabel.Text);
+
+            if (result)
+            {
+                MessageBox.Show("CAMBIOS REALIZADOS CON EXITO");
+            }
+
+            listaPagos.DataSource = aps.listaPagos(con, idClientLabel.Text);
+            listaProductosCliente.DataSource = aps.listaProductosApartados(con, idClientLabel.Text);
+        }
+
+        private void Getptos(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex>=0)
+            {
+                try
+                {
+                    DataGridViewRow filaPts = listaProductosCliente.Rows[e.RowIndex];
+
+                    idPtoApartadoLabel.Text = filaPts.Cells[0].Value.ToString(); // id del producto
+                    idproducto_label.Text = filaPts.Cells[3].Value.ToString(); //codigo producto
+                    cantidadProductolabel.Text = filaPts.Cells[2].Value.ToString(); // cantidad de producto a quitar
+
+                    
+
+
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            restanteLabel.Text = "0.00";
+            pagoClienteLabel.Text = "0.00";
+            abonoLabel.Text = "0.00";
+            cambioLabel.Text = "0.00";
+            restanteLabel.Text = "0.00";
+            montoTotaltxt.Text = "0.00";
+
+            cajaPagotxt.Text = null;
+            cajaAbonotxt.Text = null;
         }
     }
 }

@@ -50,6 +50,8 @@ namespace IntraPDV
             }
             else {
                 MessageBox.Show("Favor de Ingresar el Folio de la venta que desea buscar");
+
+
             }
             
         }
@@ -180,6 +182,16 @@ namespace IntraPDV
             finally
             {
                 con.Close();
+            }
+        }
+
+        private void llenarCampos(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.RowIndex >= 0)
+            {
+                DataGridViewRow fila = dataGridView1.Rows[e.RowIndex];
+                codVent.Text = fila.Cells[1].Value.ToString();
+                codProduct.Text = fila.Cells[4].Value.ToString();
             }
         }
     }

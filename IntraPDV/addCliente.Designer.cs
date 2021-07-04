@@ -28,48 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.clname = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.groupDelete = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.client_List = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.cancel_Btn = new System.Windows.Forms.Button();
+            this.client_List = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.groupDelete = new System.Windows.Forms.GroupBox();
+            this.clname = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.delete_Btn = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
             this.groupDelete.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // clname
-            // 
-            this.clname.Location = new System.Drawing.Point(116, 45);
-            this.clname.Name = "clname";
-            this.clname.Size = new System.Drawing.Size(271, 27);
-            this.clname.TabIndex = 0;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.clname);
-            this.groupBox1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(12, 25);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(409, 167);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Agrega un cliente";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(7, 45);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 21);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Nombre";
             // 
             // panel2
             // 
@@ -79,36 +50,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(445, 10);
             this.panel2.TabIndex = 13;
-            // 
-            // groupDelete
-            // 
-            this.groupDelete.Controls.Add(this.label3);
-            this.groupDelete.Controls.Add(this.client_List);
-            this.groupDelete.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupDelete.Location = new System.Drawing.Point(12, 25);
-            this.groupDelete.Name = "groupDelete";
-            this.groupDelete.Size = new System.Drawing.Size(387, 193);
-            this.groupDelete.TabIndex = 15;
-            this.groupDelete.TabStop = false;
-            this.groupDelete.Text = "Eliminar cliente";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 29);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(161, 19);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Clientes Guardados";
-            // 
-            // client_List
-            // 
-            this.client_List.FormattingEnabled = true;
-            this.client_List.Location = new System.Drawing.Point(15, 59);
-            this.client_List.Name = "client_List";
-            this.client_List.Size = new System.Drawing.Size(351, 27);
-            this.client_List.TabIndex = 0;
-            this.client_List.Click += new System.EventHandler(this.consultaClientes);
             // 
             // button1
             // 
@@ -134,6 +75,65 @@
             this.cancel_Btn.TabIndex = 16;
             this.cancel_Btn.Text = "Cancelar";
             this.cancel_Btn.UseVisualStyleBackColor = false;
+            // 
+            // client_List
+            // 
+            this.client_List.FormattingEnabled = true;
+            this.client_List.Location = new System.Drawing.Point(15, 59);
+            this.client_List.Name = "client_List";
+            this.client_List.Size = new System.Drawing.Size(351, 27);
+            this.client_List.TabIndex = 0;
+            this.client_List.Click += new System.EventHandler(this.consultaClientes);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(11, 29);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(161, 19);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Clientes Guardados";
+            // 
+            // groupDelete
+            // 
+            this.groupDelete.Controls.Add(this.label3);
+            this.groupDelete.Controls.Add(this.client_List);
+            this.groupDelete.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupDelete.Location = new System.Drawing.Point(12, 25);
+            this.groupDelete.Name = "groupDelete";
+            this.groupDelete.Size = new System.Drawing.Size(387, 193);
+            this.groupDelete.TabIndex = 15;
+            this.groupDelete.TabStop = false;
+            this.groupDelete.Text = "Eliminar cliente";
+            // 
+            // clname
+            // 
+            this.clname.Location = new System.Drawing.Point(116, 45);
+            this.clname.Name = "clname";
+            this.clname.Size = new System.Drawing.Size(271, 27);
+            this.clname.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(7, 45);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(73, 21);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Nombre";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.clname);
+            this.groupBox1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(12, 25);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(409, 167);
+            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Agrega un cliente";
             // 
             // delete_Btn
             // 
@@ -164,25 +164,24 @@
             this.Name = "addCliente";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "addCliente";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupDelete.ResumeLayout(false);
             this.groupDelete.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
+        private System.Windows.Forms.Panel panel2;
+        public System.Windows.Forms.Button button1;
+        public System.Windows.Forms.Button cancel_Btn;
+        private System.Windows.Forms.ComboBox client_List;
+        private System.Windows.Forms.Label label3;
+        public System.Windows.Forms.GroupBox groupDelete;
         private System.Windows.Forms.TextBox clname;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox client_List;
         public System.Windows.Forms.GroupBox groupBox1;
-        public System.Windows.Forms.Button button1;
-        public System.Windows.Forms.GroupBox groupDelete;
-        public System.Windows.Forms.Button cancel_Btn;
         public System.Windows.Forms.Button delete_Btn;
     }
 }

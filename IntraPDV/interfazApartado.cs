@@ -103,47 +103,98 @@ namespace IntraPDV
 
         private void guardarInformacion_Click(object sender, EventArgs e)
         {
+            //Variables para insertar
             float montoTotal = Convert.ToSingle(totalSumapts.Text);
             float anticipo = Convert.ToSingle(cajaAnticipotxt.Text);
             float restante = Convert.ToSingle(cantidadRestante.Text);
+
             idCte = idClientetxt.Text;
+
             apartados operacion = new apartados();
             
 
             if (idCte != null && codigoProducto != null && nombreProducto != null)
             {
-                int cantidad_productos = 0;
                 SqlConnection conectar = BDConnect.connection();
-                SqlCommand insertar = new SqlCommand("insertarApartados", conectar);
-                insertar.Parameters.Clear();
+                //operaciones de comprobacion xd
 
-                insertar.CommandType = CommandType.StoredProcedure;
-
-                foreach (DataGridViewRow fila in tablaProductos.Rows)
+                SqlDataReader lector;
+                SqlCommand command = new SqlCommand(string.Format("SELECT * FROM cuenta_apartado WHERE id_cliente = '{0}'", new string[] { idClientetxt.Text }), conectar);
+                lector = command.ExecuteReader();
+                try
                 {
-                    insertar.Parameters.Clear();
-                    insertar.Parameters.AddWithValue("@idCliente", idClientetxt.Text);
-                    insertar.Parameters.AddWithValue("@codigo", Convert.ToInt32(fila.Cells[0].Value));
-                    insertar.Parameters.AddWithValue("@precio", Convert.ToDouble(fila.Cells[3].Value));
-                    insertar.Parameters.AddWithValue("@cantidad", Convert.ToInt32(fila.Cells[1].Value));
-                    insertar.Parameters.AddWithValue("@fecha", Convert.ToDateTime(dateTimePicker1.Text));
-                    cantidad_productos += Convert.ToInt32(fila.Cells[1].Value);
-                    insertar.ExecuteNonQuery();
-                    insertar.Parameters.Clear();
-                }
+                    if (lector.Read())
+                    { 
+                        string id = idClientetxt.Text;
+                        string encontrado = lector.GetInt32(1).ToString();
+                        if (id == encontrado)
+                        {
+                            int cantidad_productos = 0;
 
-                // el otro procedimiento
-               bool res= operacion.registraApartado(conectar, idCte, cantidad_productos, montoTotal, anticipo, restante, dateTimePicker1.Text);
+                            SqlCommand insertar = new SqlCommand("insertarApartados", conectar);
+                            insertar.Parameters.Clear();
 
-                if (insertar != null && res)
-                {
-                    DialogResult resultado = MessageBox.Show("Datos insertados con exito");
-                    if (resultado==DialogResult.OK)
+                            insertar.CommandType = CommandType.StoredProcedure;
+
+                            foreach (DataGridViewRow fila in tablaProductos.Rows)
+                            {
+                                insertar.Parameters.Clear();
+                                insertar.Parameters.AddWithValue("@idCliente", idClientetxt.Text);
+                                insertar.Parameters.AddWithValue("@codigo", Convert.ToInt32(fila.Cells[0].Value));
+                                insertar.Parameters.AddWithValue("@precio", Convert.ToDouble(fila.Cells[3].Value));
+                                insertar.Parameters.AddWithValue("@cantidad", Convert.ToInt32(fila.Cells[1].Value));
+                                insertar.Parameters.AddWithValue("@fecha", Convert.ToDateTime(dateTimePicker1.Text));
+                                cantidad_productos += Convert.ToInt32(fila.Cells[1].Value);
+                                insertar.ExecuteNonQuery();
+                                insertar.Parameters.Clear();
+                            }
+
+                        }
+                    }
+                    else
                     {
-                        imprimirComprobante();
-                        CrearImpresion.ImprimirTiket();
+                        lector.Close();
+                        int cantidad_productos = 0;
+
+                        SqlCommand insertar = new SqlCommand("insertarApartados", conectar);
+                        insertar.Parameters.Clear();
+
+                        insertar.CommandType = CommandType.StoredProcedure;
+
+                        foreach (DataGridViewRow fila in tablaProductos.Rows)
+                        {
+                            insertar.Parameters.Clear();
+                            insertar.Parameters.AddWithValue("@idCliente", idClientetxt.Text);
+                            insertar.Parameters.AddWithValue("@codigo", Convert.ToInt32(fila.Cells[0].Value));
+                            insertar.Parameters.AddWithValue("@precio", Convert.ToDouble(fila.Cells[3].Value));
+                            insertar.Parameters.AddWithValue("@cantidad", Convert.ToInt32(fila.Cells[1].Value));
+                            insertar.Parameters.AddWithValue("@fecha", Convert.ToDateTime(dateTimePicker1.Text));
+                            cantidad_productos += Convert.ToInt32(fila.Cells[1].Value);
+                            insertar.ExecuteNonQuery();
+                            insertar.Parameters.Clear();
+                        }
+                        bool res = operacion.registraApartado(conectar, idCte, cantidad_productos, montoTotal, anticipo, restante, dateTimePicker1.Text);
+
+                        if (insertar != null && res)
+                        {
+                            DialogResult resultado = MessageBox.Show("Apartado realizado exitosamente", "INFORMACIÓN", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                            if (resultado == DialogResult.OK)
+                            {
+                                imprimirComprobante();
+                                CrearImpresion.ImprimirTiket();
+                            }
+                        }
                     }
                 }
+                catch (Exception msg)
+                {
+                    MessageBox.Show(msg.Message);
+                }
+                finally
+                {
+                    lector.Close();
+                }
+                
             }
             else { MessageBox.Show("Llena los campos faltantes,\n si el error aparece de nuevo comuniquese con su proveedor", "ERROR AL INSERTAR LOS DATOS"); }
         }
@@ -157,45 +208,53 @@ namespace IntraPDV
         }
         private void imprimirComprobante()
         {
+            Conversion con = new Conversion();
+            string numero = "";
+
             CrearImpresion.TextoCentro("        ");
             CrearImpresion.TextoCentro("        ");
-            CrearImpresion.TextoCentro("Nota de Apartado");
             CrearImpresion.TextLeft(" Velia Perez Zavala");
             CrearImpresion.TextLeft(" R.F.C. PEZV-690103-270");
             CrearImpresion.TextLeft(" Aquiles Serdan #105 OTE");
             CrearImpresion.TextLeft(" Colonia centro");
             CrearImpresion.TextLeft(" Gpe. Victoria,DGO C.P 34700");
-            CrearImpresion.lineasSeparacion();
+            CrearImpresion.lineasSeparacion();//---------------------------------------------------------------------
+            CrearImpresion.TextoCentro("Nota de Apartado");
             CrearImpresion.TextoCentro("Fecha: " + DateTime.Today.Day + "/" + DateTime.Today.Month + "/" + DateTime.Today.Year);
             CrearImpresion.TextLeft("Nombre: " + nombreClientetxt.Text);
-            CrearImpresion.lineasSeparacion();
-            CrearImpresion.EncabezadoApartar();//---------------------------------------------------------------------
-
+            CrearImpresion.lineasSeparacion();//---------------------------------------------------------------------
+            CrearImpresion.EncabezadoTicket();
+            int found = 0;
+            string data;
 
             foreach (DataGridViewRow celda in tablaProductos.Rows)
             {
+                data = celda.Cells[6].Value.ToString();
+                found = data.IndexOf(".");
+                CrearImpresion.TextLeft(celda.Cells[0].Value.ToString());
                 CrearImpresion.TextLeft(celda.Cells[2].Value.ToString());
-                /*CrearImpresion.AgregaArticulo(celda.Cells[0].Value.ToString()+" ",
-                    Convert.ToDecimal(celda.Cells[3].Value),Convert.ToInt32(celda.Cells[1].Value), Convert.ToDecimal(importe.Text));*/
-                CrearImpresion.TextLeft(celda.Cells[0].Value.ToString() + "     " + celda.Cells[1].Value.ToString() + "      " + celda.Cells[3].Value.ToString());
-                
+                CrearImpresion.TextLeft("                 " + "      " + celda.Cells[1].Value.ToString() + "      " + celda.Cells[3].Value.ToString() + "      " + celda.Cells[6].Value.ToString().Substring(0,found + 3));
             }
             
+
             CrearImpresion.lineasSeparacion();//----------------------------------------------------------
-            CrearImpresion.TextoDerecha("Total:   $" + totalSumapts.Text);
-            CrearImpresion.TextoDerecha("Pago:  $" + importe.Text);
+            numero = totalSumapts.Text.Trim();
+            CrearImpresion.TextoDerecha("Total:      $" + totalSumapts.Text);
+            CrearImpresion.TextoDerecha("Pago:   $" + importe.Text);
             CrearImpresion.TextoDerecha("Anticipo:   $"+ cajaAnticipotxt.Text);
             CrearImpresion.TextoDerecha("Cambio:   $" + cambioLabel.Text);
             CrearImpresion.TextoDerecha("Restan:   $"+ Convert.ToString(cantidadRestante.Text));
-            CrearImpresion.lineasSeparacion();
+            CrearImpresion.TextLeft("(" + con.enletras(numero).ToLower());
+            CrearImpresion.lineasSeparacion();//---------------------------------------------------------------------
             CrearImpresion.TextoCentro("Apartado a un mes de plazo");
             CrearImpresion.TextoCentro("No se aceptan cambios en apartado");
-            CrearImpresion.lineasSeparacion();
+            CrearImpresion.lineasSeparacion();//---------------------------------------------------------------------
             CrearImpresion.TextoCentro("****Gracias por su compra****");
         }
 
         private void cambios(object sender, DataGridViewCellEventArgs e)
         {
+            float totalDesc = 0.00F;
             foreach (DataGridViewRow fila in tablaProductos.Rows)
             {
                 if(fila.Cells[0].Value != null)
@@ -206,7 +265,9 @@ namespace IntraPDV
                     float total = 0.00F;
 
                     total = (precio - (precio * descuento) / 100) * cant;
+                    totalDesc = (precio * descuento) / 100;
                     fila.Cells[6].Value = total;
+                    fila.Cells[5].Value = totalDesc;
                 }
                 suma();
                 codigoBarras.Focus();
@@ -226,38 +287,8 @@ namespace IntraPDV
 
         private void button2_Click(object sender, EventArgs e)
         {
-
-            CrearImpresion.TextoCentro("Comprobante Apartado");
-            CrearImpresion.TextLeft(" Velia Perez Zavala");
-            CrearImpresion.TextLeft(" R.F.C. PEZV-690103-270");
-            CrearImpresion.TextLeft(" Aquiles Serdan #105 OTE");
-            CrearImpresion.TextLeft(" Colonia centro");
-            CrearImpresion.TextLeft(" Gpe. Victoria,DGO C.P 34700");
-            CrearImpresion.lineasSeparacion();
-            CrearImpresion.TextoCentro("Fecha: " + DateTime.Today.Day + "/" + DateTime.Today.Month + "/" + DateTime.Today.Year);
-            CrearImpresion.TextLeft("Nombre: " +"XXXXXXXXXX");
-            CrearImpresion.lineasSeparacion();
-            CrearImpresion.EncabezadoApartar();//---------------------------------------------------------------------
-
-            CrearImpresion.TextLeft("TEXTO PRUEBA");
-                /*CrearImpresion.AgregaArticulo(celda.Cells[0].Value.ToString()+" ",
-                    Convert.ToDecimal(celda.Cells[3].Value),Convert.ToInt32(celda.Cells[1].Value), Convert.ToDecimal(importe.Text));*/
-            CrearImpresion.TextLeft("999999         "+"   4"+"      305"+"      1220");
-            CrearImpresion.TextLeft("TEXTO PRUEBA");
-            CrearImpresion.TextLeft("12         " + "   1" + "      20" + "      20");
-
-
-            CrearImpresion.lineasSeparacion();//----------------------------------------------------------
-            CrearImpresion.TextoDerecha("Total:     $" + "000.00");
-            CrearImpresion.TextoDerecha("Pago:    $" + "000.00");
-            CrearImpresion.TextoDerecha("Anticipo:   $" + "000.00");
-            CrearImpresion.TextoDerecha("Cambio:   $" + "000.00");
-            CrearImpresion.TextoDerecha("Restan:   $" + "000.00");
-            CrearImpresion.lineasSeparacion();
-            CrearImpresion.TextoCentro("Apartado a un mes de plazo \n No se aceptan cambios en apartado");
-            CrearImpresion.lineasSeparacion();
-            CrearImpresion.TextoCentro("****Gracias por su compra****");
-            CrearImpresion.ImprimirTiket();
+            this.Close();
+           
         } //PRUEBAS
         private void consultaClientes()
         {
@@ -277,6 +308,7 @@ namespace IntraPDV
                     DataGridViewRow fila = tabla_clientes.Rows[e.RowIndex];
 
                     idClientetxt.Text = Convert.ToString(fila.Cells[0].Value);
+                    idClienteDelete.Text = Convert.ToString(fila.Cells[0].Value);
                     nombreClientetxt.Text = Convert.ToString(fila.Cells[1].Value);
                 }
                 catch (Exception ex)
@@ -290,6 +322,7 @@ namespace IntraPDV
 
         private void button1_Click(object sender, EventArgs e)
         {
+            this.Hide();
             addCliente interfazCliente = new addCliente();
             interfazCliente.groupDelete.Visible = false;
             interfazCliente.cancel_Btn.Visible = false;
@@ -300,13 +333,17 @@ namespace IntraPDV
 
         private void button3_Click_1(object sender, EventArgs e)
         {
-            addCliente interfazCliente = new addCliente();
-
-            interfazCliente.groupBox1.Visible = false;
-            interfazCliente.button1.Visible = false;
-
-            interfazCliente.ShowDialog();
-            this.Refresh();
+            SqlConnection con = BDConnect.connection();
+            apartados aps = new apartados();
+            string id = idClienteDelete.Text.Trim();
+            this.Hide();
+            bool respuesta = MessageBox.Show("El cliente " + nombreClientetxt.Text.ToUpper() + " será eliminado de la base de datos \n esta operacion no se puede revertir", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes;
+            if (respuesta)
+            {
+                bool queryResult = aps.eliminarClientes(con, id);
+                if (queryResult) MessageBox.Show("Cliente eliminado con exito", "Operación Exitosa");
+                this.Show();
+            }
         }
 
         private void addInfo_txtChange(object sender, EventArgs e)
@@ -355,26 +392,12 @@ namespace IntraPDV
                     float rest = resta(anticipo, total);
                     cambioLabel.Text = Convert.ToString(resta(anticipo, total));
 
-                    /*if (rest <= total)
-                    {
-                        cantidadRestante.Text = "" + 0;
-                        MessageBox.Show("EL VALOR ES IGUAL A LO QUE CUESTA EL PRODUCTO");
-                    }
-                    else if (rest>= total)
-                    {
-                        cantidadRestante.Text = "" + 0;
-                        MessageBox.Show("EL VALOR ES IGUAL A LO QUE CUESTA EL PRODUCTO");
-                    }*/
                 }
                 else if (anticipo<=total)
                 {
                     cantidadRestante.Text = resta(total, anticipo).ToString();
                     float rest = float.Parse(cantidadRestante.Text);
 
-                    /*if (rest<total)
-                    {
-                        MessageBox.Show("ACTUALIZAR LA COLUMNA DE ANTICIPO");
-                    }*/
                 }
             }
         }
@@ -389,33 +412,25 @@ namespace IntraPDV
 
             cambioLabel.Text = Convert.ToString(resta(pago, anticipo));
 
-            if (anticipo >= total)
+            if (anticipo >= total) //Son dos casos diferentes, el anticipo no puede ser mayor a lo que se debe.
             {
+                
                 float rest = resta(anticipo, total);
                 cambioLabel.Text = Convert.ToString(resta(anticipo, total));
 
-                /*if (rest <= total)
-                {
-                    cantidadRestante.Text = "" + 0;
-                    MessageBox.Show("EL VALOR ES IGUAL A LO QUE CUESTA EL PRODUCTO");
-                }
-                else if (rest>= total)
-                {
-                    cantidadRestante.Text = "" + 0;
-                    MessageBox.Show("EL VALOR ES IGUAL A LO QUE CUESTA EL PRODUCTO");
-                }*/
             }
             else if (anticipo <= total)
             {
+                //Actualiza la cantidad anticipo.
                 cantidadRestante.Text = resta(total, anticipo).ToString();
                 float rest = float.Parse(cantidadRestante.Text);
-
-                /*if (rest<total)
-                {
-                    MessageBox.Show("ACTUALIZAR LA COLUMNA DE ANTICIPO");
-                }*/
             }
             guardarInformacion.Focus();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            horaActual.Text = DateTime.Now.ToLongTimeString();
         }
     }
 }
