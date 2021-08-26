@@ -55,6 +55,18 @@ namespace IntraPDV
                     labelAnticipo.Text = fila.Cells[5].Value.ToString();
                     total_deuda.Text = fila.Cells[4].Value.ToString();
 
+
+                    string fechaApartado = fila.Cells[8].Value.ToString();
+
+                    DateTime fechaVence = DateTime.Parse(fechaApartado).AddMonths(1);
+
+
+
+                    fechaApartadoText.Text = fila.Cells[8].Value.ToString();
+                    fechaVencimiento.Text = fechaVence.ToString();
+                    
+
+
                     string idCliente = idClientLabel.Text;
                     listaPagos.DataSource = aps.listaPagos(con, idCliente);
                     listaProductosCliente.DataSource = aps.listaProductosApartados(con, idCliente);
@@ -62,11 +74,19 @@ namespace IntraPDV
                     float anticipo = Convert.ToSingle(labelAnticipo.Text);
                     sumaAbonos();
 
-                    float res = anticipo + sumaAbonos();
-
+                    float res =  anticipo + sumaAbonos();
                     labelMontoAbonado.Text = res.ToString();
 
-                    comparaPrecioPts(res);
+                    marcarColores(res);
+
+                    /*if (comparaPrecioPts(res))
+                    {
+                        MessageBox.Show("El producto " + nombreAentregar.ToUpper() + "\n puede ser entregado." );
+                    }
+                    else
+                    {
+                        MessageBox.Show("No hay ningun producto a entregar");
+                    }*/
                 }
                 catch (Exception e3)
                 {
@@ -75,25 +95,51 @@ namespace IntraPDV
             }
         }
 
-        private void comparaPrecioPts(float restante)
+        string nombreAentregar = "";
+        private bool comparaPrecioPts(float restante)
         {
-            float precio_producto;
+            float precio_producto =0;
             foreach (DataGridViewRow mifila in listaProductosCliente.Rows)
             {
                 precio_producto = Convert.ToSingle(mifila.Cells[2].Value);
+                nombreAentregar  += (mifila.Cells[1].Value.ToString());
                 if (restante >= precio_producto)
                 {
-                    entregarProducto.Enabled = true;
+                    return true;
+
+                    //entregarProducto.Visible = true;
                 }
                 else
                 {
-                    entregarProducto.Enabled = false;
-                    MessageBox.Show("No cumple con el monto  del producto");
+                    return false;
+                    //entregarProducto.Visible = false;
+                    //MessageBox.Show("No cumple con el monto  del producto");
                 }
 
             }
+            return false;
         }
+        private void marcarColores(float restante)
+        {
+            float precio_producto = 0;
+            foreach (DataGridViewRow mifila in listaProductosCliente.Rows)
+            {
+                precio_producto = Convert.ToSingle(mifila.Cells[3].Value);
 
+                if (restante >= precio_producto)
+                {
+                    mifila.DefaultCellStyle.BackColor = Color.Aquamarine;
+                    entregarProducto.Visible = true;
+                }
+                else
+                {
+                    mifila.DefaultCellStyle.BackColor = Color.White;
+                    entregarProducto.Visible = false;
+                }
+
+            }
+            
+        }
         private void addQuantity(object sender, EventArgs e)
         {
             cajaAbonotxt.Text = cajaPagotxt.Text;
@@ -186,7 +232,7 @@ namespace IntraPDV
                         restanteLabel.Text = "" + 0;
                         MessageBox.Show("Apartado liquidado");
                         tableCuentas.DataSource = ap.listaApartados(con);
-                        bajaInventario(idproducto_label.Text,Convert.ToInt32(cantidadProductolabel.Text));
+                        //bajaInventario(idproducto_label.Text,Convert.ToInt32(cantidadProductolabel.Text));
                         ap.eliminarPtoApartado(con, idPtoApartadoLabel.Text);
 
                         flag = true;
@@ -307,7 +353,7 @@ namespace IntraPDV
                 MessageBox.Show(error.Message);
             }
         }
-
+        int cant = 0;
         private void button3_Click(object sender, EventArgs e)//Boton para entregar el articulo
         {
             SqlConnection con = BDConnect.connection();
@@ -317,8 +363,16 @@ namespace IntraPDV
             float deuda = Convert.ToSingle(total_deuda.Text);
 
             string idProducto = idproducto_label.Text;
-            int cant = Convert.ToInt32(cantidadProductolabel.Text);
-            bajaInventario(idProducto, cant);
+            cant = Convert.ToInt32(cantidadProductolabel.Text);
+
+            if (cant != 0)
+            {
+                bajaInventario(idProducto, cant);
+            }
+            else
+            {
+                MessageBox.Show("Por favor seleccione el producto a entregar","INFORMACIÓN");
+            }
 
             bool result = aps.eliminarPtoApartado(con, idPtoApartadoLabel.Text);
 
@@ -329,6 +383,30 @@ namespace IntraPDV
 
             listaPagos.DataSource = aps.listaPagos(con, idClientLabel.Text);
             listaProductosCliente.DataSource = aps.listaProductosApartados(con, idClientLabel.Text);
+
+            int cantidad = 0;
+            foreach(DataGridViewRow fila in listaProductosCliente.Rows)
+            {
+                cantidad += Convert.ToInt32(fila.Cells[2].Value);
+
+
+            }
+            DialogResult respuesta = MessageBox.Show("La cantidad de productos es de: " + cantidad);
+            if (respuesta == DialogResult.Yes)
+            {
+                SqlConnection red = BDConnect.connection();
+                bool voz = aps.actualizarCantidadProductos(red, cantidad, idClientLabel.Text);
+                if (voz)
+                {
+                    MessageBox.Show("ACTUALIZO");
+                }
+                else
+                {
+                    MessageBox.Show("Pos nope :(");
+                }
+            }
+            tableCuentas.DataSource = aps.listaApartados(con);
+
         }
 
         private void Getptos(object sender, DataGridViewCellEventArgs e)
@@ -358,7 +436,7 @@ namespace IntraPDV
 
         private void button2_Click(object sender, EventArgs e)
         {
-            restanteLabel.Text = "0.00";
+            /*restanteLabel.Text = "0.00";
             pagoClienteLabel.Text = "0.00";
             abonoLabel.Text = "0.00";
             cambioLabel.Text = "0.00";
@@ -366,7 +444,15 @@ namespace IntraPDV
             montoTotaltxt.Text = "0.00";
 
             cajaPagotxt.Text = null;
-            cajaAbonotxt.Text = null;
+            cajaAbonotxt.Text = null;*/
+
+
+            apartados ap = new apartados();
+
+            bool flag = ap.entreDosFechas(dateTimePicker1.Text, DateTime.Now.ToString());
+
+            if (flag) MessageBox.Show("FUNCIONA EL COMPARADOR");
+            else MessageBox.Show("NO FUNCIONA :(");
         }
     }
 }

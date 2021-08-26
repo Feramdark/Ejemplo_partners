@@ -37,6 +37,8 @@ namespace IntraPDV
                 adaptador.SelectCommand = ticke;
                 adaptador.Fill(tabla);
                 dataGridView1.DataSource = tabla;
+                // Cortamos codigo porque esta parte no se porque no jala :(
+
                 Ticket.TextLeft("          ");
                 Ticket.TextLeft("          ");
                 Ticket.TextoCentro("Velia Perez Zavala");

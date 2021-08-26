@@ -121,8 +121,7 @@ namespace IntraPDV
                 SqlDataReader lector;
                 SqlCommand command = new SqlCommand(string.Format("SELECT * FROM cuenta_apartado WHERE id_cliente = '{0}'", new string[] { idClientetxt.Text }), conectar);
                 lector = command.ExecuteReader();
-                try
-                {
+               
                     if (lector.Read())
                     { 
                         string id = idClientetxt.Text;
@@ -135,20 +134,21 @@ namespace IntraPDV
                             insertar.Parameters.Clear();
 
                             insertar.CommandType = CommandType.StoredProcedure;
-
+                        
                             foreach (DataGridViewRow fila in tablaProductos.Rows)
                             {
+                                lector.Close();
                                 insertar.Parameters.Clear();
                                 insertar.Parameters.AddWithValue("@idCliente", idClientetxt.Text);
                                 insertar.Parameters.AddWithValue("@codigo", Convert.ToInt32(fila.Cells[0].Value));
                                 insertar.Parameters.AddWithValue("@precio", Convert.ToDouble(fila.Cells[3].Value));
                                 insertar.Parameters.AddWithValue("@cantidad", Convert.ToInt32(fila.Cells[1].Value));
                                 insertar.Parameters.AddWithValue("@fecha", Convert.ToDateTime(dateTimePicker1.Text));
+                                
                                 cantidad_productos += Convert.ToInt32(fila.Cells[1].Value);
                                 insertar.ExecuteNonQuery();
                                 insertar.Parameters.Clear();
                             }
-
                         }
                     }
                     else
@@ -173,7 +173,9 @@ namespace IntraPDV
                             insertar.ExecuteNonQuery();
                             insertar.Parameters.Clear();
                         }
-                        bool res = operacion.registraApartado(conectar, idCte, cantidad_productos, montoTotal, anticipo, restante, dateTimePicker1.Text);
+
+
+                        bool res = operacion.registraApartado(conectar, idCte, cantidad_productos, montoTotal, anticipo, restante, dateTimePicker1.Text,dateTimePicker1.Text);
 
                         if (insertar != null && res)
                         {
@@ -185,16 +187,6 @@ namespace IntraPDV
                             }
                         }
                     }
-                }
-                catch (Exception msg)
-                {
-                    MessageBox.Show(msg.Message);
-                }
-                finally
-                {
-                    lector.Close();
-                }
-                
             }
             else { MessageBox.Show("Llena los campos faltantes,\n si el error aparece de nuevo comuniquese con su proveedor", "ERROR AL INSERTAR LOS DATOS"); }
         }
@@ -431,6 +423,15 @@ namespace IntraPDV
         private void timer1_Tick(object sender, EventArgs e)
         {
             horaActual.Text = DateTime.Now.ToLongTimeString();
+        }
+
+        private void aumentaFechas(string fechaActual)
+        {
+            var fechaInicial = fechaActual;
+            var fechaLimite = DateTime.Parse(fechaInicial).AddMonths(1);
+
+
+            MessageBox.Show("HOY ES " + fechaActual + "Mas UN mes" + fechaLimite);
         }
     }
 }

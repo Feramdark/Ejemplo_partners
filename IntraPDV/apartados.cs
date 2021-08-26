@@ -98,7 +98,7 @@ namespace IntraPDV
             }
             else return false;
         }
-        public bool registraApartado(SqlConnection con, string idCl, int cant, float montoTotal, float anticipo, float restante, string date)
+        public bool registraApartado(SqlConnection con, string idCl, int cant, float montoTotal, float anticipo, float restante, string date,string fechaVence)
         {
             SqlCommand command = new SqlCommand("creacuentaAp", con);
             command.CommandType = CommandType.StoredProcedure;
@@ -109,6 +109,7 @@ namespace IntraPDV
             command.Parameters.AddWithValue("@anticipo",anticipo);
             command.Parameters.AddWithValue("@restante",restante);
             command.Parameters.AddWithValue("@fecha",Convert.ToDateTime(date));
+            command.Parameters.AddWithValue("@fechaVence", DateTime.Parse(fechaVence).AddMonths(1));
 
             int res = command.ExecuteNonQuery();
             command.Parameters.Clear();
@@ -197,9 +198,55 @@ namespace IntraPDV
             else return false;
         }
 
-        public bool actualizaCuenta(SqlConnection con, string idCl, int cant, float montoTotal, float anticipo, float restante, string date)
+        public bool actualizaCuenta(SqlConnection con, string idAp, int cant, float restante, string date)
         {
+            SqlCommand command = new SqlCommand(string.Format("UPDATE cuenta_apartado SET restante = restante + {0}, prod_apart = prod_apart + {1}, fecha = '{2}' WHERE id_apartado = {3}", new string[] { restante.ToString(), cant.ToString(),date,idAp}), con);
+            int resultado = command.ExecuteNonQuery();
+            con.Close();
+            if (resultado > 0)
+            {
+                return true;
+            }
+            else return false;
+        }
 
+        public bool entreDosFechas(string a,string b)
+        {
+            var fechaActual = DateTime.Parse(a);
+            var fechaLimite = DateTime.Parse(b);
+
+            fechaLimite.AddMonths(4);
+
+            int res = DateTime.Compare(fechaActual, fechaLimite);
+
+            if (res < 0) {
+                return true;
+            }else if (res == 0)
+            {
+                return true;
+            }
+
+            return false;
+
+
+        }
+        public bool actualizarCantidadProductos(SqlConnection con, int productos,string id_cliente)
+        {
+            if(productos != 0 && con.State == ConnectionState.Closed)
+            {
+                SqlCommand command = new SqlCommand(string.Format("UPDATE cuenta_apartado SET prod_apart = {0} WHERE id_cliente = {1}", new string[] {productos.ToString(),id_cliente}));
+                int request = command.ExecuteNonQuery();
+                
+                if(request > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return false;
         }
     }   
 }

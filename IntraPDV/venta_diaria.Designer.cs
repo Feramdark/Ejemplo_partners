@@ -290,7 +290,7 @@
             // 
             this.labelPagos.AutoSize = true;
             this.labelPagos.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPagos.Location = new System.Drawing.Point(842, 85);
+            this.labelPagos.Location = new System.Drawing.Point(661, 81);
             this.labelPagos.Name = "labelPagos";
             this.labelPagos.Size = new System.Drawing.Size(67, 23);
             this.labelPagos.TabIndex = 17;
